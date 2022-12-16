@@ -1,0 +1,6 @@
+dotnet add packageMicrosoft.EntityFrameworkCore.Design  
+dotnet add packageMicrosoft.EntityFrameworkCore.Sqlite  
+dotnet add packageMicrosoft.EntityFrameworkCore.Tools  
+
+
+$ sed -i -e 's/^/dotnet add package /' reqs.txt
