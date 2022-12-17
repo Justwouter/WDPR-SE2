@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ProgrammaContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("ProgrammaContext") ?? throw new InvalidOperationException("Connection string 'ProgrammaContext' not found.")));
 
 // Add services to the container.
 
