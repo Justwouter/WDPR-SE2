@@ -5,7 +5,7 @@ public class Programma
     public DateTime Van {get; set;}
     public DateTime Tot {get; set;}
     public string Descriptie {get;set;}
-    public List<Lid> LedenLijst {get; set;}
-    public Zaal Zaal {get; set;}
+    //public List<Lid> LedenLijst {get; set;}
+    //public Zaal Zaal {get; set;}
   
 }
