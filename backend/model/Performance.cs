@@ -1,4 +1,4 @@
-public class Preformance{
+public class Performance{
     public int Id {get;set;}
     public Timestamp runtimeFrom {get;set;} = null!;
     public Timestamp runtimeTo {get;set;} = null!;

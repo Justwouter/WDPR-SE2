@@ -10,18 +10,18 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PreformanceController : ControllerBase
+    public class PerformanceController : ControllerBase
     {
         private readonly TheaterContext _context;
 
-        public PreformanceController(TheaterContext context)
+        public PerformanceController(TheaterContext context)
         {
             _context = context;
         }
 
-        // GET: api/Preformance
+        // GET: api/Performance
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Preformance>>> GetOptredens()
+        public async Task<ActionResult<IEnumerable<Performance>>> GetOptredens()
         {
           if (_context.Optredens == null)
           {
@@ -30,35 +30,35 @@ namespace backend.Controllers
             return await _context.Optredens.ToListAsync();
         }
 
-        // GET: api/Preformance/5
+        // GET: api/Performance/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Preformance>> GetPreformance(int id)
+        public async Task<ActionResult<Performance>> GetPerformance(int id)
         {
           if (_context.Optredens == null)
           {
               return NotFound();
           }
-            var preformance = await _context.Optredens.FindAsync(id);
+            var performance = await _context.Optredens.FindAsync(id);
 
-            if (preformance == null)
+            if (performance == null)
             {
                 return NotFound();
             }
 
-            return preformance;
+            return performance;
         }
 
-        // PUT: api/Preformance/5
+        // PUT: api/Performance/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPreformance(int id, Preformance preformance)
+        public async Task<IActionResult> PutPerformance(int id, Performance performance)
         {
-            if (id != preformance.Id)
+            if (id != performance.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(preformance).State = EntityState.Modified;
+            _context.Entry(performance).State = EntityState.Modified;
 
             try
             {
@@ -66,7 +66,7 @@ namespace backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PreformanceExists(id))
+                if (!PerformanceExists(id))
                 {
                     return NotFound();
                 }
@@ -79,42 +79,42 @@ namespace backend.Controllers
             return NoContent();
         }
 
-        // POST: api/Preformance
+        // POST: api/Performance
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Preformance>> PostPreformance(Preformance preformance)
+        public async Task<ActionResult<Performance>> PostPerformance(Performance performance)
         {
           if (_context.Optredens == null)
           {
               return Problem("Entity set 'TheaterContext.Optredens'  is null.");
           }
-            _context.Optredens.Add(preformance);
+            _context.Optredens.Add(performance);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPreformance", new { id = preformance.Id }, preformance);
+            return CreatedAtAction("GetPerformance", new { id = performance.Id }, performance);
         }
 
-        // DELETE: api/Preformance/5
+        // DELETE: api/Performance/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePreformance(int id)
+        public async Task<IActionResult> DeletePerformance(int id)
         {
             if (_context.Optredens == null)
             {
                 return NotFound();
             }
-            var preformance = await _context.Optredens.FindAsync(id);
-            if (preformance == null)
+            var performance = await _context.Optredens.FindAsync(id);
+            if (performance == null)
             {
                 return NotFound();
             }
 
-            _context.Optredens.Remove(preformance);
+            _context.Optredens.Remove(performance);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PreformanceExists(int id)
+        private bool PerformanceExists(int id)
         {
             return (_context.Optredens?.Any(e => e.Id == id)).GetValueOrDefault();
         }
