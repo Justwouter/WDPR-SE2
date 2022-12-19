@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddDbContext<ProgrammaContext>(options =>
-  options.UseSqlite("Data Source = mijnDB.db"));
+  options.UseSqlite("Data Source = TheaterDB.sqlite"));
 // Add services to the container.
 
 builder.Services.AddCors(options =>
