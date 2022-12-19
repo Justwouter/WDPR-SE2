@@ -1,14 +1,51 @@
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  font-family: 'Arimo';
+  font-style: normal;
+  color: #FD024F;
+  font-size: 5rem;
+ 
 }
 
+b {
+ 
+  font-family: 'Roboto';
+  font-style: thin;
+  font-weight: 100;
+  font-size: 1.5rem;
+}
+
+c {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-size: 2rem;
+
+}
+d {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 100;
+
+}
+
+u {
+  font-family: 'Arimo';
+  font-style: normal;
+  font-size: 2rem;
+
+}
+
+.Card {
+  background-color: #000000;
+}
 code {
   color: #E01A76;
 }
 
 .btn-primary {
-  color: #fff;
+  color: rgb(0, 0, 0);
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
