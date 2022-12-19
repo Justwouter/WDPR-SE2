@@ -1,12 +1,26 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.DependencyInjection;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-builder.Services.AddDbContext<ProgrammaContext>(options =>
-  options.UseSqlite("Data Source = TheaterDB.sqlite"));
 // Add services to the container.
 
+//Two DB's might not be stable RN
+builder.Services.AddDbContext<ProgrammaContext>(options =>
+  options.UseSqlite("Data Source = ProgammaDB.sqlite"));
+
+builder.Services.AddDbContext<TheaterContext>(options =>
+    options.UseSqlite("Data Source = TheaterDB.sqlite"));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<TheaterContext>()
+                .AddDefaultTokenProviders();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,

@@ -1,9 +1,9 @@
 dotnet add package Microsoft.EntityFrameworkCore.Design  
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite -v 6.0.10
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite 
 dotnet add package Microsoft.EntityFrameworkCore.Tools  
-dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v 6.0.10
-dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 6.0.10
-dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer -v 6.0.10
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design 
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore 
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 
 
 #dotnet tool install dotnet-ef -g
