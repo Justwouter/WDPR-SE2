@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.DependencyInjection;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 
 //Two DB's might not be stable RN
@@ -21,6 +20,7 @@ builder.Services.AddDbContext<TheaterContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
                 .AddDefaultTokenProviders();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod()
                                                   .AllowAnyOrigin();
-                            });
+                          });
 });
 
 builder.Services.AddControllers();
@@ -46,6 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
