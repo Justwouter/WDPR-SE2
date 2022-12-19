@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {  } from 'react';
+import ProgrammaToevoegen from './components/ProgrammaToevoegen';
+import ProgrammaLijst from './components/ProgrammaLijst';
+import { BrowserRouter, Routes } from 'react-router-dom';
+import { Route } from 'react-router';
+import './custom.css';
 
-function App() {
+const App = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <div className="main-content">
+      <BrowserRouter>
+       <Routes>
+        <Route element={<ProgrammaToevoegen/>} path="/ProgrammaToevoegen" />
+        <Route element={<ProgrammaLijst/>} path="/ProgrammaLijst" />
+        <Route exact path='/' element={<ProgrammaLijst/>} />
+        </Routes>
+        </BrowserRouter>
+      </div>
+   
   );
 }
 
