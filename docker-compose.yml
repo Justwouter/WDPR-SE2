@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  backend:
+    image: mcr.microsoft.com/dotnet/sdk:7.0
+    command: >
+      bash -c "dotnet dev-certs https
+      && dotnet run"
+    working_dir: /app
+    network_mode: bridge
+    volumes:
+      - ./backend:/app
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "4000:7290"
+
+  frontend:
+    image: node
+    command: ["npm", "start"]
+    network_mode: bridge
+    working_dir: /app
+    links:
+      - backend
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "4001:44489"
+    environment:
+    - CHOKIDAR_USEPOLLING=true
