@@ -36,10 +36,13 @@ const ProgrammaForm = (props) => {
 
 
 return (
+  
+  
     <div className="main-form">
+      <div className='vTitel'>Programma toevoegen</div>
       <Form onSubmit={handleOnSubmit}>
         <Form.Group controlId="titel">
-          <Form.Label>Titel</Form.Label>
+          <Form.Label>Titel: </Form.Label>
           <Form.Control
             className="input-control"
             type="text"
@@ -52,7 +55,7 @@ return (
           <br></br>
         </Form.Group>
         <Form.Group controlId="van">
-          <Form.Label>Begintijd </Form.Label>
+          <Form.Label>Begintijd: </Form.Label>
           <Form.Control
             className="input-control"
             type="datetime-local"
@@ -64,9 +67,8 @@ return (
           <br></br>
         </Form.Group>
         <Form.Group controlId="tot">
-          <Form.Label>Aantal mensen</Form.Label>
+          <Form.Label>Eindtijd: </Form.Label>
           <Form.Control
-            
             className="input-control"
             type="datetime-local"
             name="tot"
@@ -76,9 +78,8 @@ return (
           />
           <br></br>
         </Form.Group>
-
         <Form.Group controlId="descriptie">
-          <Form.Label>Descriptie</Form.Label>
+          <Form.Label>Descriptie: </Form.Label>
           <Form.Control
             className="input-control"
             type="text"
@@ -86,7 +87,6 @@ return (
             value={descriptie}
             placeholder="descriptie: "
             onChange={handleInputChange}
-          
           />
           <br></br>
         </Form.Group>

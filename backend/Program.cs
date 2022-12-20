@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ZaalContext>(options =>
+  options.UseSqlite("Data Source = ZaalDB.sqlite"));
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 

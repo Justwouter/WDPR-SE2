@@ -19,6 +19,7 @@ c {
   font-family: 'Arimo';
   font-style: normal;
   font-size: 2rem;
+  
 
 }
 d {
@@ -49,3 +50,20 @@ code {
   border-color: #1861ac;
 }
 
+.vTitel{
+  font-family: 'Arimo';
+  font-style: normal;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.main-form{
+  font-family: 'Roboto';
+  font-style: bold;
+  font-size: 1.5rem;
+  color: white;
+}
+
+body{
+  background-color: #000000;
+}
