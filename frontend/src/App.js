@@ -5,6 +5,7 @@ import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
 import './custom.css';
 import Programma from './components/Programma';
+import { Navigate } from "react-router-dom";
 
 const App = (props) => {
   return (
@@ -16,6 +17,7 @@ const App = (props) => {
             <Route index element={<Programma />} /> 
             <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
+            <Route element={<Navigate to="/" />} path="*" />
 
         </Routes>
       </BrowserRouter>
