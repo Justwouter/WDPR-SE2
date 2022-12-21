@@ -6,6 +6,7 @@ import { Route } from 'react-router';
 import './custom.css';
 import { Navigate } from "react-router-dom";
 import Home from './components/Home';
+import Programma from './components/Programma';
 
 const App = (props) => {
   return (

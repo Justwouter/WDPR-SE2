@@ -64,7 +64,7 @@ return (
           <br></br>
         </Form.Group>
         <Form.Group controlId="tot">
-          <Form.Label>Aantal mensen</Form.Label>
+          <Form.Label>Eindtijd:</Form.Label>
           <Form.Control
             
             className="input-control"
