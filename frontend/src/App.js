@@ -4,7 +4,6 @@ import ProgrammaLijst from './components/ProgrammaLijst';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
 import './custom.css';
-import Programma from './components/Programma';
 import { Navigate } from "react-router-dom";
 import Home from './components/Home';
 
