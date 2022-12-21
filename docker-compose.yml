@@ -12,6 +12,7 @@ services:
       - ./backend:/app
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTPS_PORT=8001
     ports:
       - "4000:7290"
 
