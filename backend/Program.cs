@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 
 
@@ -11,6 +12,8 @@ using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<CastLidContext>(options =>
+  options.UseSqlite("Data Source = CastLidDB.sqlite"));
 
 // Add services to the container.
 
