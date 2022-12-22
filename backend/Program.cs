@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 
 
-
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CastLidContext>(options =>
   options.UseSqlite("Data Source = CastLidDB.sqlite"));
@@ -29,6 +29,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+                          policy =>
+                          {
+                              policy.WithOrigins("http://localhost:7153/swagger/index.html")
+                                                  .AllowAnyHeader()
+                                                  .AllowAnyMethod()
+                                                  .AllowAnyOrigin();
+                            });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,5 +55,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.Run();

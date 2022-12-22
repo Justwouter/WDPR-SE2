@@ -1,21 +1,25 @@
 import { Form, Button } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-const ShowForm = (props) => {
+const ShowsForm = (props) => {
     const [Show, setShow] = useState(() => {
       return {
-        titel: props.Show ? props.Show.titel : '',
-        datum: props.Show ? props.Show.datum : '',
+        name: props.Show ? props.Show.name : '',
+        startDate: props.Show ? props.Show.startDate : '',
+        endDate: props.Show ? props.Show.endDate : '',
+        description: props.Show ? props.Show.description : ''
         };
     });
   
-    const { titel, datum } = Show;
+    const { name, startDate, endDate, description } = Show;
     
     const handleOnSubmit = (event) => {
       event.preventDefault();
       const Show = {
-        titel,
-        datum
+        name,
+        startDate,
+        endDate,
+        description
       };
       props.handleOnSubmit(Show);
     };
@@ -33,28 +37,54 @@ const ShowForm = (props) => {
 return (
     <div className="main-form">
       <Form onSubmit={handleOnSubmit}>
-        <Form.Group controlId="titel">
-          <Form.Label>Titel</Form.Label>
+        <Form.Group controlId="name">
+          <Form.Label>name</Form.Label>
           <Form.Control
             className="input-control"
             type="text"
-            name="titel"
-            value={titel}
+            name="name"
+            value={name}
             placeholder="Titel: "
             onChange={handleInputChange}
           
           />
           <br></br>
         </Form.Group>
-        <Form.Group controlId="datum">
+        <Form.Group controlId="startDate">
           <Form.Label>datum </Form.Label>
           <Form.Control
             className="input-control"
             type="datetime-local"
-            name="datum"
-            value={datum}
+            name="startDate"
+            value={startDate}
             placeholder="Datum: "
             onChange={handleInputChange}
+          />
+          <br></br>
+        </Form.Group>
+        <Form.Group controlId="endDate">
+          <Form.Label>einddatum</Form.Label>
+          <Form.Control
+            className="input-control"
+            type="datetime-local"
+            name="endDate"
+            value={endDate}
+            placeholder="einddatum: "
+            onChange={handleInputChange}
+          
+          />
+          <br></br>
+        </Form.Group>
+        <Form.Group controlId="description">
+          <Form.Label>description</Form.Label>
+          <Form.Control
+            className="input-control"
+            type="String"
+            name="description"
+            value={description}
+            placeholder="Omschrijving: "
+            onChange={handleInputChange}
+          
           />
           <br></br>
         </Form.Group>
@@ -67,4 +97,4 @@ return (
 
 };
 
-export default ShowForm;
+export default ShowsForm;

@@ -259,3 +259,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+backend/CastLidDB.sqlite-shm
+backend/CastLidDB.sqlite-wal
