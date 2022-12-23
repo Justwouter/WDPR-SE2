@@ -1,10 +1,17 @@
 /* Provide sufficient contrast against white background */
-a {
+f {
   font-family: 'Arimo';
   font-style: normal;
   color: #FD024F;
   font-size: 5rem;
  
+}
+a {
+  font-family: 'Arimo';
+  font-style: normal;
+  color: white;
+  font-size: 2rem;
+  text-align: center;
 }
 
 b {
@@ -66,4 +73,5 @@ code {
 
 body{
   background-color: #000000;
+  color: white;
 }

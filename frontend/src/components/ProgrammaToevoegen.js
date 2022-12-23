@@ -3,11 +3,12 @@ import ProgrammaForm from './ProgrammaForm';
 
 const ProgrammaToevoegen = ({ history }) => {
   const handleOnSubmit = async (programma) => {
-    await fetch('https://localhost:7153/Programma', {
+    await fetch('http://localhost:7153/Programma', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(programma),
     });

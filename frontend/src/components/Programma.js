@@ -7,17 +7,20 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Card from '@mui/material/Card';
+import ProgrammaLijst from './ProgrammaLijst';
 
 
 const Programma = ({
-  id,
+  programmaId,
   titel,
   van,
   tot,
-  descriptie
+  descriptie,
+  zaal
   
 }) => {
   const history = useNavigate();
+ 
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
@@ -40,12 +43,10 @@ const Programma = ({
     return dagArray[new Date(van).getDay()];
   }
   function getBeginUur(){
-    let s = "00";
-    let date = new Date(van).getMinutes();
-    if(date != 0){
-      s = date
-    }
-    return new Date(van).getHours() + " : " + s ;
+    
+    let s = (new Date(van).getMinutes()<10?'0':'') + new Date(van).getMinutes();
+
+    return new Date(van).getHours() + " : " + s  ;
   }
   function getDuur(){
     return new Date(tot).getDate() - new Date(van).getDate()  ;
@@ -56,17 +57,17 @@ const Programma = ({
         <Table sx={{minWidth: 700  }} aria-label="customized table">
           <TableBody >
                 <StyledTableCell align="center">
-                  <a id='TitelGrootRood'>{getDagNr()}</a><br></br>
+                  <f id='TitelGrootRood'>{getDagNr()}</f><br></br>
                   <b>{getMaand()}</b></StyledTableCell>
                 <StyledTableCell align="center">
                   <b>{getDagNaam()}<br></br>
-                  {getBeginUur()}<br></br>Zaal 1</b>
+                  {getBeginUur()}<br></br>Zaal {zaal}</b>
                   </StyledTableCell>
                 <StyledTableCell align="left">
                   <c>{titel}</c><br></br>
                   <d>Duur: {getDuur()} uur</d> <br></br>
                   <b>{descriptie}</b></StyledTableCell>
-                <StyledTableCell align="center"><u > Bestel</u></StyledTableCell>
+                <StyledTableCell align="center"><u> <a href={'http://localhost:3000/WDPR-SE2/Programma/'+zaal+'/StoelReserveren'}>Bestel </a></u></StyledTableCell>
           </TableBody>
         </Table>
       </TableContainer>

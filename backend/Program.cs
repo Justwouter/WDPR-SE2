@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<ZaalContext>(options =>
   options.UseSqlite("Data Source = ZaalDB.sqlite"));
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -28,7 +29,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
                           policy =>
                           {
-                              policy.WithOrigins("https://localhost:7153/swagger/index.html")
+                              policy.WithOrigins("http://localhost:7153/swagger/index.html")
                                                   .AllowAnyHeader()
                                                   .AllowAnyMethod()
                                                   .AllowAnyOrigin();
