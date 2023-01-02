@@ -3,7 +3,7 @@ import ProgrammaForm from './ProgrammaForm';
 
 const ProgrammaToevoegen = ({ history }) => {
   const handleOnSubmit = async (programma) => {
-    await fetch('http://localhost:4000/api/Programma', {
+    await fetch('http://api.localhost/api/Programma', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

@@ -6,14 +6,23 @@ services:
     command: >
       bash -c "dotnet dev-certs https && dotnet run"
     working_dir: /app
-    network_mode: bridge
+    # network_mode: bridge
     volumes:
       - ./backend:/app
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       # - ASPNETCORE_HTTPS_PORT=7290
-    ports:
-      - "4000:7290"
+    scale: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
+      - "traefik.http.routers.backend.entrypoints=web"
+      - 'traefik.port=7290'
+    # ports:
+    #   - "4000:7290"
+    expose:
+      - 7290
+    
 
   frontend:
     image: node
