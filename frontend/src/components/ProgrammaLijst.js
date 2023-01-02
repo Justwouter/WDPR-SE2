@@ -10,7 +10,7 @@ const ProgrammaLijst = () => {
 
   useEffect(() => {
     async function fetchData(){
-        const response = await fetch('https://77.161.192.27:4000/api/Programma');
+        const response = await fetch('http://localhost:4000/api/Programma');
         const data = await response.json();
         setProgramma(data);
         setLoading(false);
