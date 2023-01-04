@@ -59,6 +59,8 @@ services:
       - MYSQL_DATABASE=WDPR-DB
       - MYSQL_USER=kekcoon
       - MYSQL_PASSWORD=123456
+    ports:
+      - "3306:3306"
     
 
 
