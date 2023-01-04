@@ -7,6 +7,7 @@
 
 #EFCore/DB files
 *.sqlite
+*.sqlite-*
 migrations/
 # dependencies
 node_modules/
@@ -259,5 +260,3 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
-backend/CastLidDB.sqlite-shm
-backend/CastLidDB.sqlite-wal
