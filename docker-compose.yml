@@ -8,7 +8,7 @@ services:
     # network_mode: bridge
     working_dir: /app
     depends_on:
-      - database
+      # - database
     volumes:
       - ./backend:/app
     environment:
@@ -25,7 +25,6 @@ services:
     expose:
       - 7290
     
-
   frontend:
     image: node
     command: [ "npm", "start" ]
@@ -49,26 +48,18 @@ services:
     expose:
       - 3000
     
-
-  database:
-    image: mysql
-    volumes:
-      - ./database:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=WDPR-DB
-      - MYSQL_USER=kekcoon
-      - MYSQL_PASSWORD=123456
-    ports:
-      - "3306:3306"
+  # database:
+  #   image: mysql
+  #   volumes:
+  #     - ./database:/var/lib/mysql
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=123456
+  #     - MYSQL_DATABASE=WDPR-DB
+  #     - MYSQL_USER=kekcoon
+  #     - MYSQL_PASSWORD=123456
+  #   ports:
+  #     - "3306:3306"
     
-
-
-
-
-
-
-
   traefik:
     image: "traefik:v2.9.6"
     container_name: "traefik"
