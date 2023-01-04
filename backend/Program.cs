@@ -12,10 +12,10 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 //Two DB's might not be stable RN
 builder.Services.AddDbContext<ProgrammaContext>(options =>
-  options.UseSqlite("Data Source = ProgammaDB.sqlite"));
+  options.UseSqlite(builder.Configuration.GetConnectionString("ProgrammaContext")));
 
 builder.Services.AddDbContext<TheaterContext>(options =>
-    options.UseSqlite("Data Source = TheaterDB.sqlite"));
+    options.UseMySQL(builder.Configuration.GetConnectionString("TheaterContext")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()

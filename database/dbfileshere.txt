@@ -1,0 +1,2 @@
+Placeholder so git will let this folder exist.
+necessary for the database docker container.
