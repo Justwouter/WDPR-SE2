@@ -39,7 +39,7 @@ services:
     scale: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`) || Host(`www.frontend.localhost`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       - 'traefik.backend=node'
       - 'traefik.port=3000'
