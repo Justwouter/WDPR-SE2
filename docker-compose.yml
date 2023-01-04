@@ -7,8 +7,8 @@ services:
       bash -c "dotnet dev-certs https && dotnet run"
     # network_mode: bridge
     working_dir: /app
-    depends_on:
-      # - database
+    # depends_on:
+    #   # - database
     volumes:
       - ./backend:/app
     environment:
