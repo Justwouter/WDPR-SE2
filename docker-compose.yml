@@ -17,7 +17,7 @@ services:
     scale: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.theaterlaak.site`)"
+      - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
       - "traefik.http.routers.backend.entrypoints=web"
       - 'traefik.port=7290'
     # ports:
@@ -41,7 +41,7 @@ services:
     scale: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`theaterlaak.site`) || Host(`www.theaterlaak.site`)"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`) || Host(`www.frontend.localhost`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       - 'traefik.backend=node'
       - 'traefik.port=3000'
