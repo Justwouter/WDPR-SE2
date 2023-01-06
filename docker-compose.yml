@@ -3,11 +3,11 @@ version: '3'
 services:
   backend:
     image: mcr.microsoft.com/dotnet/sdk:7.0
+    container_name: backend
     command: >
       bash -c "dotnet dev-certs https && dotnet run"
-    # network_mode: bridge
     working_dir: /app
-    depends_on:
+    # depends_on:
       # - database
     volumes:
       - ./backend:/app
@@ -17,18 +17,20 @@ services:
     scale: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
+      - "traefik.http.routers.backend.rule=Host(`api.theaterlaak.site`)"
       - "traefik.http.routers.backend.entrypoints=web"
       - 'traefik.port=7290'
     # ports:
     #   - "4000:7290"
     expose:
       - 7290
+    restart: unless-stopped
+
     
   frontend:
     image: node
+    container_name: frontend
     command: [ "npm", "start" ]
-    # network_mode: bridge
     working_dir: /app
     depends_on:
       - backend
@@ -39,7 +41,7 @@ services:
     scale: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`) || Host(`www.frontend.localhost`)"
+      - "traefik.http.routers.frontend.rule=Host(`theaterlaak.site`) || Host(`www.theaterlaak.site`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       - 'traefik.backend=node'
       - 'traefik.port=3000'
@@ -47,6 +49,7 @@ services:
     #   - "4001:80"
     expose:
       - 3000
+    restart: unless-stopped
     
   # database:
   #   image: mysql
@@ -64,7 +67,6 @@ services:
     image: "traefik:v2.9.6"
     container_name: "traefik"
     command:
-      #- "--log.level=DEBUG"
       - "--api.dashboard=true"
       - "--api.insecure=true"
       - "--providers.docker=true"
@@ -75,6 +77,7 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
+    restart: unless-stopped
     
 
   # whoami:
