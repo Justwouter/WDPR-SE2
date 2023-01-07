@@ -10,7 +10,7 @@ public class TheaterContext : IdentityDbContext{
     public TheaterContext (DbContextOptions<TheaterContext> options): base(options){}
 
     public DbSet<Performance> Optredens {get;set;} = default!;
-    public DbSet<User> User { get; set; } = default!;
+    // public DbSet<User> User { get; set; } = default!;
     // public DbSet<Role> Role { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder builder)
