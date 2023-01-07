@@ -5,7 +5,7 @@ const ProgrammaForm = (props) => {
     const [ StoelenLijst, setStoelenLijst ] = useState([]);
     const [Programma, setProgramma] = useState(() => {
       return {
-        programmaId: props.Programma ? props.Programma.programmaId : '',
+        //programmaId: props.Programma ? props.Programma.programmaId : '',
         titel: props.Programma ? props.Programma.titel : '',
         van: props.Programma ? props.Programma.van : '',
         tot: props.Programma ? props.Programma.tot : '',
@@ -16,12 +16,12 @@ const ProgrammaForm = (props) => {
       };
     });
   
-    const { programmaId, titel, van, tot, descriptie, zaal,stoelenLijst } = Programma;
+    const {  titel, van, tot, descriptie, zaal,stoelenLijst } = Programma;
     
     const handleOnSubmit = (event) => {
       event.preventDefault();
       const Programma = {
-        programmaId,
+    
         titel,
         van,
         tot,
@@ -38,9 +38,6 @@ const ProgrammaForm = (props) => {
         ...prevState,
         [name]: value,
         
-        
-  
-        
       }));
     }
     const handleInputChangeZ = (event) => {
@@ -48,13 +45,11 @@ const ProgrammaForm = (props) => {
       setProgramma((prevState) => ({
         ...prevState,
         [name]:value,
-        stoelenLijst: putStoelenLijst(value)
+        stoelenLijst: maakStoelenLijst(value)
         
         
       }));
     }
-
-  
 
     useEffect(() => {
       async function fetchData(){
@@ -66,7 +61,7 @@ const ProgrammaForm = (props) => {
       fetchData()
     }, []);
 
-    function putStoelenLijst(zaal){
+    function maakStoelenLijst(zaal){
       
       var eersteR = StoelenLijst[zaal-1]['eersteR']
       var tweedeR = StoelenLijst[zaal-1]['tweedeR']
@@ -100,16 +95,11 @@ const ProgrammaForm = (props) => {
             sLijst.push(dRObject)
           }
       
-          //console.log(sLijst)
+          console.log()
           return sLijst;
           
-          
     }
-
-
 return (
-  
-  
     <div className="main-form">
       <div className='vTitel'>Programma toevoegen</div>
       <Form onSubmit={handleOnSubmit}>
@@ -179,6 +169,7 @@ return (
         </Form.Group>
         <Button variant="primary" type="submit" className="submit-btn" >
           Programma toevoegen
+          
         </Button>
       </Form>
     </div>

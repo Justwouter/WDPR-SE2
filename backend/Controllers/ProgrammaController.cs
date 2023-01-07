@@ -93,7 +93,7 @@ namespace backend.Controllers
             return NoContent();
         }
 
-        [HttpPut("Stoel/{id}}")]
+        [HttpPut("Stoel/{id}")]
         public async Task<IActionResult> PutStoel(int id, Stoel stoel)
         {
             if (id != stoel.StoelId)

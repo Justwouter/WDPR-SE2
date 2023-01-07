@@ -12,7 +12,7 @@ const ProgrammaToevoegen = ({ history }) => {
       },
       body: JSON.stringify(programma),
     });
-    history.push('/programma');
+    //history.push('http://localhost:3000/WDPR-SE2/ProgrammaLijst');
   };
 
   return (

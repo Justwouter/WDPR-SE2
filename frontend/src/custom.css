@@ -1,5 +1,5 @@
 /* Provide sufficient contrast against white background */
-f {
+.style2 {
   font-family: 'Arimo';
   font-style: normal;
   color: #FD024F;
@@ -22,14 +22,14 @@ b {
   font-size: 1.5rem;
 }
 
-c {
+.style3 {
   font-family: 'Arimo';
   font-style: normal;
   font-size: 2rem;
   
 
 }
-d {
+.style4 {
   font-family: 'Roboto';
   font-style: italic;
   font-size: 1rem;
@@ -75,3 +75,24 @@ body{
   background-color: #000000;
   color: white;
 }
+
+
+.reserveerd {
+  background-color: #5e5e5e !important;
+  pointer-events: none;
+}
+.gekozen{
+  background-image: linear-gradient(45deg, #FD024F, #FD024F, #Ffff) !important;
+  transition: '0.3s'!important;
+  color: white !important;
+  cursor: pointer;
+}
+.vrij {
+  background-image: linear-gradient(45deg, #Ffff, #Ffff, #FD024F) !important;
+  transition: '0.3s'!important;
+  cursor: pointer;
+}
+
+
+
+

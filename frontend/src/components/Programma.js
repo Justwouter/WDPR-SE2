@@ -57,17 +57,17 @@ const Programma = ({
         <Table sx={{minWidth: 700  }} aria-label="customized table">
           <TableBody >
                 <StyledTableCell align="center">
-                  <f id='TitelGrootRood'>{getDagNr()}</f><br></br>
+                  <a className='style2' id='TitelGrootRood'>{getDagNr()}</a><br></br>
                   <b>{getMaand()}</b></StyledTableCell>
                 <StyledTableCell align="center">
                   <b>{getDagNaam()}<br></br>
                   {getBeginUur()}<br></br>Zaal {zaal}</b>
                   </StyledTableCell>
                 <StyledTableCell align="left">
-                  <c>{titel}</c><br></br>
-                  <d>Duur: {getDuur()} uur</d> <br></br>
+                  <a className='style3'>{titel}</a><br></br>
+                  <a className='style4'>Duur: {getDuur()} uur</a> <br></br>
                   <b>{descriptie}</b></StyledTableCell>
-                <StyledTableCell align="center"><u> <a href={'http://localhost:3000/WDPR-SE2/Programma/'+zaal+'/StoelReserveren'}>Bestel </a></u></StyledTableCell>
+                <StyledTableCell align="center"><u> <a href={'http://localhost:3000/WDPR-SE2/Programma/'+programmaId+'/StoelReserveren'}>Bestel </a></u></StyledTableCell>
           </TableBody>
         </Table>
       </TableContainer>
