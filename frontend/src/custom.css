@@ -200,7 +200,7 @@ body{
   margin-bottom: -1.75%;
   padding-top: 0.5%;
   min-height: 235px;
- 
+  max-height: 235px;
 
   background-image: linear-gradient(45deg, #FD024F, #F0C790, #8A84E2);
   background-size: 200%;
