@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }
 }));
 
-  const StoelReserveren = (props) => {
+  const StoelReserveren = ({startAnimatie}) => {
   const {id} = useParams();
   const [ stoelA, setStoelA ] = useState([]);
   const [ stoelB, setStoelB ] = useState([]);
@@ -32,6 +32,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
   const { state } = useLocation(); 
   
+  const transitionProperty = startAnimatie
+    ? { marginTop: '10px', opacity: 1}
+    : {};
 
   const showAlert = () => {
     alert("Kaartjes bestelt");
@@ -78,16 +81,16 @@ const Item = styled(Paper)(({ theme }) => ({
       <div className='kaartjes'>
           <a className='style10'> Kaartjes </a>
       <div className='kaart'>
-      <ul><br></br>
+      <ul>  <br></br>
       {gekozenStoelen.map((value,index) => ( 
-        <b className='kCodes' key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId == value)[0]["nr"] + '\u00A0'
-        }</b>))}</ul>
+        <div className='kCodes' style={transitionProperty}  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId == value)[0]["nr"] + '\u00A0'
+        }</div>))}</ul>
       <a className='bestellen'>
         <button onClick={showAlert}>Bestellen</button></a></div></div></div><br></br>
 
         <div>
         <b className='style13'>Eersterang</b></div><br></br>
-      <Grid  container  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+      <Grid container justifyContent="center" spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
       
         {Array.from(stoelA).map((_, index) => (  
           <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
@@ -109,7 +112,7 @@ const Item = styled(Paper)(({ theme }) => ({
       <br></br>
       <div>
       <b className='style13'>Tweederang</b></div><br></br>
-      <Grid  container  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+      <Grid  container justifyContent="center"  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
         
         { Array.from(stoelB).map((_, index) => (
           
@@ -133,7 +136,7 @@ const Item = styled(Paper)(({ theme }) => ({
       <div>
       <div>
       <b  className='style13'>Derderang </b></div><br></br>
-      <Grid container  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+      <Grid container justifyContent="center" spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
         {Array.from(stoelC).map((_, index) => (
           <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
             <Item  className={
