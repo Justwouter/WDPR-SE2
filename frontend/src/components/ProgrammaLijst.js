@@ -24,6 +24,7 @@ const ProgrammaLijst = () => {
         {!_.isEmpty(programmas) ? (
           programmas.map((programma) => (
             <Programma key={programma.id} {...programma} />
+            
           ))
         ) : (
           <p className="message">Er zijn nog geen programmas!</p>

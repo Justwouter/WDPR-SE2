@@ -4,14 +4,21 @@ import ProgrammaLijst from './components/ProgrammaLijst';
 import StoelReserveren from './components/StoelReserveren';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
+import Header from "./components/Headers";
 import './custom.css';
 
 const App = (props) => {
   return (
-    
+      
+        
+      
       <div className="main-content">
       <BrowserRouter>
+      <div>
+        <Header/>
+      </div>
        <Routes>
+        
         <Route element={<ProgrammaToevoegen/>} path="/WDPR-SE2/ProgrammaToevoegen" />
         <Route element={<ProgrammaLijst/>} path="/WDPR-SE2/ProgrammaLijst" />
         <Route element={<StoelReserveren/>} path="/WDPR-SE2/Programma/:id/StoelReserveren" />
@@ -19,6 +26,8 @@ const App = (props) => {
         </Routes>
         </BrowserRouter>
       </div>
+     
+    
    
   );
 }

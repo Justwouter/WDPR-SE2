@@ -4,35 +4,35 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
-
 import { useParams } from 'react-router';
+import {useLocation} from 'react-router-dom'
 
 const Item = styled(Paper)(({ theme }) => ({
   //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   textAlign: 'center',
-  color: theme.palette.text.secondary,
-
-  backgroundSize: '200%',
- 
-  transition: '0.5s',
-  
+  backgroundSize: '250%',
+  transition: '0.4s ease-in-out',
+  backgroundColor: '#00000000',
   '&:hover': {
-    
-    backgroundPosition: 'right'
+    transform: "scale3d(1.2, 1.2, 1)",
+    backgroundPosition: 'right',
+    border: '#ffffff'
   }
 }));
 
-  const StoelReserveren = () => {
+  const StoelReserveren = (props) => {
   const {id} = useParams();
-
   const [ stoelA, setStoelA ] = useState([]);
   const [ stoelB, setStoelB ] = useState([]);
   const [ stoelC, setStoelC ] = useState([]);
   const [ stoelen, setStoelenLijst ] = useState([]);
   const [ gekozenStoelen, setStoelen] = useState([]);
-  const [selecteerd, setSelectie] = useState(false);
+
+  const { state } = useLocation(); 
+  
+
   const showAlert = () => {
     alert("Kaartjes bestelt");
   }
@@ -45,7 +45,6 @@ const Item = styled(Paper)(({ theme }) => ({
         setStoelA(data.filter(a => a.rang == "A"));
         setStoelB(data.filter(b => b.rang == "B"));
         setStoelC(data.filter(c => c.rang == "C"));
-
         setStoelenLijst(data);
     }
     fetchData()
@@ -53,24 +52,45 @@ const Item = styled(Paper)(({ theme }) => ({
 
   const ToggleKeuzeStoel = (stoel) => {
     const index = gekozenStoelen.toString().indexOf(stoel);
-
     if (index === -1){
       setStoelen((o) => [...o,stoel])
     }else{
       setStoelen(p => p.filter(p => p != stoel));
     }
-    console.log(gekozenStoelen)
+    //console.log(gekozenStoelen)
     //console.log(stoelen.filter(s => s.stoelId == stoel))
   };
 
     return (
-      <Box textAlign={"center"} sx={{ flexGrow: 3 }}>
-        <a>Stoel Reserveren</a><br></br><br></br><br></br><br></br><br></br><br></br>
-        <a>Eersterang</a>
-      <Grid  container  spacing={{ xs: 4, md: 3 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+      <Box textAlign="center" className="grid"  sx={{ flexGrow: 3 }}>
+        {/* <a className='style10'>Stoel Reserveren</a><br></br> */}
+       
+        <div id='wrapper'>
+      <div className='infoR'>
+      <a className='style10'>{state.sTitel} - Zaal {state.sZaal} </a>
+      <a className='style11'>{ state.sBeginUur} </a><br></br>
+      <a className='style9'>{state.sDescriptie}</a><br></br>
+      
+      <a className='style12'>  {state.sDagNaam} {state.sDagNr} {state.sMaand} </a>
+      
+      </div> 
+     
+      <div className='kaartjes'>
+          <a className='style10'> Kaartjes </a>
+      <div className='kaart'>
+      <ul><br></br>
+      {gekozenStoelen.map((value,index) => ( 
+        <b className='kCodes' key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId == value)[0]["nr"] + '\u00A0'
+        }</b>))}</ul>
+      <a className='bestellen'>
+        <button onClick={showAlert}>Bestellen</button></a></div></div></div><br></br>
+
+        <div>
+        <b className='style13'>Eersterang</b></div><br></br>
+      <Grid  container  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
       
         {Array.from(stoelA).map((_, index) => (  
-          <Grid  maxWidth={75} item xs={3} sm={9} md={4} key={index}>
+          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
             <Item  className={
             stoelA[index]["status"] == true
               ? "reserveerd"
@@ -86,11 +106,15 @@ const Item = styled(Paper)(({ theme }) => ({
           </Grid>
         ))}
       </Grid>
-      <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-      <a>Tweederang</a>      
-      <Grid  container  spacing={{ xs: 4, md: 3 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+      <br></br>
+      <div>
+      <b className='style13'>Tweederang</b></div><br></br>
+      <Grid  container  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+        
         { Array.from(stoelB).map((_, index) => (
-          <Grid  maxWidth={75} item xs={3} sm={9} md={4} key={index}>
+          
+          <Grid  maxWidth={45}   md={4} key={index}>
+            
             <Item  className={
             stoelB[index]["status"] == true
               ? "reserveerd"
@@ -104,12 +128,14 @@ const Item = styled(Paper)(({ theme }) => ({
           </Grid>
         ))}
       </Grid>
-      <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-      <a>Derderang</a>      
-      <Grid container  spacing={{ xs: 4, md: 3 }} columns={{ xs: 4, sm: 8, md: 45 }}>
+      <br></br>
+      {stoelC.length != 0 &&   
+      <div>
+      <div>
+      <b  className='style13'>Derderang </b></div><br></br>
+      <Grid container  spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
         {Array.from(stoelC).map((_, index) => (
-          <Grid className="grid" maxWidth={75} item xs={3} sm={9} md={4} key={index}>
-        
+          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
             <Item  className={
             stoelC[index]["status"] == true
               ? "reserveerd"
@@ -123,17 +149,13 @@ const Item = styled(Paper)(({ theme }) => ({
           </Grid>
         ))}
       </Grid>
-      <br></br><br></br> <br></br><br></br> 
-      <ul> Kaartjes:
-      {gekozenStoelen.map((value,index) => ( 
-        <div key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId == value)[0]["nr"]
-        }</div>
-      ))}
-      </ul>
-
-      <button onClick={showAlert}>Bestellen</button>
+      </div>
+      }
+      <br></br><br></br>
       
+    
     </Box>
+    
   );
 }
  

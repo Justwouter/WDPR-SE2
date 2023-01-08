@@ -1,17 +1,26 @@
-/* Provide sufficient contrast against white background */
-.style2 {
+/*Xiketic       #1B1725
+  Gold Crayola  #F0C790
+  Medium Purple #8A84E2 
+  Red Crayola   #FD024F*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,900&display=swap');
+
+  .style2 {
   font-family: 'Arimo';
   font-style: normal;
   color: #FD024F;
   font-size: 5rem;
- 
 }
+
+
 a {
   font-family: 'Arimo';
   font-style: normal;
   color: white;
   font-size: 2rem;
   text-align: center;
+  
+  
 }
 
 b {
@@ -20,15 +29,15 @@ b {
   font-style: thin;
   font-weight: 100;
   font-size: 1.5rem;
+  
 }
 
 .style3 {
   font-family: 'Arimo';
   font-style: normal;
   font-size: 2rem;
-  
-
 }
+
 .style4 {
   font-family: 'Roboto';
   font-style: italic;
@@ -36,6 +45,37 @@ b {
   font-weight: 100;
 
 }
+.style5 {
+  font-family: 'Arimo';
+  font-style: normal;
+  color: #ffffff;
+  font-size: 2rem;
+ 
+}
+
+.style6 {
+  font-family: 'Roboto';
+  font-style: thin;
+  font-weight: 100;
+  font-size: 1.5rem;
+  
+}
+
+.style7{
+  color: #ffffff;
+  list-style: none;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.style8{
+  color: #ffffff;
+  list-style: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
 
 u {
   font-family: 'Arimo';
@@ -45,7 +85,7 @@ u {
 }
 
 .Card {
-  background-color: #000000;
+  background-color: #1B1725;
 }
 code {
   color: #E01A76;
@@ -72,7 +112,7 @@ code {
 }
 
 body{
-  background-color: #000000;
+  background-color:#1B1725;
   color: white;
 }
 
@@ -80,19 +120,179 @@ body{
 .reserveerd {
   background-color: #5e5e5e !important;
   pointer-events: none;
+  font-size: 0.7rem !important;
+  border: #5e5e5e;
+  border-width: 1.5px;
+  border-style: solid;
 }
 .gekozen{
-  background-image: linear-gradient(45deg, #FD024F, #FD024F, #Ffff) !important;
-  transition: '0.3s'!important;
+  background-image: linear-gradient(45deg, #FD024F, #FD024F, #00000000) !important;
   color: white !important;
+  font-size: 0.70rem !important;
+  border: #FD024F;
+  border-width: 1.5px;
+  border-style: solid;
   cursor: pointer;
+  user-select:none;
+
 }
 .vrij {
-  background-image: linear-gradient(45deg, #Ffff, #Ffff, #FD024F) !important;
-  transition: '0.3s'!important;
+  background-image: linear-gradient(45deg, #00000000, #00000000, #FD024F) !important;
   cursor: pointer;
+  border: #ffffff;
+  border-width: 1.5px;
+  border-style: solid;
+  color: white !important;
+  font-size: 0.70rem !important;
+  user-select:none;
+ 
+}
+
+.grid {
+  margin-left: 5%;
+  margin-right: 5%;
+ 
+}
+
+.kCodes {
+  display: flex;
+  align-content: flex-start;
+  float: left;
+  text-align: right;
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 0.75rem;
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  
+  
+
+}
+.kaartjes{
+  margin-right: 5%;
+  width: 35%;
+  text-align: left;
+  background-color: #8A84E2;
+  border-width: 2px;
+  padding-right: 5%;
+  padding-left: 3%;
+  margin-right: 1%;
+  float: left;
+  border-radius: 25px;
+  /* border-color: #fd024d;
+  border-width: 3px;
+  border-style: solid; */
+  color: #000000;
+  flex-direction: row;
+  margin-bottom: -1.75%;
+  padding-top: 0.5%;
+  min-height: 235px;
+  max-height: 235px;
+
+  background-image: linear-gradient(45deg, #FD024F, #F0C790, #8A84E2);
+  background-size: 200%;
+  transition: 0.4s ease-in-out;
+
+}
+.kaartjes:hover{
+  background-position: right;
 }
 
 
+.bestellen{
+  display: flex;
+  position: absolute;
+  margin-left: 21%;
+  float: right;
+  margin-top: -75px;
+  
+  
+}
 
+.bestellen button{
+  background-color: #1B1725;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  list-style: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-width: 0px;
+  float: left;
+  transition: transform 0.3s ease-in-out;
+ 
+}
 
+.bestellen button:hover{
+  cursor: pointer;
+  transform: scale3d(1.1, 1.1, 1);
+}
+
+.infoR {
+
+  width: 60%;
+  text-align: left;
+  float: right;
+  padding-top: 25px;
+}
+
+.style9{
+  text-align: left;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  font-size: 1.2rem;
+ 
+}
+.style10{
+  text-align: left;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  
+}
+
+.style11{
+  text-align: left;
+  color: #fd024d;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 20px;
+}
+.style12{
+  text-align: right;
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  background-color: #F0C790;
+  border-radius: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+.style13{
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+#wrapper{
+  display: inline-block;
+}
