@@ -4,5 +4,4 @@ namespace backend.model;
 
 public class Role : IdentityRole
 {
-    
 }

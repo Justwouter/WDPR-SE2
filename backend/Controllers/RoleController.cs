@@ -83,7 +83,8 @@ namespace backend.Controllers
 
         // POST: api/Role
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost, Authorize(Roles = "Medewerker")]
+        // [HttpPost, Authorize(Roles = "Medewerker")]
+        [HttpPost]
         public async Task<ActionResult<Role>> PostRole(Role role)
         {
             await _roleManager.CreateAsync(role);

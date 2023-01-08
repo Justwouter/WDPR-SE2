@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using backend.model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using backend.model;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
-namespace backend
+namespace backend.Controllers
 {
 
     [Route("api/[controller]")]
@@ -30,9 +30,9 @@ namespace backend
             _roleManager = roleManager;
             _context = context;
         }
-
-        // GET: api/Login
-        [HttpGet]
+        
+        // GET: api/User
+        [HttpGet, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IEnumerable<IdentityUser>>> GetUser()
         {
             if (_userManager.Users == null)
@@ -43,8 +43,8 @@ namespace backend
             return x;
         }
 
-        // GET: api/Login/5
-        [HttpGet("{id}")]
+        // GET: api/User/{id}
+        [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IdentityUser>> GetUser(string id)
         {
             if (_userManager.Users == null)
@@ -61,7 +61,7 @@ namespace backend
             return user;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<ActionResult> UpdateEmail(string id, string email)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -82,7 +82,7 @@ namespace backend
 
         // POST: api/Login
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IdentityUser>> PostUser(User user)
         {
             if (_userManager == null)
@@ -96,7 +96,8 @@ namespace backend
             // return CreatedAtAction("GetUser", new { id = user.Id }, user);
             return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
         }
-
+        
+        [NonAction]
         public async Task<IdentityResult> CreateUserAsync(string email, string password)
         {
             var user = new IdentityUser { UserName = email, Email = email };
@@ -105,7 +106,7 @@ namespace backend
         }
 
         // DELETE: api/Login/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             if (_userManager.Users == null)

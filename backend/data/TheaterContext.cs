@@ -10,14 +10,23 @@ public class TheaterContext : IdentityDbContext{
     public TheaterContext (DbContextOptions<TheaterContext> options): base(options){}
 
     public DbSet<Performance> Optredens {get;set;} = default!;
-    // public DbSet<User> User { get; set; } = default!;
+    public DbSet<User> Users { get; set; } = default!;
     // public DbSet<Role> Role { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.Entity<Performance>().ToTable("Optredens");
-        builder.Entity<User>().ToTable("Gebruikers");
+        builder.Entity<Role>()
+            .Property(r => r.NormalizedName)
+            .ValueGeneratedOnAdd();
+
+        builder.Entity<Role>()
+            .Property(r => r.ConcurrencyStamp)
+            .ValueGeneratedOnAdd();
+
+        builder.Entity<Role>().HasData(new Role() { Name = "Medewerker", NormalizedName = "MEDEWERKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
+        builder.Entity<Role>().HasData(new Role() { Name = "Bezoeker", NormalizedName = "BEZOEKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
     }
 
 }
