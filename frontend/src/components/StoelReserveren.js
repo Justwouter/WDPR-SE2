@@ -55,7 +55,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
   const ToggleKeuzeStoel = (stoel) => {
     const index = gekozenStoelen.toString().indexOf(stoel);
-    if (index === -1){
+    if (index === -1 && gekozenStoelen.length < 25 == true ){
       setStoelen((o) => [...o,stoel])
     }else{
       setStoelen(p => p.filter(p => p != stoel));
@@ -71,15 +71,16 @@ const Item = styled(Paper)(({ theme }) => ({
         <div id='wrapper'>
       <div className='infoR'>
       <a className='style10'>{state.sTitel} - Zaal {state.sZaal} </a>
-      <a className='style11'>{ state.sBeginUur} </a><br></br>
+      <a className='style11'>{ state.sBeginUur + '-' + state.sEindUur} </a><br></br>
       <a className='style9'>{state.sDescriptie}</a><br></br>
+      <a className='style12'>Duur: {state.sDuur}min</a>
+      <a className='style12'>{state.sDagNaam} {state.sDagNr} {state.sMaand}</a>
       
-      <a className='style12'>  {state.sDagNaam} {state.sDagNr} {state.sMaand} </a>
       
       </div> 
      
       <div className='kaartjes'>
-          <a className='style10'> Kaartjes </a>
+          <a className='style10'> Kaartjes</a>
       <div className='kaart'>
       <ul>  <br></br>
       {gekozenStoelen.map((value,index) => ( 
@@ -90,10 +91,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
         <div>
         <b className='style13'>Eersterang</b></div><br></br>
+        
       <Grid container justifyContent="center" spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
       
         {Array.from(stoelA).map((_, index) => (  
           <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
+            
             <Item  className={
             stoelA[index]["status"] == true
               ? "reserveerd"
@@ -101,13 +104,14 @@ const Item = styled(Paper)(({ theme }) => ({
               ? "gekozen"
               : "vrij"
             } 
-                    onClick= {() => ToggleKeuzeStoel(stoelA[index]["stoelId"])}
+                    onClick= {()=> ToggleKeuzeStoel(stoelA[index]["stoelId"])}
             >{"" + stoelA[index]["nr"] } 
              {/* <div style={{ visibility: this.state.driverDetails.firstName != undefined? 'visible': 'hidden'}}></div> */}
 
             </Item>
           </Grid>
         ))}
+        
       </Grid>
       <br></br>
       <div>
@@ -125,7 +129,7 @@ const Item = styled(Paper)(({ theme }) => ({
               ? "gekozen"
               : "vrij"
             } 
-                    onClick= {() => ToggleKeuzeStoel(stoelB[index]["stoelId"])}
+                    onClick= { ()=> ToggleKeuzeStoel(stoelB[index]["stoelId"])}
             >{"" + stoelB[index]["nr"] } 
             </Item>
           </Grid>
@@ -146,7 +150,7 @@ const Item = styled(Paper)(({ theme }) => ({
               ? "gekozen"
               : "vrij"
             } 
-                    onClick= {() => ToggleKeuzeStoel(stoelC[index]["stoelId"])}
+                    onClick= {()=> ToggleKeuzeStoel(stoelC[index]["stoelId"])}
             >{"" + stoelC[index]["nr"] } 
             </Item>
           </Grid>

@@ -21,19 +21,19 @@ export class Headers extends Component {
                 <li className="nav_listlogo"><img style={{ width: 150, height: 100 }} src={Logo}/></li><br />
                 <li className="nav_listitem">Home
                   <ul className="nav_listitemdrop">
-                    <li>Drop 1</li>
-                    <li>Drop 2</li>
-                    <li>Drop 3</li></ul></li>
+                    <li className='hDrop'>Drop 1</li>
+                    <li className='hDrop'>Drop 2</li>
+                    <li className='hDrop'>Drop 3</li></ul></li>
                 <li className="nav_listitem">Programma
                   <ul className="nav_listitemdrop">
-                    <li>Drop 1</li>
-                    <li>Drop 2</li>
-                    <li>Drop 3</li></ul></li>
+                    <li className='hDrop'>Drop 1</li>
+                    <li className='hDrop'>Drop 2</li>
+                    <li className='hDrop'>Drop 3</li></ul></li>
                 <li className="nav_listitem">Winkelmand
                   <ul className="nav_listitemdrop">
-                    <li>Drop 1</li>
-                    <li>Drop 2</li>
-                    <li>Drop 3</li></ul></li>
+                    <li className='hDrop'>Drop 1</li>
+                    <li className='hDrop'>Drop 2</li>
+                    <li className='hDrop'>Drop 3</li></ul></li>
                 <li className="nav_item"><i className="gg-search" /></li>
                 <li className="nav_item"><button className="btn-inloggen">Inloggen</button></li></div><ul><br /></ul></ul></nav>
           

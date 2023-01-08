@@ -50,8 +50,17 @@ const Programma = ({
 
     return (new Date(van).getHours()<10 ? '0'  : '') + new Date(van).getHours() + ':' + s  ;
   }
+
+  function getEindUur(){
+    
+    let s = (new Date(tot).getMinutes()<10 ? '0' : '') + new Date(tot).getMinutes();
+
+    return (new Date(tot).getHours()<10 ? '0'  : '') + new Date(tot).getHours() + ':' + s  ;
+  }
   function getDuur(){
-    return new Date(tot).getDate() - new Date(van).getDate()  ;
+    var diff = (new Date(tot).getTime() - new Date(van).getTime());
+    var minuten = Math.round((diff/1000)/60);
+    return minuten ;
   }
 
     return (
@@ -60,16 +69,16 @@ const Programma = ({
           <TableBody >
             
                 <StyledTableCell align="center">
-                  <a className='style2' id='TitelGrootRood'>{getDagNr()}</a><br></br>
-                  <b>{getMaand()}</b></StyledTableCell>
+                  <div className='style2' id='TitelGrootRood'>{getDagNr()}</div><br></br>
+                  <div>{getMaand()}</div></StyledTableCell>
                 <StyledTableCell align="center">
-                  <b>{getDagNaam()}<br></br>
-                  {getBeginUur()}<br></br>Zaal {zaal}</b>
+                  <div>{getDagNaam()}<br></br>
+                  {getBeginUur()}<br></br>Zaal {zaal}</div>
                   </StyledTableCell>
                 <StyledTableCell align="left">
-                  <a className='style3'>{titel}</a><br></br>
-                  <a className='style4'>Duur: {getDuur()} uur</a> <br></br>
-                  <b>{descriptie}</b></StyledTableCell>
+                  <div className='style3'>{titel}</div><br></br>
+                  <div className='style4'>Duur: {getDuur()} minuten</div> <br></br>
+                  <div>{descriptie}</div></StyledTableCell>
                 
                 <StyledTableCell align="center"><u> 
                 <Link to= {'/WDPR-SE2/Programma/'+programmaId+'/StoelReserveren'}
@@ -80,7 +89,8 @@ const Programma = ({
                             sDuur: getDuur(),
                             sDagNr: getDagNr(),
                             sDagNaam: getDagNaam(),
-                            sMaand: getMaand()}}
+                            sMaand: getMaand(),
+                            sEindUur: getEindUur()}}
               
                 ><a >Bestel </a></Link>
                 </u>

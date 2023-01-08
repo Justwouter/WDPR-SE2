@@ -1,3 +1,7 @@
+/*Xiketic       #1B1725
+  Gold Crayola  #F0C790
+  Medium Purple #8A84E2 
+  Red Crayola   #FD024F*/
 *,
 *::before,
 *::after{
@@ -5,6 +9,10 @@
   margin: 0;
   padding: 0;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,900&display=swap');
+
+
 
 .nav_list div{
     background: white;
@@ -15,10 +23,11 @@
     box-shadow:  0px 4px 2px -2px rgba(170, 170, 170, 0.356);
   }
   .nav_listitem{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
     color: #003452;
     list-style: none;
-    font-weight: normal;
-    font-size: 1.25rem;
     position: relative;
     padding: 1.5rem 1rem;
     margin-right: 2rem;
@@ -41,7 +50,7 @@
   }
   
   .nav_item2{
-    color: black;
+    color: #1B1725;
     list-style: none;
     font-weight: lighter;
     font-size: 0.75rem;
@@ -54,7 +63,7 @@
   }
   
   .nav_item{
-    color: #003452;
+    color: #1B1725;
     list-style: none;
     position: relative;
     padding: 0rem 0.5rem;
@@ -63,6 +72,9 @@
     
   }
   .nav_listitemdrop{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
     position: absolute;
     top: 4rem;
     left: -1rem;
@@ -77,7 +89,13 @@
     opacity: 0;
     visibility: hidden;
     transition:opacity 200ms ease-in-out;
-    
+  }
+
+  .hDrop{
+    color: #1B1725;
+  }
+  .nav_listitem:hover{
+    color: #FD024F;
   }
   .nav_listitem li{
     
@@ -87,7 +105,7 @@
     transition: background-color 200ms ease-in-out;
   }
   .nav_list li:hover{
-    color: black;
+    color: #FD024F;
   }
   li:hover .nav_listitemdrop{
     opacity: 1;
@@ -143,6 +161,6 @@
   cursor: pointer;
 }
 .btn-inloggen:hover{
-  color: var(--adoPurple);
+  color: #1B1725;
   
 }
