@@ -12,7 +12,6 @@ import Login from './components/Login'
 
 const App = (props) => {
   return (
-
     <div className="main-content">
       <BrowserRouter>
         <Routes>
@@ -28,7 +27,6 @@ const App = (props) => {
         </Routes>
       </BrowserRouter>
     </div>
-
   );
 }
 
