@@ -6,29 +6,30 @@ import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
 import Header from "./components/Header";
 import './custom.css';
+import { Navigate } from "react-router-dom";
+import Home from './components/Home';
+import Programma from './components/Programma';
+import BaseLayout from './components/BaseLayout/BaseLayout';
+import Login from './components/Login'
 
 const App = (props) => {
   return (
-      
-        
-      
-      <div className="main-content">
+    <div className="main-content">
       <BrowserRouter>
-      <div>
-        <Header/>
-      </div>
-       <Routes>
-        
-        <Route element={<ProgrammaToevoegen/>} path="/WDPR-SE2/ProgrammaToevoegen" />
-        <Route element={<ProgrammaLijst/>} path="/WDPR-SE2/ProgrammaLijst" />
-        <Route element={<StoelReserveren/>} path="/WDPR-SE2/Programma/:id/StoelReserveren" />
-        <Route exact path='/WDPR-SE2' element={<ProgrammaLijst/>} />
+        <Routes>
+          {/* De index element moet naar de homepage als we die hebben */}
+          <Route path="/" element={<BaseLayout />}>
+            <Route index element={<Home />} />
+            <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
+            <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
+            <Route element={<Programma />} path="/Programma" />
+            <Route element={<Login />} path="/Login" />
+            <Route element={<StoelReserveren/>} path="/Programma/:id/StoelReserveren" />
+            <Route element={<Navigate to="/" />} path="*" />
+          </Route>
         </Routes>
-        </BrowserRouter>
-      </div>
-     
-    
-   
+      </BrowserRouter>
+    </div>
   );
 }
 

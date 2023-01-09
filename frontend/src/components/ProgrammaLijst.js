@@ -11,7 +11,7 @@ const ProgrammaLijst = () => {
 
   useEffect(() => {
     async function fetchData(){
-        const response = await fetch('http://localhost:7153/Programma');
+        const response = await fetch('http://api.localhost/api/Programma');
         const data = await response.json();
         setProgramma(data);
         setLoading(false);

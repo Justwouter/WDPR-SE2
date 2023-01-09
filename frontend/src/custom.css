@@ -12,7 +12,25 @@
   font-size: 5rem;
 }
 
+@import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
 
+/* Custom stuff */
+body {
+  background-color: black;
+}
+h1{
+  color: whitesmoke;
+}
+h3{
+  color: whitesmoke;
+}
+label{
+  color: whitesmoke;
+}
+
+
+/* Provide sufficient contrast against white background */
 a {
   font-family: 'Arimo';
   font-style: normal;
@@ -329,3 +347,40 @@ body{
   }
 }
 
+
+
+/* Footer */
+.footer-basic {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  padding: 40px 0;
+  /* background-color: #ffffff;
+  color: #4b4c4d; */
+  color: whitesmoke;
+}
+
+.footer-basic ul {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.footer-basic li {
+  padding: 0 10px;
+}
+
+.footer-basic ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity: 1;
+}
