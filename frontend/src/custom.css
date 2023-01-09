@@ -188,7 +188,7 @@ body{
   text-align: left;
   background-color: #8A84E2;
   border-width: 2px;
-  padding-right: 5%;
+  padding-right: 3%;
   padding-left: 3%;
   float: left;
   border-radius: 25px;
@@ -215,7 +215,7 @@ body{
 .bestellen{
   display: flex;
   position: absolute;
-  margin-left: 21%;
+  margin-left: 22%;
   float: right;
   margin-top: -75px;
   
@@ -229,7 +229,7 @@ body{
   color: white;
   list-style: none;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-width: 0px;
   float: left;
   transition: transform 0.3s ease-in-out;
@@ -239,7 +239,7 @@ body{
 
 .bestellen button:hover{
   cursor: pointer;
-  transform: scale3d(1.1, 1.1, 1);
+  transform: scale3d(1.2, 1.2, 1);
 }
 
 .infoR {

@@ -5,7 +5,7 @@ const ProgrammaForm = (props) => {
     const [ StoelenLijst, setStoelenLijst ] = useState([]);
     const [Programma, setProgramma] = useState(() => {
       return {
-        //programmaId: props.Programma ? props.Programma.programmaId : '',
+        // programmaId: props.Programma ? props.Programma.programmaId : '',
         titel: props.Programma ? props.Programma.titel : '',
         van: props.Programma ? props.Programma.van : '',
         tot: props.Programma ? props.Programma.tot : '',
@@ -21,7 +21,6 @@ const ProgrammaForm = (props) => {
     const handleOnSubmit = (event) => {
       event.preventDefault();
       const Programma = {
-    
         titel,
         van,
         tot,

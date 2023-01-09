@@ -4,7 +4,7 @@ import ProgrammaLijst from './components/ProgrammaLijst';
 import StoelReserveren from './components/StoelReserveren';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
-import Header from "./components/Headers";
+import Header from "./components/Header";
 import './custom.css';
 
 const App = (props) => {

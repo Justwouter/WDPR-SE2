@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Programma from './Programma';
+
 
 const ProgrammaLijst = () => {
   const [ loading, setLoading ] = useState(true);
@@ -24,6 +25,7 @@ const ProgrammaLijst = () => {
         {!_.isEmpty(programmas) ? (
           programmas.map((programma) => (
             <Programma key={programma.id} {...programma} />
+            
             
           ))
         ) : (

@@ -80,14 +80,14 @@ const Item = styled(Paper)(({ theme }) => ({
       </div> 
      
       <div className='kaartjes'>
-          <a className='style10'> Kaartjes</a>
+          <a className='style10'> Stoelen : {gekozenStoelen.length}</a>
       <div className='kaart'>
       <ul>  <br></br>
       {gekozenStoelen.map((value,index) => ( 
         <div className='kCodes' style={transitionProperty}  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId == value)[0]["nr"] + '\u00A0'
         }</div>))}</ul>
       <a className='bestellen'>
-        <button onClick={showAlert}>Bestellen</button></a></div></div></div><br></br>
+        <button onClick={showAlert}>Reserveer</button></a></div></div></div><br></br>
 
         <div>
         <b className='style13'>Eersterang</b></div><br></br>

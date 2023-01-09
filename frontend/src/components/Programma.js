@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -21,7 +20,7 @@ const Programma = ({
   zaal
   
 }) => {
-  const history = useNavigate();
+  
  
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -64,24 +63,24 @@ const Programma = ({
   }
 
     return (
-      <TableContainer  component={Card}>
-        <Table sx={{minWidth: 700  }} aria-label="customized table">
+      <TableContainer   component={Card}>
+        <Table  sx={{minWidth: 700  }} aria-label="customized table">
           <TableBody >
-            
+            <tr>
                 <StyledTableCell align="center">
-                  <div className='style2' id='TitelGrootRood'>{getDagNr()}</div><br></br>
-                  <div>{getMaand()}</div></StyledTableCell>
+                  <ul className='style2' >{getDagNr()}</ul><br></br>
+                  <ul>{getMaand()}</ul></StyledTableCell>
                 <StyledTableCell align="center">
-                  <div>{getDagNaam()}<br></br>
-                  {getBeginUur()}<br></br>Zaal {zaal}</div>
+                  <ul>{getDagNaam()}<br></br>
+                  {getBeginUur()}<br></br>Zaal {zaal}</ul>
                   </StyledTableCell>
                 <StyledTableCell align="left">
-                  <div className='style3'>{titel}</div><br></br>
-                  <div className='style4'>Duur: {getDuur()} minuten</div> <br></br>
-                  <div>{descriptie}</div></StyledTableCell>
+                  <ul className='style3'>{titel}</ul><br></br>
+                  <ul className='style4'>Duur: {getDuur()} minuten</ul> <br></br>
+                  <ul>{descriptie}</ul></StyledTableCell>
                 
                 <StyledTableCell align="center"><u> 
-                <Link to= {'/WDPR-SE2/Programma/'+programmaId+'/StoelReserveren'}
+                <Link to= {'/WDPR-SE2/Programma/'+ programmaId +'/StoelReserveren'}
                   state= {{ sTitel: titel, 
                             sDescriptie: descriptie,
                             sZaal: zaal,
@@ -92,11 +91,9 @@ const Programma = ({
                             sMaand: getMaand(),
                             sEindUur: getEindUur()}}
               
-                ><a >Bestel </a></Link>
+                >Bestel</Link>
                 </u>
-                </StyledTableCell>
-             
-                
+                </StyledTableCell></tr>
           </TableBody>
         </Table>
       </TableContainer>
