@@ -47,10 +47,9 @@ public class AccountController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] User user)
     {
-        var result = await _signInManager.PasswordSignInAsync(user.UserName, user.Password, false, lockoutOnFailure: false);
-        // var _user = await _userManager.FindByNameAsync(user.UserName);
-        if (result.Succeeded)
-            if (await _userManager.CheckPasswordAsync(user, user.Password))
+        var _user = await _userManager.FindByNameAsync(user.UserName);
+        if (_user != null)
+            if (await _userManager.CheckPasswordAsync(_user, user.Password))
             {
                 var secret = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(
@@ -58,7 +57,7 @@ public class AccountController : ControllerBase
 
                 var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };
-                var roles = await _userManager.GetRolesAsync(user);
+                var roles = await _userManager.GetRolesAsync(_user);
                 foreach (var role in roles)
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 var tokenOptions = new JwtSecurityToken

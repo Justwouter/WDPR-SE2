@@ -43,6 +43,26 @@ namespace backend.Controllers
             return x;
         }
 
+        [HttpGet("checkRole")]
+        public async Task<IActionResult> CheckRole(string userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.IsInRoleAsync(user, roleName);
+            if (result)
+            {
+                return Ok("The user does have " + roleName + " as a role.");
+            }
+            else
+            {
+                return Ok("The user does NOT have " + roleName + " as a role.");
+            }
+        }
+
         // GET: api/User/{id}
         [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IdentityUser>> GetUser(string id)
