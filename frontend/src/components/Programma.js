@@ -80,7 +80,7 @@ const Programma = ({
                   <ul>{descriptie}</ul></StyledTableCell>
                 
                 <StyledTableCell align="center"><u> 
-                <Link to= {'/WDPR-SE2/Programma/'+ programmaId +'/StoelReserveren'}
+                <Link to= {'/Programma/'+ programmaId +'/StoelReserveren'}
                   state= {{ sTitel: titel, 
                             sDescriptie: descriptie,
                             sZaal: zaal,
