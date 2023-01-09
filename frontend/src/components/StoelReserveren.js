@@ -42,7 +42,7 @@ const Item = styled(Paper)(({ theme }) => ({
   
   useEffect(() => {
     async function fetchData(){
-        const response = await fetch('http://api.localhost/Programma/'+id+'/StoelenLijst');
+        const response = await fetch('http://api.localhost/api/Programma/'+id+'/StoelenLijst');
         const data = await response.json();
    
         setStoelA(data.filter(a => a.rang == "A"));
