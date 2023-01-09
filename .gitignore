@@ -8,6 +8,8 @@
 #EFCore/DB files
 *.sqlite
 migrations/
+database/
+!database/dbfileshere.txt
 # dependencies
 node_modules/
 .pnp/
