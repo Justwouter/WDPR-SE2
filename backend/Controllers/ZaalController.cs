@@ -29,36 +29,6 @@ namespace backend.Controllers
           }
             return await _context.Zaal.ToListAsync();
         }
-        // Maakt een standaard lijst afhankelijk van de waardes in Zaal X
-        // [HttpGet("{id}/StoelenLijst")]
-        // public IActionResult Get(int id)
-        // {
-            
-        //     var Eerste = _context.Zaal.Where(x => x.Id.Equals(id)).Select(c => c.EersteR).ToList();
-        //     var Tweede = _context.Zaal.Where(x => x.Id.Equals(id)).Select(c => c.TweedeR).ToList();
-        //     var Derde = _context.Zaal.Where(x => x.Id.Equals(id)).Select(c => c.DerdeR).ToList();
-
-        //     var StoelenLijst = new List<Stoel>{};
-        //     if(Eerste[0] != 0){
-        //         for(int i = 1; i <= Eerste[0]; i++){
-        //         StoelenLijst.Add(new Stoel() {Id = i, Rang = "A", Status = false});
-        //         }
-        //     }
-
-        //     if(Tweede[0] != 0){
-        //         for(int i = 1; i <= Tweede[0]; i++){
-        //         StoelenLijst.Add(new Stoel() {Id = i,Rang = "B", Status = false});
-        //         }
-        //     }
-
-        //     if(Derde[0] != 0){
-        //         for(int i = 1; i <= Derde[0]; i++){
-        //         StoelenLijst.Add(new Stoel() {Id = i,Rang = "C", Status = false});
-        //         }
-        //     }
-            
-        //     return Ok(StoelenLijst);
-        // }
 
         // GET: api/Zaal/5
         [HttpGet("{id}")]

@@ -164,34 +164,5 @@ namespace backend.Controllers
             return (_context.Programma?.Any(e => e.ProgrammaId == id)).GetValueOrDefault();
         }
 
-        
-        // public List<Stoel> postStandardLijst(int id)
-        // {
-            
-        //     var Eerste = _contextZaal.Zaal.Where(x => x.Id.Equals(id)).Select(c => c.EersteR).ToList();
-        //     var Tweede = _contextZaal.Zaal.Where(x => x.Id.Equals(id)).Select(c => c.TweedeR).ToList();
-        //     var Derde = _contextZaal.Zaal.Where(x => x.Id.Equals(id)).Select(c => c.DerdeR).ToList();
-
-        //     var StoelenLijst = new List<Stoel>{};
-        //     if(Eerste[0] != 0){
-        //         for(int i = 1; i <= Eerste[0]; i++){
-        //         StoelenLijst.Add(new Stoel() {Nr = i, Rang = "A", Status = false});
-        //         }
-        //     }
-
-        //     if(Tweede[0] != 0){
-        //         for(int i = 1; i <= Tweede[0]; i++){
-        //         StoelenLijst.Add(new Stoel() {Nr = i,Rang = "B", Status = false});
-        //         }
-        //     }
-
-        //     if(Derde[0] != 0){
-        //         for(int i = 1; i <= Derde[0]; i++){
-        //         StoelenLijst.Add(new Stoel() {Nr = i,Rang = "C", Status = false});
-        //         }
-        //     }
-            
-        //     return StoelenLijst;
-        // }
     }
 }
