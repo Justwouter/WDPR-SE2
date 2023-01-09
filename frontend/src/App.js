@@ -1,8 +1,10 @@
 import React from 'react';
 import ProgrammaToevoegen from './components/ProgrammaToevoegen';
 import ProgrammaLijst from './components/ProgrammaLijst';
+import StoelReserveren from './components/StoelReserveren';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
+import Header from "./components/Header";
 import './custom.css';
 import { Navigate } from "react-router-dom";
 import Home from './components/Home';
@@ -22,6 +24,7 @@ const App = (props) => {
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<Programma />} path="/Programma" />
             <Route element={<Login />} path="/Login" />
+            <Route element={<StoelReserveren/>} path="/Programma/:id/StoelReserveren" />
             <Route element={<Navigate to="/" />} path="*" />
           </Route>
         </Routes>

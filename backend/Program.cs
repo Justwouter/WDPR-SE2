@@ -6,15 +6,17 @@ using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-// Add services to the container.
 
-//Two DB's might not be stable RN
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 builder.Services.AddDbContext<ProgrammaContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("ProgrammaContext")));
 
 builder.Services.AddDbContext<TheaterContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TheaterContext")));
+
+builder.Services.AddDbContext<ZaalContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("ZaalContext")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
