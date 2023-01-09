@@ -11,11 +11,11 @@ const Header = () => {
   const navigate = useNavigate(); 
   
   const home = () =>{ 
-  navigate('/WDPR-SE2/');
+  navigate('/');
   }
 
   const programma = () =>{ 
-    navigate('/WDPR-SE2/ProgrammaLijst');
+    navigate('/ProgrammaLijst');
   }
 
     return(
