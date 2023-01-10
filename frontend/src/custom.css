@@ -174,10 +174,8 @@ body{
 }
 
 .kCodes {
-  display: flex;
-  align-content: flex-start;
-  float: left;
-  text-align: right;
+  display: inline-block;
+  text-align: left;
   color: #000000;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -187,11 +185,10 @@ body{
   padding-left: 10px;
   padding-right: 10px;
   margin-right: 10px;
-  margin-top: 5px;
-  flex-grow: 1;
-  transition:transform 0.3s;
-  animation: fadeInAnimation 0.5s linear;
- 
+  margin-bottom: 5px;
+  /* transition:transform 0.2s;
+  animation: fadeInAnimation 0.4s linear;
+  */
 }
 
 .kCodes:hover{
@@ -199,94 +196,87 @@ body{
   transform: scale3d(1.1, 1.1, 1);
 }
 
-.kaartjes{
-  margin-right: 4%;
-  margin-left: 0.6%;
-  width: 35%;
-  text-align: left;
-  background-color: #8A84E2;
-  border-width: 2px;
-  padding-right: 3%;
-  padding-left: 3%;
-  float: left;
-  border-radius: 25px;
-  /* border-color: #fd024d;
-  border-width: 3px;
-  border-style: solid; */
-  color: #000000;
+.inhoud{
+  margin-top: -40px;
+  margin-left: 10px;
+}
+
+.stoel{
+  display: inline-block;
   flex-direction: row;
-  margin-bottom: -1.75%;
-  padding-top: 0.5%;
-  min-height: 235px;
-  max-height: 235px;
-
-  background-image: linear-gradient(45deg, #FD024F, #F0C790, #8A84E2);
-  background-size: 200%;
-  transition: 0.4s ease-in-out;
-
+  margin-bottom: -40px;
+  
 }
-.kaartjes:hover{
-  background-position: right;
-}
-
-
-.bestellen{
+.kTitel{
   display: flex;
-  position: absolute;
-  margin-left: 22%;
-  float: right;
-  margin-top: -75px;
-  
-  
-}
-
-.bestellen button{
-  background-color: #1B1725;
-  padding: 20px;
-  border-radius: 15px;
-  color: white;
-  list-style: none;
-  font-weight: bold;
-  font-size: 1rem;
-  border-width: 0px;
   float: left;
-  transition: transform 0.3s ease-in-out;
- 
- 
-}
-
-.bestellen button:hover{
-  cursor: pointer;
-  transform: scale3d(1.2, 1.2, 1);
-}
-
-.infoR {
-
-  width: 60%;
-  text-align: left;
-  float: right;
-  padding-top: 25px;
-}
-
-.style9{
-  text-align: left;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 100;
-  font-size: 1.2rem;
- 
-}
-.style10{
+  float: inline-start;
   text-align: left;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   font-size: 2.5rem;
-  
+  margin-top: -100px;
+  margin-left: 25px;
 }
 
-.style11{
+.kaart{
+  position: sticky;
+  bottom: 0;
+  left: auto;
+  justify-content: right;
+  width: 500px;
   text-align: left;
+  background-color: #8A84E2;
+  border-width: 2px;
+  border-radius: 25px;
+  color: #000000;
+  min-height: 215px;
+  background-image: linear-gradient(45deg, #FD024F, #F0C790, #8A84E2);
+  background-size: 200%;
+  transition: 0.4s ease-in-out;
+}
+.kaart:hover{
+  background-position: right;
+}
+
+
+.kaart button{
+  display: inline-block;
+  position: absolute;
+  margin-left: 400px;
+  margin-top: -100px;
+  background-color: #1B1725;
+  padding: 15px;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  list-style: none;
+  font-weight: bold;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease-in-out;
+
+}
+
+.kaart button:hover{
+  cursor: pointer;
+  transform: scale3d(1.10, 1.10, 1);
+}
+
+/* INFORMATIE SECTIE */
+.hTitel{
+  display: inline-block;
+}
+
+.titel{
+  display: inline-block;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+.tijd{
+  display: inline-block;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -297,8 +287,17 @@ body{
   padding-right: 20px;
   margin-left: 20px;
 }
-.style12{
-  text-align: right;
+.info{
+  max-width: 80%;
+  text-align: left;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+.duur{
+  display: flex;
+  float: right;
   color: #000000;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -307,12 +306,14 @@ body{
   border-radius: 30px;
   padding-left: 20px;
   padding-right: 20px;
-  float: right;
   margin-top: 10px;
   margin-right: 10px;
 }
 
-.style13{
+.rTitel{
+  flex: flex;
+  float: center;
+  justify-content: center;
   text-align: center;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
@@ -320,30 +321,28 @@ body{
   font-size: 1.2rem;
 }
 
-#wrapper{
-  display: inline-block;
-}
+
 
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
-    margin-top: 50px;
-  }
-  80% {
-    opacity: 1;
     margin-top: 0px;
+  }
+  /* 80% {
+    opacity: 1;
+    margin-top: -15px;
   }
   90% {
     opacity: 1;
-    margin-top: 9px;
+    margin-top: -20px;
   }
   95% {
     opacity: 1;
-    margin-top: 7px;
-  }
+    margin-top: -23px;
+  } */
   100% {
     opacity: 1;
-    margin-top: 5px;
+    margin-top: -25px;
   }
 }
 
