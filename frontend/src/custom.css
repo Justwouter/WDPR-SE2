@@ -1,25 +1,17 @@
-/*Xiketic       #1B1725
-  Gold Crayola  #F0C790
-  Medium Purple #8A84E2 
-  Red Crayola   #FD024F*/
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,900&display=swap');
-
-  .style2 {
-  font-family: 'Arimo';
-  font-style: normal;
-  color: #FD024F;
-  font-size: 5rem;
+:root{
+  --adoXiketic: #1B1725;
+  --adoGoldCrayola: #F0C790;
+  --adoMediumPurple: #8A84E2;
+  --adoRedCrayola: #FD024F;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,900&display=swap');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
-
 /* Custom stuff */
 body {
   background-color: black;
-}
-h1{
+  padding-top: 175px;}
+/* h1{
   color: whitesmoke;
 }
 h3{
@@ -27,122 +19,46 @@ h3{
 }
 label{
   color: whitesmoke;
-}
+} */
 
-
-/* Provide sufficient contrast against white background */
-a {
+/* ProgrammaLijst Font styles */
+.style2 {
   font-family: 'Arimo';
   font-style: normal;
-  color: white;
-  font-size: 2rem;
-  text-align: center;
-  
-  
-}
-
-b {
- 
-  font-family: 'Roboto';
-  font-style: thin;
-  font-weight: 100;
-  font-size: 1.5rem;
-  
-}
-
+  color: #FD024F;
+  font-size: 5rem;}
 .style3 {
   font-family: 'Arimo';
   font-style: normal;
-  font-size: 2rem;
-}
-
+  font-size: 2rem;}
 .style4 {
   font-family: 'Roboto';
   font-style: italic;
   font-size: 1rem;
-  font-weight: 100;
-
-}
-.style5 {
-  font-family: 'Arimo';
-  font-style: normal;
-  color: #ffffff;
-  font-size: 2rem;
- 
-}
-
-.style6 {
-  font-family: 'Roboto';
-  font-style: thin;
-  font-weight: 100;
-  font-size: 1.5rem;
-  
-}
-
-.style7{
-  color: #ffffff;
-  list-style: none;
-  font-weight: bold;
-  font-size: 2rem;
-}
-
-.style8{
-  color: #ffffff;
-  list-style: none;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-
-
-u {
-  font-family: 'Arimo';
-  font-style: normal;
-  font-size: 2rem;
-
-}
-
+  font-weight: 100;}
 .Card {
-  background-color: #1B1725;
-}
+  background-color: #1B1725;}
 code {
-  color: #E01A76;
-}
+  color: #E01A76;}
 
-.btn-primary {
-  color: rgb(0, 0, 0);
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.vTitel{
-  font-family: 'Arimo';
-  font-style: normal;
-  font-size: 2rem;
-  text-align: center;
-}
-
+/* ProgrammaForm */
 .main-form{
   font-family: 'Roboto';
   font-style: bold;
   font-size: 1.5rem;
-  color: white;
-}
-
+  color: white;}
 body{
   background-color:#1B1725;
-  color: white;
-}
+  color: white;}
 
-
+/* Boxes Stoel reserveren  */
 .reserveerd {
   background-color: #5e5e5e !important;
   pointer-events: none;
   font-size: 0.7rem !important;
   border: #5e5e5e;
   border-width: 1.5px;
-  border-style: solid;
-}
+  border-style: solid;}
 .gekozen{
   background-image: linear-gradient(45deg, #FD024F, #FD024F, #00000000) !important;
   color: white !important;
@@ -151,9 +67,7 @@ body{
   border-width: 1.5px;
   border-style: solid;
   cursor: pointer;
-  user-select:none;
-
-}
+  user-select:none;}
 .vrij {
   background-image: linear-gradient(45deg, #00000000, #00000000, #FD024F) !important;
   cursor: pointer;
@@ -162,19 +76,14 @@ body{
   border-style: solid;
   color: white !important;
   font-size: 0.70rem !important;
-  user-select:none;
- 
-}
-
+  user-select:none;}
 .grid {
   margin-left: 5%;
-  margin-right: 5%;
-  
- 
-}
+  margin-right: 5%;}
 
+/* Kaartjes Stoel reserveren */
 .kCodes {
-  display: inline-block;
+  display: inline-flex;
   text-align: left;
   color: #000000;
   font-family: 'Poppins', sans-serif;
@@ -186,27 +95,17 @@ body{
   padding-right: 10px;
   margin-right: 10px;
   margin-bottom: 5px;
-  /* transition:transform 0.2s;
-  animation: fadeInAnimation 0.4s linear;
-  */
-}
-
+  animation: fadeInAnimation 0.5s ease forwards;}
 .kCodes:hover{
   
-  transform: scale3d(1.1, 1.1, 1);
-}
-
+  transform: scale3d(1.1, 1.1, 1);}
 .inhoud{
-  margin-top: -40px;
-  margin-left: 10px;
-}
-
+  margin-top: -35px;
+  margin-left: 10px;}
 .stoel{
   display: inline-block;
   flex-direction: row;
-  margin-bottom: -40px;
-  
-}
+  margin-bottom: -40px;}
 .kTitel{
   display: flex;
   float: left;
@@ -217,15 +116,15 @@ body{
   font-weight: 900;
   font-size: 2.5rem;
   margin-top: -100px;
-  margin-left: 25px;
-}
-
+  margin-left: 25px;}
 .kaart{
+  display: inline-block;
   position: sticky;
   bottom: 0;
   left: auto;
   justify-content: right;
-  width: 500px;
+  min-width: 500px;
+  max-width: 500px;
   text-align: left;
   background-color: #8A84E2;
   border-width: 2px;
@@ -234,13 +133,9 @@ body{
   min-height: 215px;
   background-image: linear-gradient(45deg, #FD024F, #F0C790, #8A84E2);
   background-size: 200%;
-  transition: 0.4s ease-in-out;
-}
+  transition: 0.4s ease-in-out;}
 .kaart:hover{
-  background-position: right;
-}
-
-
+  background-position: right;}
 .kaart button{
   display: inline-block;
   position: absolute;
@@ -252,29 +147,22 @@ body{
   color: rgb(255, 255, 255);
   list-style: none;
   font-weight: bold;
-  font-size: 0.7rem;
-  transition: transform 0.3s ease-in-out;
-
-}
-
+  font-size: 0.8rem;
+  transition: transform 0.3s;}
 .kaart button:hover{
   cursor: pointer;
-  transform: scale3d(1.10, 1.10, 1);
-}
+  transform: scale3d(1.10, 1.10, 1) ;}
 
-/* INFORMATIE SECTIE */
+/* INFORMATIE SECTIE Stoel reserveren */
 .hTitel{
-  display: inline-block;
-}
-
+  display: inline-block;}
 .titel{
   display: inline-block;
   text-align: center;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
-  font-size: 2.5rem;
-}
+  font-size: 2.5rem;}
 .tijd{
   display: inline-block;
   color: #ffffff;
@@ -285,16 +173,14 @@ body{
   border-radius: 25px;
   padding-left: 20px;
   padding-right: 20px;
-  margin-left: 20px;
-}
+  margin-left: 20px;}
 .info{
   max-width: 80%;
   text-align: left;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 100;
-  font-size: 1.2rem;
-}
+  font-size: 1.2rem;}
 .duur{
   display: flex;
   float: right;
@@ -307,9 +193,7 @@ body{
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 10px;
-  margin-right: 10px;
-}
-
+  margin-right: 10px;}
 .rTitel{
   flex: flex;
   float: center;
@@ -318,35 +202,128 @@ body{
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: 1.2rem;
-}
+  font-size: 1.2rem;}
 
-
-
+/* KEYFRAMES */
 @keyframes fadeInAnimation {
   0% {
     opacity: 0;
-    margin-top: 0px;
+    transform: scale(0);
   }
-  /* 80% {
+  70% {
     opacity: 1;
-    margin-top: -15px;
+    transform: scale(0.8);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.1);
   }
   90% {
     opacity: 1;
-    margin-top: -20px;
+    transform: scale(0.9);
   }
-  95% {
-    opacity: 1;
-    margin-top: -23px;
-  } */
   100% {
     opacity: 1;
-    margin-top: -25px;
+    transform: scale(1);
+  }}
+@keyframes pulse-effect {
+  0% {
+    transform: scale(0.95) ;
+    box-shadow: 0 0 0 0 #fd024dcb;
   }
-}
+  
+  70% {
+    transform: scale(1) ;
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+  }
+  
+  100% {
+    transform: scale(0.95) ;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }}
 
+/* Header */
+.logo{
+  background-color: var(--adoRedCrayola);
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  border: none;}
+.logo:hover{
+  transform: scale(1);
+  animation: pulse-effect 2s infinite ;
+  cursor: pointer;}
+.header-basic .laak{
+  pointer-events: none !important;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1.95rem;
+  display: inline-block;
+  margin-left: -99px;
+  margin-top: -45px;}
+.header-basic .lijn{
+  display: inline-block;
+  min-width: 125px; 
+  max-width: 125px;
+  color: var(--adoXiketic);
+  height: 0.5px;
+  margin-left: -100px;
+  margin-top: -20px;
+  pointer-events: none !important;}
+.header-basic .theater{
+  pointer-events: none !important;
+  color: var(--adoXiketic);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 1.95rem;
+  margin-left: -118px;
+  margin-top: 0px;}
+.vLijn{
+  min-height: 100px ;
+  max-height: 100px ;
+  background-color: var(--adoXiketic) ;
+  width: 3px;
+  position: absolute;
+  margin-left: 420px;
+  margin-top: -70px;
 
+  pointer-events: none ;}
+
+.header-basic .login{
+  background-color: #E01A76;
+  color: var(--adoXiketic) !important;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600 ;
+  font-size: 1.95rem ;
+  margin-left: 50px;}
+.list-inline{
+  margin-left: 5%;
+  display: flex;
+  flex-direction: row;}
+.header-basic  {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 40px;
+  background-color: #ffffff;}
+.header-basic .basic{
+  color: var(--adoXiketic) ;
+  margin-left: 5%;
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.95rem;
+  margin-bottom: -70px;
+  float: right;}
+.header-basic li {
+  padding: 0 10px;}
+.header-basic ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;}
+.header-basic ul a:hover {
+  opacity: 1;}
 
 /* Footer */
 .footer-basic {
@@ -358,28 +335,20 @@ body{
   padding: 40px 0;
   /* background-color: #ffffff;
   color: #4b4c4d; */
-  color: whitesmoke;
-}
-
+  color: whitesmoke;}
 .footer-basic ul {
   padding: 0;
   list-style: none;
   text-align: center;
   font-size: 18px;
   line-height: 1.6;
-  margin-bottom: 0;
-}
-
+  margin-bottom: 0;}
 .footer-basic li {
-  padding: 0 10px;
-}
-
+  padding: 0 10px;}
 .footer-basic ul a {
   color: inherit;
   text-decoration: none;
-  opacity: 0.8;
-}
-
+  opacity: 0.8;}
 .footer-basic ul a:hover {
-  opacity: 1;
-}
+  opacity: 1;}
+

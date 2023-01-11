@@ -33,7 +33,7 @@ const Item = styled(Paper)(({ theme }) => ({
   const { state } = useLocation(); 
   
   const transitionProperty = startAnimatie
-    ? { marginTop: '10px', opacity: 1}
+    ? { marginLeft: '50px', opacity: 1}
     : {};
 
   const showAlert = () => {
@@ -51,7 +51,7 @@ const Item = styled(Paper)(({ theme }) => ({
         setStoelenLijst(data);
     }
     fetchData()
-  }, )
+  },[state.sID] )
 
   const ToggleKeuzeStoel = (stoel) => {
     const index = gekozenStoelen.toString().indexOf(stoel);
@@ -151,10 +151,10 @@ const Item = styled(Paper)(({ theme }) => ({
           <div><button onClick={showAlert}>Reserveer</button></div>
       </div>
 
-      <div >
-        <ul className='inhoud'><br></br>
+      <div className='inhoud'>
+        <ul><br></br>
           {gekozenStoelen.map((value,index) => ( 
-            <li className='kCodes' style={transitionProperty}  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId === value)[0]["nr"] + '\u00A0'}</li>))}</ul>
+            <div className='kCodes' style={transitionProperty}  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId === value)[0]["nr"] + '\u00A0'}</div>))}</ul>
       </div></div>
     
     </Box>
