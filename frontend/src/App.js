@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Programma from './components/Programma';
 import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
+import Registration from "./components/Registration";
 
 const App = (props) => {
   return (
@@ -24,6 +25,7 @@ const App = (props) => {
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<Programma />} path="/Programma" />
             <Route element={<Login />} path="/Login" />
+            <Route element={<Registration />} path="/Registration" />
             <Route element={<StoelReserveren/>} path="/Programma/:id/StoelReserveren" />
             <Route element={<Navigate to="/" />} path="*" />
           </Route>

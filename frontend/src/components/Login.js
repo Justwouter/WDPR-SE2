@@ -1,23 +1,30 @@
 import React, {useState} from "react";
 export default function Login() {
-    const [email, setEmail] = new useState("");
+    const [gebruikersnaam, setGebruikersnaam] = new useState("");
     const [password, setPassword] = new useState("");
     const [formError, setFormError] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
-            alert(email)
+            var user = {userName: gebruikersnaam, Password: password}
+            fetch('http://api.localhost/api/Account/login', {
+                method: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(user)
+            }).then(response => console.log(response))
         }
     }
 
     const validateForm = () => {
         let errorMessage = '';
 
-        if (!email) {
-            errorMessage = 'Email is noodzakelijk';
-        } else if (!validateEmail()) {
-            errorMessage = 'Voer a.u.b. een werkende email in';
+        if (!gebruikersnaam) {
+            errorMessage = 'Gebruikersnaam is noodzakelijk';
         }
 
         if (!password) {
@@ -31,21 +38,15 @@ export default function Login() {
         return !errorMessage;
     };
 
-    const validateEmail = () => {
-        // Check if email is a valid format using a regular expression
-        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-        return emailRegex.test(email);
-    };
-
     return (
         <div>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="gebruikersnaam">Gebruikersnaam:</label>
                 <input type="text"
-                       id="email"
-                       value={email}
-                       onInput={(e) => setEmail(e.target.value)}/>
+                       id="gebruikersnaam"
+                       value={gebruikersnaam}
+                       onInput={(e) => setGebruikersnaam(e.target.value)}/>
                 <br/>
                 <br/>
                 <label htmlFor="password">Wachtwoord:</label>

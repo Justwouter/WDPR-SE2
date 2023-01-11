@@ -11,6 +11,7 @@ function Footer() {
                     <Footitem link="/programmalijst" text="Lijst" />
                     <Footitem link="/programmatoevoegen" text="Toevoegen" />
                     <Footitem link="/Login" text="Login" />
+                    <Footitem link="/Registration" text="Registreer" />
                 </ul>
             </footer>
         </div>

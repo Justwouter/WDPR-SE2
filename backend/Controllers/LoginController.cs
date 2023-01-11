@@ -24,7 +24,7 @@ public class AccountController : ControllerBase
         _roleManager = roleManager;
     }
 
-    [HttpPost]
+    [HttpGet]
     [Route("registreer")]
     public async Task<ActionResult<IEnumerable<User>>> Registreer([FromBody] User user)
     {
