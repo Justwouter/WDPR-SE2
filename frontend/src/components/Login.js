@@ -9,14 +9,18 @@ export default function Login() {
         if (validateForm()) {
             var user = {userName: gebruikersnaam, Password: password}
             fetch('http://api.localhost/api/Account/login', {
-                method: "GET",
+                method: "POST",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify(user)
-            }).then(response => console.log(response))
+            }).then((response) => response.json())
+                .then((data) => {
+                    window.localStorage.setItem("jwt", data.token);
+                    window.location.href = 'http://frontend.localhost/';
+                })
         }
     }
 
