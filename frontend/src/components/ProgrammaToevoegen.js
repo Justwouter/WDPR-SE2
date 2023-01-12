@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from "react-router";
 import ProgrammaForm from './ProgrammaForm';
 
 const ProgrammaToevoegen = ({ history }) => {
+  const navigate = useNavigate();
   const handleOnSubmit = async (programma) => {
     await fetch('http://api.localhost/api/Programma', {
       method: 'POST',
@@ -12,6 +14,7 @@ const ProgrammaToevoegen = ({ history }) => {
       },
       body: JSON.stringify(programma),
     });
+    navigate("/programmatoevoegen");
   };
 
   return (
