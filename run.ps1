@@ -1,5 +1,5 @@
 $startLocation=Get-Location
-if ($args.contains("-dcp")) {
+if ($args.contains("-dcd")) {
     ./deploy
     docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
     continue
@@ -7,6 +7,7 @@ if ($args.contains("-dcp")) {
 elseif ($args.contains("-dc")) {
     ./deploy -r
     docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+    continue
 }
 else {
     Set-Location "$startLocation/frontend"
