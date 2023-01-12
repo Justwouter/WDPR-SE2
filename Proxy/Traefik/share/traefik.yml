@@ -1,33 +1,26 @@
 global:
   checkNewVersion: true
-  sendAnonymousUsage: false  # true by default
+  sendAnonymousUsage: false
 
-# (Optional) Log information
-# ---
-log:
-  level: DEBUG  # DEBUG, INFO, WARNING, ERROR, CRITICAL
-  format: json  # common, json, logfmt
-  filePath: /var/log/traefik/traefik.log
+#(Optional) Log logs everything, accesslog logs connection protocols
+# log:
+#   level: DEBUG  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+#   format: json  # common, json, logfmt
+#   filePath: /var/log/traefik/traefik.log
 
-# (Optional) Accesslog
-# ---
-accesslog:
-  format: json  # common, json, logfmt
-  filePath: /var/log/traefik/access.log
+# accesslog:
+#   format: json  # common, json, logfmt
+#   filePath: /var/log/traefik/access.log
 
 # (Optional) Enable API and Dashboard
-# ---
 api:
- dashboard: true  # true by default
- insecure: true  # Don't do this in production!
+ dashboard: true
+ insecure: true  # Don't do this in prod!
 
-# Entry Points configuration
-# ---
 entryPoints:
   web:
     address: :80
     # (Optional) Redirect to HTTPS
-    # ---
     http:
       redirections:
         entryPoint:
@@ -37,8 +30,7 @@ entryPoints:
   websecure:
     address: :443
 
-# Configure your CertificateResolver here...
-# ---
+# Configure CertificateResolvers here
 certificatesResolvers:
   staging:
     acme:
@@ -50,7 +42,7 @@ certificatesResolvers:
 #
 #   production:
 #     acme:
-#       email: your-email@example.com
+#       email: Admin@theaterlaak.site
 #       storage: /etc/traefik/certs/acme.json
 #       caServer: "https://acme-v02.api.letsencrypt.org/directory"
 #       httpChallenge:
@@ -61,7 +53,7 @@ tls:
   stores:
     default:
       defaultCertificate:
-        certFile: /etc/traefik/certs/cert1.pem
+        certFile: /etc/traefik/certs/cert1.pem  #Yea ain't putting certs in a git repo
         keyFile: /etc/traefik/certs/privkey1.pem
 # (Optional) Disable TLS version 1.0 and 1.1
 #   options:
@@ -70,7 +62,7 @@ tls:
 
 providers:
   docker:
-    exposedByDefault: false  # Default is true
+    exposedByDefault: false
   file:
     # watch for dynamic configuration changes
     directory: /etc/traefik
