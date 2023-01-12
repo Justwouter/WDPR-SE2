@@ -11,10 +11,8 @@ const BaseLayout = () => {
     return (
         
         <React.StrictMode>
-            {/* <Navbar /> */}
-            <Outlet />
             <Header />
-     
+            <Outlet />
         </React.StrictMode>
     )
 };
