@@ -11,7 +11,7 @@ export default function Registration() {
         event.preventDefault();
         if (validateForm()) {
             var user = {userName: userName, email: email, Password: password}
-            fetch('http://api.theaterlaak.site/api/Account/registreer', {
+            fetch('http://api.localhost/api/Account/registreer', {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',

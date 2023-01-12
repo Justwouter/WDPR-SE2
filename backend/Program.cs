@@ -45,8 +45,8 @@ builder.Services.AddAuthentication(opt =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "http://api.theaterlaak.site",
-        ValidAudience = "http://api.theaterlaak.site",
+        ValidIssuer = "http://api.localhost",
+        ValidAudience = "http://api.localhost",
         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
     };
 });

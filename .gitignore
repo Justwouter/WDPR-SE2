@@ -7,6 +7,7 @@
 #Proxy stuff
 Proxy/Caddy
 Proxy/Traefik/share/certs
+Proxy/Traefik/share/log
 #EFCore/DB files
 *.sqlite
 migrations/

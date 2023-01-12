@@ -62,8 +62,8 @@ public class AccountController : ControllerBase
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 var tokenOptions = new JwtSecurityToken
                 (
-                    issuer: "http://api.theaterlaak.site",
-                    audience: "http://api.theaterlaak.site",
+                    issuer: "http://api.localhost",
+                    audience: "http://api.localhost",
                     claims: claims,
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: signingCredentials

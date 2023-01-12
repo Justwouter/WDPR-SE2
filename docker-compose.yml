@@ -13,16 +13,12 @@ services:
       - ./backend:/app
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      # - ASPNETCORE_HTTPS_PORT=7290
-      - url=https://api.theaterlaak.site  #Caddy config
+      - url=https://api.localhost  #Caddy config
     scale: 1
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.theaterlaak.site`)"
-      - "traefik.http.routers.backend.entrypoints=websecure" 
-      - "traefik.http.routers.backend.tls=true"
-      - "traefik.http.routers.backend.tls.certresolver=staging"  
-      # - 'traefik.port=7290'
+      - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
+ 
     expose:
       - 7290
     restart: unless-stopped
@@ -39,17 +35,13 @@ services:
       - ./frontend:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - url=https://theaterlaak.site  #Caddy config
+      - url=https://frontend.localhost  #Caddy config
     scale: 1
     labels:
       #Traefik config
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`theaterlaak.site`) || Host(`www.theaterlaak.site`)"
-      - "traefik.http.routers.frontend.entrypoints=websecure" 
-      - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.tls.certresolver=staging"   
+      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`) || Host(`www.frontend.localhost`)" 
       - 'traefik.backend=node'
-      # - 'traefik.port=3000'
     expose:
       - 3000
     restart: unless-stopped
@@ -58,20 +50,10 @@ services:
   traefik:
     image: "traefik:v2.9.6"
     container_name: "traefik"
-    # command:
-      # - "--api.dashboard=true"
-      # - "--api.insecure=true"
-      # - "--providers.docker=true"
-      # - "--providers.docker.exposedbydefault=false"
-      # - "--entrypoints.web.address=:80"
-      # - "--entrypoints.websecure.address=:443" 
     volumes:
-      - ./Proxy/Traefik/share/:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./Proxy/Traefik/log:/var/log/traefik
     ports:
       - "80:80"
-      - "443:443"
       - "8080:8080" #Dashboard, remove in prod
     
     restart: unless-stopped
@@ -94,9 +76,7 @@ services:
       restart: unless-stopped
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.test-app.rule=Host(`test.theaterlaak.site`)"
-        - "traefik.http.routers.test-app.entrypoints=websecure"
-        - "traefik.http.routers.test-app.tls=true"
-        - "traefik.http.routers.test-app.tls.certresolver=staging"
+        - "traefik.http.routers.test-app.rule=Host(`test.frontend.localhost`)"
+
 
 
