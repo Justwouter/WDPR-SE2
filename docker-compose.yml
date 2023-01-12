@@ -13,7 +13,7 @@ services:
       - ./backend:/app
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTPS_PORT=7290
+      # - ASPNETCORE_HTTPS_PORT=7290
       - url=https://api.theaterlaak.site  #Caddy config
     scale: 1
     labels:
