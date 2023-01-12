@@ -26,8 +26,7 @@ const App = (props) => {
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<Programma />} path="/Programma" />
             <Route element={<Login />} path="/Login" />
-            <Route element={<MultiFormBestellen />} path="/Bestellen" />
-            <Route element={<StoelReserveren/>} path="/Programma/:id/StoelReserveren" />
+            <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
             <Route element={<Navigate to="/" />} path="*" />
           </Route>
         </Routes>
