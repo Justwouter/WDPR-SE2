@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }
 }));
 
-  const StoelReserveren = ({startAnimatie}) => {
+  const StoelReserveren = () => {
 
   const [ stoelA, setStoelA ] = useState([]);
   const [ stoelB, setStoelB ] = useState([]);
@@ -45,11 +45,12 @@ const Item = styled(Paper)(({ theme }) => ({
         setStoelC(data.filter(c => c.rang === "C" ));
         setStoelenLijst(data);
     }
-    fetchData()
+    fetchData().catch(err => {
+      console.error(); })
   },[state?.sID] )
 
   const ToggleKeuzeStoel = (stoel) => {
-    const index = gekozenStoelen.toString().indexOf(stoel);
+    const index = gekozenStoelen.indexOf(stoel);
     if (index === -1 && (gekozenStoelen.length < 25) === true ){
       setStoelen((o) => [...o,stoel])
     }else{
@@ -67,7 +68,7 @@ const Item = styled(Paper)(({ theme }) => ({
             <Item  className={
               rang[index]["status"] === true
                 ? "reserveerd"
-                : gekozenStoelen.toString().indexOf(rang[index]["stoelId"]) !== -1
+                : gekozenStoelen.indexOf(rang[index]["stoelId"]) !== -1
                 ? "gekozen"
                 : "vrij" } 
               onClick= {()=> ToggleKeuzeStoel(rang[index]["stoelId"])}

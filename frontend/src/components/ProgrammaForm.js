@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 const ProgrammaForm = (props) => {
-    const [ StoelenLijst, setStoelenLijst ] = useState([]);
     const [Programma, setProgramma] = useState(() => {
       return {
         titel: props.Programma ? props.Programma.titel : '',
@@ -14,7 +13,7 @@ const ProgrammaForm = (props) => {
       };
     });
   
-    const {  titel, van, tot, descriptie, zaal,stoelenLijst } = Programma;
+    const {  titel, van, tot, descriptie, zaal } = Programma;
     
     const handleOnSubmit = (event) => {
       event.preventDefault();
@@ -24,9 +23,10 @@ const ProgrammaForm = (props) => {
         tot,
         descriptie,
         zaal,
-        stoelenLijst
+        stoelenLijst: maakStoelenLijst(zaal)
       };
       props.handleOnSubmit(Programma);
+      
     };
   
     const handleInputChange = (event) => {
@@ -37,31 +37,18 @@ const ProgrammaForm = (props) => {
         
       }));
     }
-    const handleInputChangeZ = (event) => {
-      const {name, value } = event.target;
-      setProgramma((prevState) => ({
-        ...prevState,
-        [name]:value,
-        stoelenLijst: maakStoelenLijst(value)
-        
-      }));
-    }
+   
 
-    useEffect(() => {
-      async function fetchData(){
-          const response = await fetch('http://api.localhost:/Zaal');
-          const data = await response.json();
-          setStoelenLijst(data);
-        
-      }
-      fetchData()
-    }, []);
+    const zalen =[{"eersteR": 20, "tweedeR": 100,  "derdeR" : 120},
+                  {"eersteR": 20, "tweedeR": 160,  "derdeR" : 0},
+                  {"eersteR": 10, "tweedeR": 80,  "derdeR" : 0},
+                  {"eersteR": 40, "tweedeR": 200,  "derdeR" : 200}];
 
     function maakStoelenLijst(zaal){
       
-      var eersteR = StoelenLijst[zaal-1]['eersteR']
-      var tweedeR = StoelenLijst[zaal-1]['tweedeR']
-      var derdeR = StoelenLijst[zaal-1]['derdeR']
+      var eersteR = zalen[zaal-1]['eersteR']
+      var tweedeR = zalen[zaal-1]['tweedeR']
+      var derdeR = zalen[zaal-1]['derdeR']
   
   
       let sLijst = []
@@ -106,7 +93,7 @@ return (
             type="text"
             name="titel"
             value={titel}
-            placeholder="Titel: "
+            placeholder={"Titel"}
             onChange={handleInputChange}
           
           />
@@ -157,9 +144,10 @@ return (
             max="4"
             name="zaal"
             value={zaal}
+            pattern="[1-4]*"
             placeholder="Kies zaal 1 t/m 4: "
             
-            onChange={handleInputChangeZ}
+            onChange={handleInputChange}
           />
           <br></br>
         </Form.Group>

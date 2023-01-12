@@ -1,7 +1,41 @@
 import React, {useState}from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
-const BetalingsForm = () => {
+const BetalingsForm = (props) => {
+
+ 
+    const [Gast, setGast] = useState(() => {
+      return {
+        gNaam: props.Gast ? props.Gast.gNaam : '',
+        gANaam: props.Gast ? props.Gast.gANaam : '',
+        gMail: props.Gast ? props.Gast.gMail : '',
+        order: props.Gast ? props.Gast.order : ''
+   
+      };
+    });
+  
+    const {  gNaam, gANaam, gMail, order } = Gast;
+    
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const Gast = {
+        gNaam: gNaam + gANaam,
+        gANaam,
+        gMail,
+        order
+    
+      };
+      props.handleOnSubmit(Gast);
+    };
+  
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setGast((prevState) => ({
+        ...prevState,
+        [name]: value,
+        
+      }));
+    }
 
     //TEST
 var details = {
@@ -40,8 +74,55 @@ const handleOnSubmit = async () => {
     if(html === undefined){
     return(
         <div>
+           <div className="gastInfo-form">
+      <div className='gGegevens'>Gegevens: </div>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="gNaam">
+          <Form.Label>Voornaam: </Form.Label>
+          <Form.Control
+            className="input-control"
+            type="text"
+            name="gNaam"
+            value={gNaam}
+            placeholder={"Voornaam"}
+            onChange={handleInputChange}
+          
+          />
+          <br></br>
+        </Form.Group>
+        <Form.Group controlId="gAchternaam">
+          <Form.Label>Achternaam: </Form.Label>
+          <Form.Control
+            className="input-control"
+            type="text"
+            name="gANaam"
+            value={gANaam}
+            placeholder="Achternaam"
+            onChange={handleInputChange}
+          />
+          <br></br>
+        </Form.Group>
+        <Form.Group controlId="gEmail">
+          <Form.Label>Email: </Form.Label>
+          <Form.Control
+            className="input-control"
+            type="text"
+            name="gMail"
+            value={gMail}
+            placeholder="Email"
+            onChange={handleInputChange}
+          />
+          <br></br>
+        </Form.Group>
+        <Form.Label>Kaartjes: </Form.Label>
+        <Form.Label>Kosten: </Form.Label>
+        
+        <Button type="submit" className="submit-btn" onClick={handleOnSubmit}>Betaal</Button> 
+       
+      </Form>
+    </div>
             {/* HET IS 8:00 AAAAAAAAAAAAAAAAAAAAAAAH */}
-            <Button onClick={handleOnSubmit}>Betaal</Button> 
+            
         </div>
     )}else{
         return (
