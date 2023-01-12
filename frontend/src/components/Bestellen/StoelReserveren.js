@@ -7,6 +7,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useParams } from 'react-router';
 import {useLocation} from 'react-router-dom'
 
+
+
 const Item = styled(Paper)(({ theme }) => ({
   //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -22,7 +24,32 @@ const Item = styled(Paper)(({ theme }) => ({
   }
 }));
 
-  const StoelReserveren = ({startAnimatie}) => {
+const test = [{amount: '30', reference: '1', url: 'frontend.local'}]
+
+var details = {
+  'amount': '30',
+  'reference': '1',
+  'url': 'http://google.nl'
+};
+
+var formBody = [];
+for (var property in details) {
+var encodedKey = encodeURIComponent(property);
+var encodedValue = encodeURIComponent(details[property]);
+formBody.push(encodedKey + "=" + encodedValue);
+}
+formBody = formBody.join("&");
+
+
+  const StoelReserveren = ({startAnimatie, volgendeStap}) => {
+
+  const GaDoor = e => {
+    e.preventDefault();
+    
+  }
+
+  const [ html, setHTML ] = useState();
+  let code = `${html}`;
   const {id} = useParams();
   const [ stoelA, setStoelA ] = useState([]);
   const [ stoelB, setStoelB ] = useState([]);
@@ -62,8 +89,27 @@ const Item = styled(Paper)(({ theme }) => ({
     }
     //console.log(gekozenStoelen)
     //console.log(stoelen.filter(s => s.stoelId == stoel))
-  };
+  }
 
+  const handleOnSubmit = async () => {
+    await fetch('https://fakepay.azurewebsites.net/', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Access-Control-Allow-Origin': '*'},
+      body: formBody
+      }) 
+        .then(response => {
+        return response.text()
+      })
+        .then(response => {
+        return setHTML(response)
+      })
+}
+  
+    if(html === undefined){
+    
     return (
       <Box textAlign="center" className="grid"  sx={{ flexGrow: 3 }}>
         {/* <a className='style10'>Stoel Reserveren</a><br></br> */}
@@ -75,8 +121,6 @@ const Item = styled(Paper)(({ theme }) => ({
       <a className='style9'>{state.sDescriptie}</a><br></br>
       <a className='style12'>Duur: {state.sDuur}min</a>
       <a className='style12'>{state.sDagNaam} {state.sDagNr} {state.sMaand}</a>
-      
-      
       </div> 
      
       <div className='kaartjes'>
@@ -87,7 +131,7 @@ const Item = styled(Paper)(({ theme }) => ({
         <div className='kCodes' style={transitionProperty}  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId == value)[0]["nr"] + '\u00A0'
         }</div>))}</ul>
       <a className='bestellen'>
-        <button onClick={showAlert}>Reserveer</button></a></div></div></div><br></br>
+        <button onClick={GaDoor}>Reserveer</button></a></div></div></div><br></br>
 
         <div>
         <b className='style13'>Eersterang</b></div><br></br>
@@ -96,7 +140,7 @@ const Item = styled(Paper)(({ theme }) => ({
       
         {Array.from(stoelA).map((_, index) => (  
           <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
-            
+
             <Item  className={
             stoelA[index]["status"] == true
               ? "reserveerd"
@@ -164,6 +208,10 @@ const Item = styled(Paper)(({ theme }) => ({
     </Box>
     
   );
+    }else{
+      return (
+      <div dangerouslySetInnerHTML = {{__html: code}} />);
+    }
 }
  
  export default   StoelReserveren;

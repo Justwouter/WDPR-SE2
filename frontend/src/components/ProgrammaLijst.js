@@ -15,19 +15,30 @@ const ProgrammaLijst = () => {
         const data = await response.json();
         setProgramma(data);
         setLoading(false);
+       
     }
     fetchData()
+    
   }, []);
+
+
+  
 
 
   return loading ? "Laden..." : (
       <div className="attractie-list">
+        
         {!_.isEmpty(programmas) ? (
           programmas.map((programma) => (
-            <Programma key={programma.id} {...programma} />
+            <Programma key={programma.id} {...programma} 
             
+             />
+            
+
             
           ))
+          
+          
         ) : (
           <p className="message">Er zijn nog geen programmas!</p>
         )}

@@ -6,8 +6,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Card from '@mui/material/Card';
 import {Link} from 'react-router-dom';
-
-
+import { Button } from 'react-bootstrap';
 
 
 
@@ -20,8 +19,9 @@ const Programma = ({
   zaal
   
 }) => {
+
+
   
- 
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
@@ -44,16 +44,11 @@ const Programma = ({
     return dagArray[new Date(van).getDay()];
   }
   function getBeginUur(){
-    
     let s = (new Date(van).getMinutes()<10 ? '0' : '') + new Date(van).getMinutes();
-
     return (new Date(van).getHours()<10 ? '0'  : '') + new Date(van).getHours() + ':' + s  ;
   }
-
   function getEindUur(){
-    
     let s = (new Date(tot).getMinutes()<10 ? '0' : '') + new Date(tot).getMinutes();
-
     return (new Date(tot).getHours()<10 ? '0'  : '') + new Date(tot).getHours() + ':' + s  ;
   }
   function getDuur(){
@@ -63,6 +58,7 @@ const Programma = ({
   }
 
     return (
+      
       <TableContainer   component={Card}>
         <Table  sx={{minWidth: 700  }} aria-label="customized table">
           <TableBody >
@@ -96,7 +92,10 @@ const Programma = ({
                 </StyledTableCell></tr>
           </TableBody>
         </Table>
+        
       </TableContainer>
+
+      
       
     );
   }
