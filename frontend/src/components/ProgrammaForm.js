@@ -5,14 +5,12 @@ const ProgrammaForm = (props) => {
     const [ StoelenLijst, setStoelenLijst ] = useState([]);
     const [Programma, setProgramma] = useState(() => {
       return {
-        // programmaId: props.Programma ? props.Programma.programmaId : '',
         titel: props.Programma ? props.Programma.titel : '',
         van: props.Programma ? props.Programma.van : '',
         tot: props.Programma ? props.Programma.tot : '',
         descriptie: props.Programma ? props.Programma.descriptie : '',
         zaal: props.Programma ? props.Programma.zaal : '',
         stoelenLijst: props.Programma ? props.Programma.stoelenLijst : ''
-        //LEDENLIJST + ZAAL later
       };
     });
   
@@ -45,7 +43,6 @@ const ProgrammaForm = (props) => {
         ...prevState,
         [name]:value,
         stoelenLijst: maakStoelenLijst(value)
-        
         
       }));
     }
