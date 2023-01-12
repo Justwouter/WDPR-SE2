@@ -23,8 +23,8 @@ const ProgrammaLijst = () => {
   return loading ? "Laden..." : (
       <div className="attractie-list">
         {!_.isEmpty(programmas) ? (
-          programmas.map((programma) => (
-            <Programma key={programma.id} {...programma} />
+          programmas.map((_,programma) => (
+            <Programma key={programma} {..._} />
             
             
           ))
