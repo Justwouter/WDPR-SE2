@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import ProgrammaLijst from '../ProgrammaLijst';
-import StoelReserveren from '../StoelReserveren';
+import StoelReserveren from './StoelReserveren';
 import Programma from '../Programma';
 import BetalingsForm from './BetalingsForm';
 
