@@ -52,7 +52,7 @@ const ProgrammaForm = (props) => {
 
     useEffect(() => {
       async function fetchData(){
-          const response = await fetch('http://api.localhost:/Zaal');
+          const response = await fetch('http://api.theaterlaak.site:/Zaal');
           const data = await response.json();
           setStoelenLijst(data);
         

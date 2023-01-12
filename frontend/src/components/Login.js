@@ -8,7 +8,7 @@ export default function Login() {
         event.preventDefault();
         if (validateForm()) {
             var user = {userName: gebruikersnaam, Password: password}
-            fetch('http://api.localhost/api/Account/login', {
+            fetch('http://api.theaterlaak.site/api/Account/login', {
                 method: "POST",
                 headers: {
                     'Accept': 'application/json',
@@ -19,7 +19,7 @@ export default function Login() {
             }).then((response) => response.json())
                 .then((data) => {
                     window.localStorage.setItem("jwt", data.token);
-                    window.location.href = 'http://frontend.localhost/';
+                    window.location.href = 'http://theaterlaak.site/';
                 })
         }
     }
