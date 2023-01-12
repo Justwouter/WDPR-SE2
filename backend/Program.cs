@@ -21,6 +21,7 @@ builder.Services.AddDbContext<ZaalContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
                 .AddDefaultTokenProviders();
+                
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
