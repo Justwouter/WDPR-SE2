@@ -44,14 +44,11 @@ const Programma = ({
     let dagArray = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
     return dagArray[new Date(van).getDay()];
   }
-  function getBeginUur(){
+  function getUur(date){
     let s = (new Date(van).getMinutes()<10 ? '0' : '') + new Date(van).getMinutes();
     return (new Date(van).getHours()<10 ? '0'  : '') + new Date(van).getHours() + ':' + s  ;
   }
-  function getEindUur(){
-    let s = (new Date(tot).getMinutes()<10 ? '0' : '') + new Date(tot).getMinutes();
-    return (new Date(tot).getHours()<10 ? '0'  : '') + new Date(tot).getHours() + ':' + s  ;
-  }
+
   function getDuur(){
     var diff = (new Date(tot).getTime() - new Date(van).getTime());
     var minuten = Math.round((diff/1000)/60);
@@ -69,7 +66,7 @@ const Programma = ({
                   <ul>{getMaand()}</ul></StyledTableCell>
                 <StyledTableCell align="center">
                   <ul>{getDagNaam()}<br></br>
-                  {getBeginUur()}<br></br>Zaal {zaal}</ul>
+                  {getUur(van)}<br></br>Zaal {zaal}</ul>
                   </StyledTableCell>
                 <StyledTableCell align="left">
                   <ul className='style3'>{titel}</ul><br></br>
@@ -82,12 +79,12 @@ const Programma = ({
                             sTitel: titel, 
                             sDescriptie: descriptie,
                             sZaal: zaal,
-                            sBeginUur: getBeginUur(),
+                            sBeginUur: getUur(van),
                             sDuur: getDuur(),
                             sDagNr: getDagNr(),
                             sDagNaam: getDagNaam(),
                             sMaand: getMaand(),
-                            sEindUur: getEindUur()}}
+                            sEindUur: getUur(tot)}}
               
                 >Bestel</Link>
                 {/* <div onClick={() => <StoelReserveren dProgramma ={Programma}/>}>

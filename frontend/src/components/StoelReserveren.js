@@ -32,10 +32,6 @@ const Item = styled(Paper)(({ theme }) => ({
 
   const { state } = useLocation(); 
   
-  const transitionProperty = startAnimatie
-    ? { marginLeft: '50px', opacity: 1}
-    : {};
-
   const showAlert = () => {
     alert("Kaartjes bestelt");
   }
@@ -154,7 +150,7 @@ const Item = styled(Paper)(({ theme }) => ({
       <div className='inhoud'>
         <ul><br></br>
           {gekozenStoelen.map((value,index) => ( 
-            <div className='kCodes' style={transitionProperty}  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId === value)[0]["nr"] + '\u00A0'}</div>))}</ul>
+            <div className='kCodes'  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId === value)[0]["nr"] + '\u00A0'}</div>))}</ul>
       </div></div>
     
     </Box>
