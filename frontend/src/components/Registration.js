@@ -1,9 +1,11 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router";
 export default function Registration() {
     const [userName, setUserName] = new useState("");
     const [email, setEmail] = new useState("");
     const [password, setPassword] = new useState("");
     const [formError, setFormError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,6 +22,7 @@ export default function Registration() {
             }).then(response => {
                 if (response.status === 201){
                     alert("Alles is goed gegaan.")
+                    navigate('/Login')
                 } else {
                     alert("Er is iets mis gegaan, probeer het later nogmaals.")
                 }
