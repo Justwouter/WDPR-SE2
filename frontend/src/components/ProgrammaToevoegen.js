@@ -14,7 +14,7 @@ const ProgrammaToevoegen = ({ history }) => {
       },
       body: JSON.stringify(programma),
     });
-    navigate("/programmatoevoegen");
+    navigate("/ProgrammaLijst");
   };
 
   return (
