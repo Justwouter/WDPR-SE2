@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 import { Outlet } from 'react-router';
 
@@ -11,9 +11,8 @@ const BaseLayout = () => {
     return (
         
         <React.StrictMode>
-            {/* <Navbar /> */}
+            <Header />
             <Outlet />
-            <Footer />
         </React.StrictMode>
     )
 };
