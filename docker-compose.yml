@@ -14,11 +14,13 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       # - ASPNETCORE_HTTPS_PORT=7290
+      - url=https://api.localhost  #Caddy config
     scale: 1
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.localhost`)"
-      - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.routers.frontend.entrypoints=web,websecure" 
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"  
       - 'traefik.port=7290'
     # ports:
     #   - "4000:7290"
@@ -38,11 +40,14 @@ services:
       - ./frontend:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - url=https://frontend.localhost  #Caddy config
     scale: 1
     labels:
+      #Traefik config
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`) || Host(`www.frontend.localhost`)"
-      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.routers.frontend.entrypoints=web,websecure" 
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"   
       - 'traefik.backend=node'
       - 'traefik.port=3000'
     # ports:
@@ -51,17 +56,6 @@ services:
       - 3000
     restart: unless-stopped
     
-  # database:
-  #   image: mysql
-  #   volumes:
-  #     - ./database:/var/lib/mysql
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=123456
-  #     - MYSQL_DATABASE=WDPR-DB
-  #     - MYSQL_USER=kekcoon
-  #     - MYSQL_PASSWORD=123456
-  #   ports:
-  #     - "3306:3306"
     
   traefik:
     image: "traefik:v2.9.6"
@@ -72,26 +66,28 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443" 
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true" 
+      - "--certificatesresolvers.myresolver.acme.email=Admin@theaterlaak.site" 
+      - "--certificatesresolvers.myresolver.acme.storage=Proxy/Traefik/letsencrypt/acme.json" 
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "Proxy/Traefik/letsencrypt:/letsencrypt"
     ports:
       - "80:80"
       - "8080:8080"
     restart: unless-stopped
+
+  # caddy:
+  #   image: caddy:alpine
+    
+  #   volumes:
+  #           - ./Proxy/Caddy/Caddyfile:/etc/caddy/Caddyfile
+  #           - ./Proxy/Caddy//data:/data # Optional
+  #           - ./Proxy/Caddy/config:/config # Optional
+  #   ports:
+  #           - "80:80"
+  #           - "443:443"
+  #   restart: unless-stopped
     
 
-  # whoami:
-  #   image: "traefik/whoami"
-  #   container_name: "simple-service"
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
-  #     - "traefik.http.routers.whoami.entrypoints=web"
-
-  # whoami2:
-  #   image: "nginxdemos/hello"
-  #   scale: 1
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.whoami2.rule=Host(`localhost`) && Path(`/whoami2`)"
-  #     - "traefik.http.routers.whoami2.entrypoints=web"

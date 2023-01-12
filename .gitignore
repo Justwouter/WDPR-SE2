@@ -4,7 +4,8 @@
 #IDE Config files
 .vscode
 .idea
-
+#Proxy stuff
+Proxy/Caddy
 #EFCore/DB files
 *.sqlite
 migrations/

@@ -16,6 +16,7 @@ if ($args.Contains("-r")) {
 
     Set-Location $startLocation
     ((Get-Content .\docker-compose.yml -Raw) -replace 'api.theaterlaak.site', 'api.localhost' -replace 'theaterlaak.site', 'frontend.localhost') | Set-Content .\docker-compose.yml -NoNewline
+    ((Get-Content .\Proxy\Caddy\Caddyfile -Raw) -replace 'api.theaterlaak.site', 'api.localhost' -replace 'theaterlaak.site', 'frontend.localhost') | Set-Content .\Proxy\Caddy\Caddyfile -NoNewline
     
 
 }
@@ -32,5 +33,6 @@ else {
 
     Set-Location $startLocation
     ((Get-Content .\docker-compose.yml -Raw) -replace 'api.localhost', 'api.theaterlaak.site' -replace 'frontend.localhost', 'theaterlaak.site') | Set-Content .\docker-compose.yml -NoNewline
-        
+    ((Get-Content .\Proxy\Caddy\Caddyfile -Raw) -replace 'api.localhost', 'api.theaterlaak.site' -replace 'frontend.localhost', 'theaterlaak.site') | Set-Content .\Proxy\Caddy\Caddyfile -NoNewline
+
 }
