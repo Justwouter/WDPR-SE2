@@ -43,17 +43,73 @@ body {
   background-color: #1B1725;
 }
 
-code {
-  color: #E01A76;
-}
 
 /* ProgrammaForm */
-.main-form {
-  font-family: 'Roboto';
-  font-style: bold;
-  font-size: 1.5rem;
-  color: white;
+.vTitel{
+  font-family: 'Poppins', sans-serif;
+  font-style: 900;
+  font-size: 2.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+.fButton{
+  display: flex;
+  justify-content: center;
+ 
+}
+.fButton button{
+  background-color: var(--adoRedCrayola);
+  border-style: none;
+  font-family: 'Poppins', sans-serif;
+  font-style: 500;
+  font-size: 2rem;
+  border-radius: 15px;
+  transition: transform 0.5s;
+}
+.fButton button:hover{
+  background-color: var(--adoRedCrayola);
+  transform: scale3d(1.2, 1.20, 1);
+}
+
+.fBox {
+  font-family: 'Poppins', sans-serif;
+  font-style: 500;
+  font-size: 1.5rem;
+  color: var(--adoXiketic);
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  display: inline-block;
+  background-color: var(--adoGoldCrayola);
+  justify-content: center;
+
+  border-radius: 25px;
+  
+}
+
+.fBox .veld {
+  padding-left: 15px;
+  padding-right: 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: #ffffff91;
+  transition: 0.2s background-color ease-in-out, 0.2s box-shadow ease-in-out;
+}
+
+.veld:hover {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 8px 30px 0px rgba(0, 0, 0, 0.05);
+}
+
+.main-form{
+  width: 100%;
+  padding-left: 400px;
+  padding-right: 400px;
+}
+
 
 body {
   background-color: #1B1725;

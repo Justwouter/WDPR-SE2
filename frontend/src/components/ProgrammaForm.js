@@ -37,6 +37,14 @@ const ProgrammaForm = (props) => {
         
       }));
     }
+    const handleSelect= (event) => {
+      const { value } = event.target;
+      setProgramma((prevState) => ({
+        ...prevState,
+        zaal: value,
+        
+      }));
+    }
    
 
     const zalen =[{"eersteR": 20, "tweedeR": 100,  "derdeR" : 120},
@@ -45,7 +53,7 @@ const ProgrammaForm = (props) => {
                   {"eersteR": 40, "tweedeR": 200,  "derdeR" : 200}];
 
     function maakStoelenLijst(zaal){
-      
+      console.log(zaal)
       var eersteR = zalen[zaal-1]['eersteR']
       var tweedeR = zalen[zaal-1]['tweedeR']
       var derdeR = zalen[zaal-1]['derdeR']
@@ -84,17 +92,21 @@ const ProgrammaForm = (props) => {
     }
 return (
     <div className="main-form">
-      <div className='vTitel'>Programma toevoegen</div>
+      <div className='vTitel'><div >Programma toevoegen</div></div>
+      
+      <div className='fBox'>
       <Form onSubmit={handleOnSubmit}>
         <Form.Group controlId="titel">
           <Form.Label>Titel: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className='veld'
             type="text"
             name="titel"
             value={titel}
             placeholder={"Titel"}
             onChange={handleInputChange}
+        
           
           />
           <br></br>
@@ -102,7 +114,8 @@ return (
         <Form.Group controlId="van">
           <Form.Label>Begintijd: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className='veld'
             type="datetime-local"
             name="van"
             value={van}
@@ -114,7 +127,8 @@ return (
         <Form.Group controlId="tot">
           <Form.Label>Eindtijd: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className='veld'
             type="datetime-local"
             name="tot"
             value={tot}
@@ -126,36 +140,35 @@ return (
         <Form.Group controlId="descriptie">
           <Form.Label>Descriptie: </Form.Label>
           <Form.Control
-            className="input-control"
+            className='veld'
+            as="textarea" rows={3}
+            required={true}
             type="text"
             name="descriptie"
             value={descriptie}
-            placeholder="descriptie: "
+            placeholder="Descriptie: "
             onChange={handleInputChange}
           />
           <br></br>
         </Form.Group>
         <Form.Group controlId="stoelenlijst">
-          <Form.Label>Zaal: </Form.Label>
-          <Form.Control
-            className="input-control"
-            type="number"
-            min="1"
-            max="4"
-            name="zaal"
-            value={zaal}
-            pattern="[1-4]*"
-            placeholder="Kies zaal 1 t/m 4: "
-            
-            onChange={handleInputChange}
-          />
-          <br></br>
+          <Form.Label>Zaal: </Form.Label><br></br>
+          <Form.Select className='veld' required={true} onChange={handleSelect} aria-label="Kies zaal">
+            <option value={1}>Zaal 1</option>
+            <option value={2}>Zaal 2</option>
+            <option value={3}>Zaal 3</option>
+            <option value={4}>Zaal 4</option>
+
+          </Form.Select>
+          <br></br><br></br><br></br>
         </Form.Group>
-        <Button variant="primary" type="submit" className="submit-btn" >
-          Programma toevoegen
+        <div className='fButton'><div>
+        <Button variant="primary" type="submit"  >
+          Toevoegen
           
-        </Button>
+        </Button></div></div>
       </Form>
+      </div>
     </div>
   );
 

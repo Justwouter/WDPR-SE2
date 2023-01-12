@@ -9,7 +9,7 @@ const BetalingsForm = (props) => {
         gNaam: props.Gast ? props.Gast.gNaam : '',
         gANaam: props.Gast ? props.Gast.gANaam : '',
         gMail: props.Gast ? props.Gast.gMail : '',
-        order: props.Gast ? props.Gast.order : ''
+        order: props.Gast ? props.Gast.order : Date.now()
    
       };
     });
@@ -25,7 +25,7 @@ const BetalingsForm = (props) => {
         order
     
       };
-      props.handleOnSubmit(Gast);
+      handleOnSubmit(Gast);
     };
   
     const handleInputChange = (event) => {
@@ -71,16 +71,19 @@ const handleOnSubmit = async () => {
         return setHTML(response)
       })
     }
+
+
     if(html === undefined){
     return(
-        <div>
-           <div className="gastInfo-form">
-      <div className='gGegevens'>Gegevens: </div>
+      <div className='main-form'>
+      <div className='vTitel'>Gegevens</div>
+      <div className="fBox">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="gNaam">
           <Form.Label>Voornaam: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className="veld"
             type="text"
             name="gNaam"
             value={gNaam}
@@ -93,7 +96,8 @@ const handleOnSubmit = async () => {
         <Form.Group controlId="gAchternaam">
           <Form.Label>Achternaam: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className="veld"
             type="text"
             name="gANaam"
             value={gANaam}
@@ -105,7 +109,8 @@ const handleOnSubmit = async () => {
         <Form.Group controlId="gEmail">
           <Form.Label>Email: </Form.Label>
           <Form.Control
-            className="input-control"
+             required={true}
+            className="veld"
             type="text"
             name="gMail"
             value={gMail}
@@ -114,11 +119,13 @@ const handleOnSubmit = async () => {
           />
           <br></br>
         </Form.Group>
-        <Form.Label>Kaartjes: </Form.Label>
+        <Form.Label>Kaartjes: </Form.Label><br></br>
         <Form.Label>Kosten: </Form.Label>
         
-        <Button type="submit" className="submit-btn" onClick={handleOnSubmit}>Betaal</Button> 
-       
+        <br></br><br></br>
+        <div className='fButton'><div>
+        <Button type="submit" className="submit-btn" >Betaal</Button> 
+        </div></div>
       </Form>
     </div>
             {/* HET IS 8:00 AAAAAAAAAAAAAAAAAAAAAAAH */}
