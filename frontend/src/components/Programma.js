@@ -6,10 +6,6 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Card from '@mui/material/Card';
 import {Link} from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-
-
-
 
 const Programma = ({
   programmaId,
@@ -20,9 +16,6 @@ const Programma = ({
   zaal
   
 }) => {
-
-
-  
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
   

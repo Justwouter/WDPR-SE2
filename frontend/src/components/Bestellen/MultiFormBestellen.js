@@ -5,6 +5,7 @@ import StoelReserveren from './StoelReserveren';
 import Programma from '../Programma';
 import BetalingsForm from './BetalingsForm';
 
+// BIG FAIL IT WONT WORK T_T
 export default class MultiFormBestellen extends Component {
 
     state = {
