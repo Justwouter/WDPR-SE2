@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom';
 
 
 
+
 const Programma = ({
   programmaId,
   titel,
@@ -80,8 +81,9 @@ const Programma = ({
                   <ul>{descriptie}</ul></StyledTableCell>
                 
                 <StyledTableCell align="center"><u> 
-                <Link to= {'/Programma/'+ programmaId +'/StoelReserveren'}
-                  state= {{ sTitel: titel, 
+                <Link to= {'/Programma/StoelReserveren'}
+                  state= {{ sID: programmaId,
+                            sTitel: titel, 
                             sDescriptie: descriptie,
                             sZaal: zaal,
                             sBeginUur: getBeginUur(),
@@ -92,6 +94,9 @@ const Programma = ({
                             sEindUur: getEindUur()}}
               
                 >Bestel</Link>
+                {/* <div onClick={() => <StoelReserveren dProgramma ={Programma}/>}>
+                  Bestel
+                </div> */}
                 </u>
                 </StyledTableCell></tr>
           </TableBody>
