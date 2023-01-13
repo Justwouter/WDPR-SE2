@@ -90,7 +90,7 @@ export default function Registration() {
                 <br/>
                 <br/>
                 {formError && <div className="error">{formError}</div>}
-                <button>Registreer</button>
+                <button>Registreer nu</button>
             </form>
         </div>
     );
