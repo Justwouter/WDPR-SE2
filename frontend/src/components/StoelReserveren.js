@@ -127,7 +127,6 @@ const Item = styled(Paper)(({ theme }) => ({
     }
     
 }
- 
  export default   StoelReserveren;
     
 
