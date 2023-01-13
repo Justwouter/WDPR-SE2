@@ -46,17 +46,19 @@ const Item = styled(Paper)(({ theme }) => ({
         setStoelenLijst(data);
     }
     fetchData().catch(err => {
-      console.error(); })
+      console.error();
+    })
   },[state?.sID] )
 
-  const ToggleKeuzeStoel = (stoel) => {
+  const ToggleKeuzeStoel = (stoel,i) => {
     const index = gekozenStoelen.indexOf(stoel);
+   
     if (index === -1 && (gekozenStoelen.length < 25) === true ){
       setStoelen((o) => [...o,stoel])
     }else{
       setStoelen(p => p.filter(p => p !== stoel));
     }
-    //console.log(gekozenStoelen)
+    console.log(stoel + " - " + i)
     //console.log(stoelen.filter(s => s.stoelId == stoel))
   };
 
@@ -64,13 +66,14 @@ const Item = styled(Paper)(({ theme }) => ({
     return(
       <Grid container justifyContent="center" spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
           {Array.from(rang).map((_, i) => (  
-          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={innerWidth}>
+          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={i}>
             <Item  className={
               rang[i]["status"] === true
                 ? "reserveerd"
                 : gekozenStoelen.indexOf(rang[i]["stoelId"]) !== -1
                 ? "gekozen"
                 : "vrij" } 
+                
               onClick= {()=> ToggleKeuzeStoel(rang[i]["stoelId"])}
             >{"" + rang[i]["nr"] } 
             </Item>
@@ -106,14 +109,11 @@ const Item = styled(Paper)(({ theme }) => ({
         <div className='kaart'><br></br><br></br>
         <div className='stoel'>
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
-
-            {gekozenStoelen.length !== 0 && 
             <div><Link to= {'/BetalingsForm'}><Button>Reserveer
               </Button>
             
-            </Link></div>
-            }
-            </div>
+            </Link></div></div>
+  
         <div className='inhoud'>
           <ul><br></br>
             {gekozenStoelen.map((value,index) => ( 
@@ -130,6 +130,4 @@ const Item = styled(Paper)(({ theme }) => ({
  
  export default   StoelReserveren;
     
-
-
 
