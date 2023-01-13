@@ -64,7 +64,7 @@ const Item = styled(Paper)(({ theme }) => ({
     return(
       <Grid container justifyContent="center" spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
           {Array.from(rang).map((_, i) => (  
-          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={innerWidth}>
+          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={i}>
             <Item  className={
               rang[i]["status"] === true
                 ? "reserveerd"
