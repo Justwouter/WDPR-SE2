@@ -63,16 +63,16 @@ const Item = styled(Paper)(({ theme }) => ({
   const MaakRangGrid = (rang) => {
     return(
       <Grid container justifyContent="center" spacing={{ xs: 4, md: 1 }} columns={{ xs: 4, sm: 8, md: 45 }}>
-          {Array.from(rang).map((_, index) => (  
-          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={index}>
+          {Array.from(rang).map((_, i) => (  
+          <Grid  maxWidth={45} item xs={3} sm={9} md={4} key={innerWidth}>
             <Item  className={
-              rang[index]["status"] === true
+              rang[i]["status"] === true
                 ? "reserveerd"
-                : gekozenStoelen.indexOf(rang[index]["stoelId"]) !== -1
+                : gekozenStoelen.indexOf(rang[i]["stoelId"]) !== -1
                 ? "gekozen"
                 : "vrij" } 
-              onClick= {()=> ToggleKeuzeStoel(rang[index]["stoelId"])}
-            >{"" + rang[index]["nr"] } 
+              onClick= {()=> ToggleKeuzeStoel(rang[i]["stoelId"])}
+            >{"" + rang[i]["nr"] } 
             </Item>
           </Grid>))}
       </Grid>)}
