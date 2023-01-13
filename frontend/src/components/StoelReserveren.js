@@ -106,11 +106,14 @@ const Item = styled(Paper)(({ theme }) => ({
         <div className='kaart'><br></br><br></br>
         <div className='stoel'>
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
+
+            {gekozenStoelen.length !== 0 && 
             <div><Link to= {'/BetalingsForm'}><Button>Reserveer
               </Button>
             
-            </Link></div></div>
-  
+            </Link></div>
+            }
+            </div>
         <div className='inhoud'>
           <ul><br></br>
             {gekozenStoelen.map((value,index) => ( 

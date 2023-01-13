@@ -223,6 +223,7 @@ body {
 }
 
 .kaart button {
+  border-style: none;
   display: inline-block;
   position: absolute;
   margin-left: 400px;
@@ -238,6 +239,7 @@ body {
 }
 
 .kaart button:hover {
+  background-color: #1B1725;
   cursor: pointer;
   transform: scale3d(1.10, 1.10, 1);
 }

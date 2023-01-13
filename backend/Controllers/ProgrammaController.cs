@@ -132,6 +132,38 @@ namespace backend.Controllers
             return NoContent();
         }
 
+        //Handle multiple stoelid
+        // [HttpPut("Stoel/{Kaart}")]
+        // public async Task<IActionResult> PutStoelen(int id, Stoel stoel)
+        // {
+        //     if (id != stoel.StoelId)
+        //     {
+        //         return BadRequest();
+        //     }
+
+            
+        //     _context.Entry(stoel).State = EntityState.Modified;
+
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!ProgrammaExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
+
+        //     return NoContent();
+        // }
+
+
 
         // POST: api/Programma
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
