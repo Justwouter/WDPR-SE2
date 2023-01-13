@@ -13,13 +13,13 @@ namespace backend.Controllers
     public class ProgrammaController : ControllerBase
     {
         private readonly ProgrammaContext _context;
-        private readonly ZaalContext _contextZaal;
+        
         
 
-        public ProgrammaController(ProgrammaContext context, ZaalContext zaalContext)
+        public ProgrammaController(ProgrammaContext context)
         {
             _context = context;
-            _contextZaal = zaalContext;
+        
         }
 
         // GET: api/Programma
@@ -133,35 +133,28 @@ namespace backend.Controllers
         }
 
         //Handle multiple stoelid
-        // [HttpPut("Stoel/{Kaart}")]
-        // public async Task<IActionResult> PutStoelen(int id, Stoel stoel)
-        // {
-        //     if (id != stoel.StoelId)
-        //     {
-        //         return BadRequest();
-        //     }
+        [HttpPut("Stoel/Update/")]
+        public async Task<IActionResult> PutStoelen([FromQuery] int[] k)
+        {
+            if (_context.Stoel == null)
+            {
+                return Problem("Entity set 'ProgrammaContext.Stoel'  is null.");
+            }
 
-            
-        //     _context.Entry(stoel).State = EntityState.Modified;
+           
+            //int kaartje = Int32.Parse(kaart);
 
-        //     try
-        //     {
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         if (!ProgrammaExists(id))
-        //         {
-        //             return NotFound();
-        //         }
-        //         else
-        //         {
-        //             throw;
-        //         }
-        //     }
+            var secondArray= await _context.Stoel.Where (h=> k.Contains(h.StoelId)).ToListAsync();
+            // var getStoel = await (from p in _context.Stoel 
+            //     where p.StoelId == kaartje select p).ToListAsync();
 
-        //     return NoContent();
-        // }
+            secondArray.ForEach(x => x.Status = true);
+
+            await _context.SaveChangesAsync();
+           
+            return NoContent();
+           
+        }
 
 
 

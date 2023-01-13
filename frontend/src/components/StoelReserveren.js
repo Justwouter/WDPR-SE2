@@ -108,7 +108,11 @@ const Item = styled(Paper)(({ theme }) => ({
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
 
             {gekozenStoelen.length !== 0 && 
-            <div><Link to= {'/BetalingsForm'}><Button>Reserveer
+            <div><Link to= {'/BetalingsForm'} 
+            state= {{ sID: state.sID,
+              sGStoelen: gekozenStoelen}}
+            
+            ><Button>Reserveer
               </Button>
             
             </Link></div>
