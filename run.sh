@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
+runfunc() {
+    if [[ "$1" == *"-dcd"* ]]; then
+        ./deploy.sh
+        docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+        return
+    elif [[ "$1" == *"-dc"* ]]; then
+        ./deploy.sh -r
+        docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+        return
+    fi
 
-startLocation=$(pwd)
-if [[ "$1" == *"-dc"* ]]; then
-    docker-compose up
-else
-    cd "$startLocation/frontend" || exit
-    npm install && npm start
-    cd "$startLocation/backend" || exit
-    dotnet run
-    cd "$startLocation" || exit
-fi
+}
+
+runfunc "$@"
