@@ -4,8 +4,9 @@ public class Betaling
 {   
     [Key]
     public int BetalingId {get; set;}
+    public string? account {get; set;}
     public Boolean succes {get; set;}
-    public int reference {get; set;}
+    public string? reference {get; set;}
  
     
   

@@ -30,6 +30,17 @@ namespace backend.Controllers
             return await _context.Order.ToListAsync();
         }
 
+         // GET: api/Betaling
+        [HttpGet("/Betaling")]
+        public async Task<ActionResult<IEnumerable<Betaling>>> GetBetaling()
+        {
+          if (_context.Betaling == null)
+          {
+              return NotFound();
+          }
+            return await _context.Betaling.ToListAsync();
+        }
+
         // GET: api/Order/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
@@ -82,7 +93,7 @@ namespace backend.Controllers
         // POST: api/Order
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder( Order order)
         {
           if (_context.Order == null)
           {
@@ -93,9 +104,10 @@ namespace backend.Controllers
 
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
-        [Consumes("application/x-www-form-urlencoded")]
+        
         [HttpPost("/api/Betaling")]
-        public async Task<ActionResult<Betaling>> PostBetaling([FromForm]Betaling betaling)
+        //[Consumes("application/x-www-form-urlencoded")]
+        public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
         {
           if (_context.Betaling == null)
           {
@@ -104,6 +116,7 @@ namespace backend.Controllers
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
 
+            //return NoContent();
             return CreatedAtAction("GetBetaling", new { id = betaling.BetalingId }, betaling);
         }
 

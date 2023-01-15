@@ -6,8 +6,6 @@ public class Order
     public int OrderId {get; set;}
     public string Naam {get; set;}
     public string Email {get; set;}
-    
-    public string Kaart {get; set;}
-    public int BetalingNr {get; set;}
+    public string BetalingNr {get; set;}
   
 }

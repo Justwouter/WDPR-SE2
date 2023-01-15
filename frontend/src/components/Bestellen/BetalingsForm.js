@@ -49,7 +49,7 @@ const BetalingsForm = (props) => {
     }, "")
 
     useEffect(() => {
-      // PUT request using fetch with async/await
+      
       async function updatePost() {
           const requestOptions = {
               method: 'PUT',
@@ -66,7 +66,7 @@ const BetalingsForm = (props) => {
 
 var details = {
   'amount': state.sGStoelen.length * 25,
-  'reference': betalingNr,
+  'reference': JSON.stringify(betalingNr),
   'url': 'http://api.localhost/api/Betaling'
 };
 

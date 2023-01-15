@@ -14,6 +14,7 @@ import Login from './components/Login'
 import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
 
+
 const App = () => {
   return (
     <div className="main-content">
@@ -26,6 +27,7 @@ const App = () => {
             <Route element={<Registration />} path="/Registration" />
             <Route element={<Programma />} path="/Programma" />
             <Route element={<BetalingsForm />} path="/BetalingsForm"/>
+           {/* //<Route element={<SuccesvolB />} path="/SuccesvolB"/> */}
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
