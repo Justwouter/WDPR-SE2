@@ -6,10 +6,11 @@ using backend.model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-public class TheaterContext : IdentityDbContext{
-    public TheaterContext (DbContextOptions<TheaterContext> options): base(options){}
+public class TheaterContext : IdentityDbContext
+{
+    public TheaterContext(DbContextOptions<TheaterContext> options) : base(options) { }
 
-    public DbSet<Performance> Optredens {get;set;} = default!;
+    public DbSet<Performance> Optredens { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
     // public DbSet<Role> Role { get; set; } = default!;
 
@@ -22,9 +23,9 @@ public class TheaterContext : IdentityDbContext{
         builder.Entity<Role>().HasData(new Role() { Name = "Bezoeker", NormalizedName = "BEZOEKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
         builder.Entity<Role>().HasData(new Role() { Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = Guid.NewGuid().ToString() });
 
-        builder.Entity<User>().HasData(new User() {UserName = "Admin", Type = "Admin", Password="Admin1!"});
+        builder.Entity<User>().HasData(new User() { UserName = "Admin", Type = "Admin", Password = "Admin1!" });
 
     }
-    
+
 
 }
