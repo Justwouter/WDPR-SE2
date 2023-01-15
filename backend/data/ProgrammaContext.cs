@@ -8,7 +8,12 @@ public class ProgrammaContext : DbContext
 {
 
 
-    public ProgrammaContext(DbContextOptions<ProgrammaContext> options) : base(options) { }
+    public ProgrammaContext(DbContextOptions<ProgrammaContext> options)
+        : base(options)
+    {
+
+
+    }
 
     public DbSet<Programma> Programma { get; set; } = default!;
     public DbSet<Stoel> Stoel { get; set; } = default!;
