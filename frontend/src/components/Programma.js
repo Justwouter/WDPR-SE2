@@ -21,8 +21,7 @@ const Programma = ({
   
     [`&.${tableCellClasses.body}`]: {
       fontSize: 14,
-      color: theme.palette.common.white,
-      backgroundColor: '#1B1725',
+      color: theme.palette.common.white
     },
   }));
   
@@ -54,20 +53,21 @@ const Programma = ({
         <Table  sx={{minWidth: 700  }} aria-label="customized table">
           <TableBody >
             <tr>
-                <StyledTableCell align="center">
-                  <ul className='style2' >{getDagNr()}</ul><br></br>
-                  <ul>{getMaand()}</ul></StyledTableCell>
-                <StyledTableCell align="center">
+                <StyledTableCell className='table1'align="center">
+                    <ul className='style2' >{getDagNr()}</ul><br></br>
+                    <ul>{getMaand()}</ul>
+                  </StyledTableCell>
+                <StyledTableCell className='table2' align="center">
                   <ul>{getDagNaam()}<br></br>
                   {getUur(van)}<br></br>Zaal {zaal}</ul>
                   </StyledTableCell>
-                <StyledTableCell align="left">
+                <StyledTableCell className='table3' align="left">
                   <ul className='style3'>{titel}</ul><br></br>
                   <ul className='style4'>Duur: {getDuur()} minuten</ul> <br></br>
                   <ul>{descriptie}</ul></StyledTableCell>
                 
-                <StyledTableCell align="center"><u> 
-                <Link to= {'/Programma/StoelReserveren'}
+                <StyledTableCell className='table4' align="center">
+                <Link  className='bestelKnop' to= {'/Programma/StoelReserveren'}
                   state= {{ sID: programmaId,
                             sTitel: titel, 
                             sDescriptie: descriptie,
@@ -83,7 +83,7 @@ const Programma = ({
                 {/* <div onClick={() => <StoelReserveren dProgramma ={Programma}/>}>
                   Bestel
                 </div> */}
-                </u>
+              
                 </StyledTableCell></tr>
           </TableBody>
         </Table>

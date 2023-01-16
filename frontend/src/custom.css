@@ -24,12 +24,46 @@ body {
   font-style: normal;
   color: #FD024F;
   font-size: 5rem;
+ 
 }
+.table1{
+  background-color: var(--adoXiketic);
+  max-width: 25px;
+  
+}
+.table1 ul{
+  font-family: 'Poppins', sans-serif;
+  font-style: 600;
 
-.style3 {
-  font-family: 'Arimo';
-  font-style: normal;
+}
+.table2{
+  background-color: var(--adoXiketic);
+
+  max-width: 25px;
+}
+.table2 ul{
+  font-family: 'Poppins', sans-serif;
+  font-style: 600;
+  font-size: 1.5rem;
+}
+.table3{
+  background-color: var(--adoXiketic);
+
+  max-width: 200px;
+}
+.table3 ul{
+  font-family: 'Poppins', sans-serif;
+  font-style:400;
+  font-size: 1rem;
+}
+.table3 .style3 {
+  font-family: 'Poppins', sans-serif;
+  font-style:700;
   font-size: 2rem;
+}
+.table4{
+  max-width: 25px;
+  background-color: var(--adoXiketic);
 }
 
 .style4 {
@@ -41,6 +75,23 @@ body {
 
 .Card {
   background-color: #1B1725;
+}
+.bestelKnop {
+  color: #ffffff;
+  padding: 20px;
+  background-color: var(--adoRedCrayola);
+  max-width: 100px;
+  border-style: none;
+  font-family: 'Poppins', sans-serif;
+  font-style: 500;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  transition: transform 0.5s;
+}
+.bestelKnop:hover{
+  color: var(--adoXiketic);
+  background-color: var(--adoRedCrayola);
+  transform: scale3d(1.2, 1.20, 1);
 }
 
 
@@ -59,7 +110,7 @@ body {
  
 }
 .fButton button{
-  background-color: var(--adoRedCrayola);
+  background-color: var(--adoRedCrayola) ;
   border-style: none;
   font-family: 'Poppins', sans-serif;
   font-style: 500;
@@ -170,14 +221,10 @@ body {
   animation: fadeInAnimation 0.5s ease forwards;
 }
 
-.kCodes:hover {
-
-  transform: scale3d(1.1, 1.1, 1);
-}
-
 .inhoud {
   margin-top: -35px;
   margin-left: 10px;
+
 }
 
 .stoel {
