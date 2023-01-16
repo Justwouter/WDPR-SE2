@@ -84,7 +84,7 @@ export default function Registration() {
                 <br/>
                 <label htmlFor="password">Wachtwoord:</label>
                 <input type="password"
-                       id="password"
+                       id="Registerpassword"
                        value={password}
                        onInput={(e) => setPassword(e.target.value)}/>
                 <br/>
