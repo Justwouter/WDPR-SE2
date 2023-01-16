@@ -1,0 +1,69 @@
+global:
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+#(Optional) Log logs everything, accesslog logs connection protocols
+# log:
+#   level: DEBUG  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+#   format: json  # common, json, logfmt
+#   filePath: /var/log/traefik/traefik.log
+
+# accesslog:
+#   format: json  # common, json, logfmt
+#   filePath: /var/log/traefik/access.log
+
+# (Optional) Enable API and Dashboard
+api:
+ dashboard: true
+ insecure: true  # Don't do this in prod!
+
+entryPoints:
+  web:
+    address: :80
+    # (Optional) Redirect to HTTPS
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
+  websecure:
+    address: :443
+
+# Configure CertificateResolvers here
+certificatesResolvers:
+  staging:
+    acme:
+      email: Admin@theaterlaak.site
+      storage: /etc/traefik/certs/acme.json
+      caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+        entryPoint: web
+#
+#   production:
+#     acme:
+#       email: Admin@theaterlaak.site
+#       storage: /etc/traefik/certs/acme.json
+#       caServer: "https://acme-v02.api.letsencrypt.org/directory"
+#       httpChallenge:
+#         entryPoint: web
+
+#(Optional) Overwrite Default Certificates
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/certs/cert1.pem  #Yea ain't putting certs in a git repo
+        keyFile: /etc/traefik/certs/privkey1.pem
+# (Optional) Disable TLS version 1.0 and 1.1
+#   options:
+#     default:
+#       minVersion: VersionTLS12
+
+providers:
+  docker:
+    exposedByDefault: false
+  file:
+    # watch for dynamic configuration changes
+    directory: /etc/traefik
+    watch: true
