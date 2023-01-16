@@ -4,16 +4,25 @@
 #IDE Config files
 .vscode
 .idea
+#Proxy stuff
+Proxy/Caddy
+Proxy/Traefik/share/certs
+Proxy/Traefik/share/log
+#EFCore/DB files
+*.sqlite
+migrations/
+database/
+!database/dbfileshere.txt
 # dependencies
-frontend/node_modules
-frontend/.pnp
+node_modules/
+.pnp/
 .pnp.js
 
 # testing
-frontend/coverage
+coverage/
 
 # production
-frontend/build
+build/
 
 # misc
 .DS_Store
@@ -255,3 +264,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+backend/ProgammaDB.sqlite-shm
+backend/ProgammaDB.sqlite-wal

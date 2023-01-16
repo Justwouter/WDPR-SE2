@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  backend:
+    labels:
+        - "traefik.http.routers.backend.entrypoints=websecure" 
+        - "traefik.http.routers.backend.tls=true"
+        - "traefik.http.routers.backend.tls.certresolver=staging" 
+  frontend:
+    labels:
+      - "traefik.http.routers.frontend.entrypoints=websecure" 
+      - "traefik.http.routers.frontend.tls=true"
+      - "traefik.http.routers.frontend.tls.certresolver=staging"  
+  traefik:
+    volumes:
+      - ./Proxy/Traefik/share/:/etc/traefik #Config files
+      - ./Proxy/Traefik/log:/var/log/traefik #Log files
+    ports:
+    - "443:443"
+  test-app:
+    labels:
+      - "traefik.http.routers.test-app.entrypoints=websecure"
+      - "traefik.http.routers.test-app.tls=true"
+      - "traefik.http.routers.test-app.tls.certresolver=staging"

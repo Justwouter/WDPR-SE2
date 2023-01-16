@@ -1,0 +1,18 @@
+dotnet add package Microsoft.EntityFrameworkCore.Design  
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite 
+dotnet add package Microsoft.EntityFrameworkCore.Tools  
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design 
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore 
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+
+#dotnet tool install dotnet-ef -g
+#dotnet tool install -g dotnet-aspnet-codegenerator
+#dotnet-aspnet-codegenerator controller -name VakkenController -async -sqlite -api -m Vak  -dc SchoolContext -outDir Controllers
+#sed -i -e 's/^/dotnet add package /' reqs.txt
+#./dbup Name
+
+
+
+#NODE
+#npm i -g create-react-app && npx create-react-app@latest frontend
