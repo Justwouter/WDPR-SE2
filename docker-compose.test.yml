@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    labels:
+      - "traefik.http.routers.backend.entrypoints=web"
+      - 'traefik.port=7290'
+  frontend:
+    labels:
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - 'traefik.port=3000'
+  traefik:
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+  test-app:
+    labels:
+      - "traefik.http.routers.test-app.entrypoints=web"
