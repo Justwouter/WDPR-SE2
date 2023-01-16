@@ -56,7 +56,7 @@ const Item = styled(Paper)(({ theme }) => ({
     }else{
       setStoelen(p => p.filter(p => p !== stoel));
     }
-    //console.log(gekozenStoelen)
+    console.log(stoel + " - " + i)
     //console.log(stoelen.filter(s => s.stoelId == stoel))
   };
 
@@ -106,7 +106,6 @@ const Item = styled(Paper)(({ theme }) => ({
         <div className='kaart'><br></br><br></br>
         <div className='stoel'>
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
-
             {gekozenStoelen.length !== 0 && 
             <div><Link to= {'/BetalingsForm'} 
             state= {{ sID: state.sID,
@@ -133,7 +132,3 @@ const Item = styled(Paper)(({ theme }) => ({
 }
  
  export default   StoelReserveren;
-    
-
-
-
