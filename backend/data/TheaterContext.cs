@@ -17,16 +17,14 @@ public class TheaterContext : IdentityDbContext{
     {
         base.OnModelCreating(builder);
         builder.Entity<Performance>().ToTable("Optredens");
-        // builder.Entity<Role>()
-        //     .Property(r => r.NormalizedName)
-        //     .ValueGeneratedOnAdd();
-        //
-        // builder.Entity<Role>()
-        //     .Property(r => r.ConcurrencyStamp)
-        //     .ValueGeneratedOnAdd();
 
         builder.Entity<Role>().HasData(new Role() { Name = "Medewerker", NormalizedName = "MEDEWERKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
         builder.Entity<Role>().HasData(new Role() { Name = "Bezoeker", NormalizedName = "BEZOEKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
+        builder.Entity<Role>().HasData(new Role() { Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = Guid.NewGuid().ToString() });
+
+        builder.Entity<User>().HasData(new User() {UserName = "Admin", Type = "Admin", Password="Admin1!"});
+
     }
+    
 
 }
