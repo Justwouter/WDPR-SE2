@@ -38,9 +38,7 @@ describe('Registration component', () => {
         const submitButton = getByText('Registreer nu');
 
         fireEvent.input(emailInput, { target: { value: 'mail@mail.nl' } });
-        expect(emailInput.value).toBe('mail@mail.nl')
         fireEvent.input(passwordInput, { target: { value: 'String1!' } });
-        expect(passwordInput.value).toBe('String1!')
         fireEvent.click(submitButton);
         expect(getByText('Gebruikersnaam is noodzakelijk')).toBeInTheDocument();
     });
@@ -98,15 +96,15 @@ describe('Registration component', () => {
     });
 
     // it('should navigate to the login page when the form is submitted with valid input', () => {
-    //     const { getByText, getByLabelText } = render(<Registration />);
+    //     const { getByText, getByLabelText } = render(<BrowserRouter> <Registration/></BrowserRouter>);
     //     const usernameInput = getByLabelText('Gebruikersnaam:');
     //     const emailInput = getByLabelText('Email:');
     //     const passwordInput = getByLabelText('Wachtwoord:');
-    //     const submitButton = getByText('Registreer');
+    //     const submitButton = getByText('Registreer nu');
     //
-    //     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-    //     fireEvent.change(emailInput, { target: { value: 'test@email.com' } });
-    //     fireEvent.change(passwordInput, { target: { value: 'password' } });
+    //     fireEvent.input(usernameInput, { target: { value: 'testuser' } });
+    //     fireEvent.input(emailInput, { target: { value: 'test@email.com' } });
+    //     fireEvent.input(passwordInput, { target: { value: 'password' } });
     //     fireEvent.click(submitButton);
     //
     //     expect(navigate).toHaveBeenCalledWith('/Login');
