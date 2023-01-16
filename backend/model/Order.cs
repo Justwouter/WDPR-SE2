@@ -7,5 +7,6 @@ public class Order
     public string Naam {get; set;}
     public string Email {get; set;}
     public string BetalingNr {get; set;}
-  
+    
+    public string Kaart {get; set;}
 }

@@ -5,26 +5,35 @@ import {useLocation} from 'react-router-dom';
 const BetalingsForm = (props) => {
 
     const { state } = useLocation(); 
+    //TEST
+    const mijnKaarten = state.sGStoelen.reduce((result , item) => {
+      return `${result}${item},`
+    }, "").slice(0,-1)
+
+    const mijnKaartenUrl = state.sGStoelen.reduce((result, item) => {
+      return `${result}k=${item}&`
+    }, "")
+
     //console.log(state);
     const [Order, setGast] = useState(() => {
       return {
-        naam: props.Gast ? props.Gast.naam : '',
-        gANaam: props.Gast ? props.Gast.gANaam : '',
-        email: props.Gast ? props.Gast.email : '',
-        betalingNr: props.Gast ? props.Gast.betalingNr : Date.now()
+        naam: props.Order ? props.Order.naam : '',
+        email: props.Order ? props.Order.email : '',
+        betalingNr: props.Order ? props.Order.betalingNr : JSON.stringify(Date.now()),
+        kaart: props.Order ? props.Order.kaart : mijnKaarten
    
       };
     });
   
-    const {  naam, gANaam, email, betalingNr } = Order;
+    const {  naam, email, betalingNr } = Order;
     
     const handleSubmit = (event) => {
       event.preventDefault();
       const Order = {
-        naam: naam + gANaam,
-        gANaam,
+        naam,
         email,
-        betalingNr
+        betalingNr,
+        kaart: mijnKaarten
     
       };
       handleOnSubmit(Order);
@@ -39,14 +48,7 @@ const BetalingsForm = (props) => {
       }));
     }
 
-    //TEST
-    const mijnKaarten = state.sGStoelen.reduce((result , item) => {
-      return `${result}${state.sID}P${item}SI -`
-    }, "")
-
-    const mijnKaartenUrl = state.sGStoelen.reduce((result, item) => {
-      return `${result}k=${item}&`
-    }, "")
+    
 
     useEffect(() => {
       
@@ -66,7 +68,7 @@ const BetalingsForm = (props) => {
 
 var details = {
   'amount': state.sGStoelen.length * 25,
-  'reference': JSON.stringify(betalingNr),
+  'reference': betalingNr,
   'url': 'http://api.localhost/api/Betaling'
 };
 
@@ -81,7 +83,7 @@ formBody.push(encodedKey + "=" + encodedValue);
 }
 formBody = formBody.join("&");
 
-const handleOnSubmit = async (order) => {
+const handleOnSubmit = async (Order) => {
     await fetch('http://api.localhost/api/Order', {
       method: 'POST',
       headers: {
@@ -89,7 +91,7 @@ const handleOnSubmit = async (order) => {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       
-      }, body: JSON.stringify(order),
+      }, body: JSON.stringify(Order),
     })
 
     await fetch('https://fakepay.azurewebsites.net/', {
@@ -129,19 +131,7 @@ const handleOnSubmit = async (order) => {
           />
           <br></br>
         </Form.Group>
-        <Form.Group controlId="gAchternaam">
-          <Form.Label>Achternaam: </Form.Label>
-          <Form.Control
-            required={true}
-            className="veld"
-            type="text"
-            name="gANaam"
-            value={gANaam}
-            placeholder="Achternaam"
-            onChange={handleInputChange}
-          />
-          <br></br>
-        </Form.Group>
+  
         <Form.Group controlId="email">
           <Form.Label>Email: </Form.Label>
           <Form.Control
@@ -155,7 +145,7 @@ const handleOnSubmit = async (order) => {
           />
           <br></br>
         </Form.Group>
-        <Form.Label>Kaartjes: {mijnKaarten.slice(0, -1)}</Form.Label><br></br>
+        <Form.Label>Kaartjes: {mijnKaarten}</Form.Label><br></br>
         <Form.Label>Kosten: {state.sGStoelen.length * 25} </Form.Label>
         
         <br></br><br></br>

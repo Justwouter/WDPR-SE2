@@ -141,18 +141,12 @@ namespace backend.Controllers
                 return Problem("Entity set 'ProgrammaContext.Stoel'  is null.");
             }
 
-           
-            //int kaartje = Int32.Parse(kaart);
-
             var secondArray= await _context.Stoel.Where (h=> k.Contains(h.StoelId)).ToListAsync();
-            // var getStoel = await (from p in _context.Stoel 
-            //     where p.StoelId == kaartje select p).ToListAsync();
-
             secondArray.ForEach(x => x.Status = true);
 
             await _context.SaveChangesAsync();
            
-            return NoContent();
+            return NoContent(); 
            
         }
 

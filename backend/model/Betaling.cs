@@ -7,6 +7,8 @@ public class Betaling
     public string? account {get; set;}
     public Boolean succes {get; set;}
     public string? reference {get; set;}
+
+
  
     
   

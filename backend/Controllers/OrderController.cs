@@ -13,10 +13,12 @@ namespace backend.Controllers
     public class OrderController : ControllerBase
     {
         private readonly OrderContext _context;
+        private readonly ProgrammaContext programma_context;
 
-        public OrderController(OrderContext context)
+        public OrderController(OrderContext context, ProgrammaContext programmaContext)
         {
             _context = context;
+            programma_context = programmaContext;
         }
 
         // GET: api/Order
@@ -93,7 +95,7 @@ namespace backend.Controllers
         // POST: api/Order
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder( Order order)
+        public async Task<ActionResult<Order>> PostOrder( [FromBody] Order order)
         {
           if (_context.Order == null)
           {
@@ -105,16 +107,27 @@ namespace backend.Controllers
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
         
-        [HttpPost("/api/Betaling")]
+        [HttpPost("/api/Betaling/")]
         //[Consumes("application/x-www-form-urlencoded")]
         public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
         {
-          if (_context.Betaling == null)
-          {
-              return Problem("Entity set 'BetalingContext.Betaling'  is null.");
-          }
+            if (_context.Betaling == null)
+                {
+                    return Problem("Entity set 'BetalingContext.Betaling'  is null.");
+                }
+            
+            var getKaart = _context.Order.Where(w => w.BetalingNr == betaling.reference).Select(w => w.Kaart).Single();
+                                
+            int[] kaarten =  Array.ConvertAll(getKaart.Split(','), int.Parse);
+
+            if(betaling.succes == false){
+                    var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
+                    secondArray.ForEach(x => x.Status = false);
+                    await programma_context.SaveChangesAsync();
+                }
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
+            
 
             //return NoContent();
             return CreatedAtAction("GetBetaling", new { id = betaling.BetalingId }, betaling);
