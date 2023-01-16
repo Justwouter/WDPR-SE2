@@ -5,7 +5,7 @@ services:
     image: mcr.microsoft.com/dotnet/sdk:7.0
     container_name: backend
     command: >
-      bash -c "dotnet run"
+      bash -c "dotnet build && dotnet run"
     working_dir: /app
     # depends_on:
       # - database
