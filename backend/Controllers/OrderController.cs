@@ -111,6 +111,7 @@ namespace backend.Controllers
         //[Consumes("application/x-www-form-urlencoded")]
         public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
         {
+            string s = "Betaling is: ";
             if (_context.Betaling == null)
                 {
                     return Problem("Entity set 'BetalingContext.Betaling'  is null.");
@@ -124,11 +125,12 @@ namespace backend.Controllers
                     var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
                     secondArray.ForEach(x => x.Status = false);
                     await programma_context.SaveChangesAsync();
+                    s + "mislukt";
                 }
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
             
-
+            
             //return NoContent();
             return CreatedAtAction("GetBetaling", new { id = betaling.BetalingId }, betaling);
         }

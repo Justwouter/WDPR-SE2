@@ -56,7 +56,7 @@ const Item = styled(Paper)(({ theme }) => ({
     }else{
       setStoelen(p => p.filter(p => p !== stoel));
     }
-    console.log(stoel + " - " + i)
+    //console.log(stoel + " - " + i)
     //console.log(stoelen.filter(s => s.stoelId == stoel))
   };
 

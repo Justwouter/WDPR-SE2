@@ -8,7 +8,7 @@ const ProgrammaForm = (props) => {
         van: props.Programma ? props.Programma.van : '',
         tot: props.Programma ? props.Programma.tot : '',
         descriptie: props.Programma ? props.Programma.descriptie : '',
-        zaal: props.Programma ? props.Programma.zaal : '',
+        zaal: props.Programma ? props.Programma.zaal : '1',
         stoelenLijst: props.Programma ? props.Programma.stoelenLijst : ''
       };
     });

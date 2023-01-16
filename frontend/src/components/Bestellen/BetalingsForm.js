@@ -1,6 +1,7 @@
 import React, {useState, useEffect}from 'react';
 import { Button, Form } from 'react-bootstrap';
 import {useLocation} from 'react-router-dom';
+import ProgrammaLijst  from '../ProgrammaLijst';
 
 const BetalingsForm = (props) => {
 
@@ -111,7 +112,7 @@ const handleOnSubmit = async (Order) => {
     }
 
 
-    if(html === undefined){
+    if(html === undefined ){
     return(
       <div className='main-form'>
       <div className='vTitel'>Gegevens</div>
@@ -157,9 +158,13 @@ const handleOnSubmit = async (Order) => {
             {/* HET IS 8:00 AAAAAAAAAAAAAAAAAAAAAAAH */}
             
         </div>
-    )}else{
-        return (
-            <div dangerouslySetInnerHTML = {{__html: code}} />);
+    )}else if(state?.sID == null){
+        return (<ProgrammaLijst />);
+            
+    }else{
+      return(
+        <div dangerouslySetInnerHTML = {{__html: code}} />);
+      
     }
 }
 
