@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Home from "./Home";
 export default function Login() {
     const [gebruikersnaam, setGebruikersnaam] = new useState("");
     const [password, setPassword] = new useState("");
@@ -18,6 +19,7 @@ export default function Login() {
                 body: JSON.stringify(user)
             }).then((response) => response.json())
                 .then((data) => {
+                    document.cookie = "jwt="+data.token;
                     window.localStorage.setItem("jwt", data.token);
                     window.location.href = 'http://frontend.localhost/';
                 })

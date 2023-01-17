@@ -107,7 +107,7 @@ describe('Registration component', () => {
     //     fireEvent.input(passwordInput, { target: { value: 'password' } });
     //     fireEvent.click(submitButton);
     //
-    //     expect(navigate).toHaveBeenCalledWith('/Login');
+    //     expect(navigate).toHaveBeenCalledWith('/login');
     //
     // });
 });
