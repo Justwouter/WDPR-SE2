@@ -18,7 +18,7 @@ deploy() {
                 ReplaceInFile "$file" "$DevSedConditions"
             done
         done
-        #Add a seperate check for docker-compose, this is easier than excluding all script files in the root dir.
+        #Add a separate check for docker-compose, this is easier than excluding all script files in the root dir.
         cd "$startLocation" || exit
         ReplaceInFile docker-compose.yml "$DevSedConditions"
     else
