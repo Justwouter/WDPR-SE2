@@ -30,7 +30,7 @@ namespace backend.Controllers
             _roleManager = roleManager;
             _context = context;
         }
-        
+
         // GET: api/User
         [HttpGet, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IEnumerable<IdentityUser>>> GetUser()
@@ -55,11 +55,31 @@ namespace backend.Controllers
             var result = await _userManager.IsInRoleAsync(user, roleName);
             if (result)
             {
-                return Ok("The user does have " + roleName + " as a role.");
+                return Ok("The user has " + roleName + " as a role.");
             }
             else
             {
-                return Ok("The user does NOT have " + roleName + " as a role.");
+                return NoContent();
+            }
+        }
+
+        [HttpGet("checkNameForRole")]
+        public async Task<IActionResult> CheckRoleByName(string userName, string roleName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.IsInRoleAsync(user, roleName);
+            if (result)
+            {
+                return Ok("The user has " + roleName + " as a role.");
+            }
+            else
+            {
+                return NoContent();
             }
         }
 
@@ -116,12 +136,12 @@ namespace backend.Controllers
             // return CreatedAtAction("GetUser", new { id = user.Id }, user);
             return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
         }
-        
+
         [NonAction]
         public async Task<IdentityResult> CreateUserAsync(string email, string password)
         {
             var user = new IdentityUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);    
+            var result = await _userManager.CreateAsync(user, password);
             return result;
         }
 
@@ -144,12 +164,6 @@ namespace backend.Controllers
 
             return NoContent();
         }
-
-        // private bool UserExists(int id)
-        // {
-        //     return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
-        // }
-
 
     }
 }
