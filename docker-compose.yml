@@ -55,7 +55,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.test-app.rule=Host(`test.frontend.localhost`)"
+      - "traefik.http.routers.test-app.rule=Host(`test.localhost`)"
 
 
   traefik: #Reverse proxy, please don't touch
