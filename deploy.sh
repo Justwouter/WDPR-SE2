@@ -41,8 +41,8 @@ deploy() {
 startLocation=$(pwd)
 folderlocations=("$startLocation/frontend/src/" "$startLocation/backend/")
 CR=$(printf '\r')
-DevSedConditions=('s/api.theaterlaak.site/api.localhost/g' 's/theaterlaak.site/frontend.localhost/g' 's/test.theaterlaak.site/test.localhost/g')
-ProdSedConditions=('s/api.localhost/api.theaterlaak.site/g' 's/frontend.localhost/theaterlaak.site/g' 's/test.localhost/test.theaterlaak.site/g')
+DevSedConditions=('s/api.theaterlaak.site/api.localhost/g' 's/test.theaterlaak.site/test.localhost/g' 's/theaterlaak.site/frontend.localhost/g' )
+ProdSedConditions=('s/api.localhost/api.theaterlaak.site/g' 's/test.localhost/test.theaterlaak.site/g' 's/frontend.localhost/theaterlaak.site/g' )
 lineEnding="$ ! s/\$/$CR/" #Inserts a carriage return after every line ending except the last otherwise newlines will be appended to a file everytime this condition is used.
 
 deploy "$@"
