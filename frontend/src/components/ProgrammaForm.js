@@ -53,7 +53,6 @@ const ProgrammaForm = (props) => {
                   {"eersteR": 40, "tweedeR": 200,  "derdeR" : 200}];
 
     function maakStoelenLijst(zaal){
-      console.log(zaal)
       var eersteR = zalen[zaal-1]['eersteR']
       var tweedeR = zalen[zaal-1]['tweedeR']
       var derdeR = zalen[zaal-1]['derdeR']
