@@ -3,7 +3,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <NoWarn>NETSDK1004;</NoWarn>
+    <!-- The NETSDK1044 error shows up when building this project in docker becouse it is missing XML config files for every dependency. We have no use for these errors as all our dependencies are already compiled and present when building in docker -->
+    <NoWarn>NETSDK1004;</NoWarn> 
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
