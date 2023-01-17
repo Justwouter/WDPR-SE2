@@ -10,6 +10,7 @@ import { Button } from 'react-bootstrap';
 import ProgrammaLijst from './ProgrammaLijst';
 
 
+
 const Item = styled(Paper)(({ theme }) => ({
   //backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -56,8 +57,6 @@ const Item = styled(Paper)(({ theme }) => ({
     }else{
       setStoelen(p => p.filter(p => p !== stoel));
     }
-    //console.log(stoel + " - " + i)
-    //console.log(stoelen.filter(s => s.stoelId == stoel))
   };
 
   const MaakRangGrid = (rang) => {
@@ -107,7 +106,7 @@ const Item = styled(Paper)(({ theme }) => ({
         <div className='stoel'>
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
             {gekozenStoelen.length !== 0 && 
-            <div><Link to= {'/BetalingsForm'} 
+            <div><Link to= {"/BetalingsForm"} 
             state= {{ sID: state.sID,
               sGStoelen: gekozenStoelen}}
             

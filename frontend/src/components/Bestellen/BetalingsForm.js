@@ -1,19 +1,27 @@
+
 import React, {useState, useEffect}from 'react';
 import { Button, Form } from 'react-bootstrap';
-import {useLocation} from 'react-router-dom';
-import ProgrammaLijst  from '../ProgrammaLijst';
+import { useLocation} from 'react-router-dom';
+import ProgrammaLijst from '../ProgrammaLijst';
+
 
 const BetalingsForm = (props) => {
 
     const { state } = useLocation(); 
+
+
     //TEST
     const mijnKaarten = state.sGStoelen.reduce((result , item) => {
-      return `${result}${item},`
-    }, "").slice(0,-1)
-
+        return `${result}${item},`
+      }, "");
+  
     const mijnKaartenUrl = state.sGStoelen.reduce((result, item) => {
-      return `${result}k=${item}&`
-    }, "")
+        return `${result}k=${item}&`
+      }, "")
+    
+
+ 
+   
 
     //console.log(state);
     const [Order, setGast] = useState(() => {
@@ -21,7 +29,7 @@ const BetalingsForm = (props) => {
         naam: props.Order ? props.Order.naam : '',
         email: props.Order ? props.Order.email : '',
         betalingNr: props.Order ? props.Order.betalingNr : JSON.stringify(Date.now()),
-        kaart: props.Order ? props.Order.kaart : mijnKaarten
+        kaart: props.Order ? props.Order.kaart : mijnKaarten.slice(0,-1)
    
       };
     });
@@ -30,12 +38,12 @@ const BetalingsForm = (props) => {
     
     const handleSubmit = (event) => {
       event.preventDefault();
+     
       const Order = {
         naam,
         email,
         betalingNr,
-        kaart: mijnKaarten
-    
+        kaart: mijnKaarten.slice(0,-1)
       };
       handleOnSubmit(Order);
     };
@@ -49,42 +57,43 @@ const BetalingsForm = (props) => {
       }));
     }
 
-    
-
     useEffect(() => {
-      
+     
       async function updatePost() {
           const requestOptions = {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ title: 'Kaartjes verstuurd' })
           };
-          await fetch('http://api.localhost/api/Programma/Stoel/Update?'+ mijnKaartenUrl.slice(0, -1), requestOptions);
-       
-          
+          await fetch('http://api.localhost/api/Programma/Stoel/Update?'+ mijnKaartenUrl.slice(0,-1), requestOptions);
       }
-  
       updatePost();
   }, [mijnKaartenUrl]);
 
-var details = {
-  'amount': state.sGStoelen.length * 25,
-  'reference': betalingNr,
-  'url': 'http://api.localhost/api/Betaling'
-};
 
+  var details = {
+    'amount': state.sGStoelen.length * 25,
+    'reference': betalingNr,
+    'url': 'http://api.localhost/api/Betaling'
+  };
+  
+  
+  
+  var formBody = [];
+  for (var property in details) {
+  var encodedKey = encodeURIComponent(property);
+  var encodedValue = encodeURIComponent(details[property]);
+  formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&");
+  
+  
 const [ html, setHTML ] = useState();
 let code = `${html}`;
 
-var formBody = [];
-for (var property in details) {
-var encodedKey = encodeURIComponent(property);
-var encodedValue = encodeURIComponent(details[property]);
-formBody.push(encodedKey + "=" + encodedValue);
-}
-formBody = formBody.join("&");
-
 const handleOnSubmit = async (Order) => {
+    
+
     await fetch('http://api.localhost/api/Order', {
       method: 'POST',
       headers: {
@@ -112,7 +121,7 @@ const handleOnSubmit = async (Order) => {
     }
 
 
-    if(html === undefined ){
+    if(html === undefined && state?.sGStoelen != null){
     return(
       <div className='main-form'>
       <div className='vTitel'>Gegevens</div>
@@ -158,15 +167,16 @@ const handleOnSubmit = async (Order) => {
             {/* HET IS 8:00 AAAAAAAAAAAAAAAAAAAAAAAH */}
             
         </div>
-    )}else if(state?.sID == null){
-        return (<ProgrammaLijst />);
-            
+    )}else if(state?.sGStoelen == null){
+        return(<ProgrammaLijst/>)
+    
+      
+  
     }else{
       return(
         <div dangerouslySetInnerHTML = {{__html: code}} />);
       
     }
 }
-
 
 export default   BetalingsForm;

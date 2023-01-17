@@ -80,10 +80,6 @@ const Programma = ({
                             sEindUur: getUur(tot)}}
               
                 >Bestel</Link>
-                {/* <div onClick={() => <StoelReserveren dProgramma ={Programma}/>}>
-                  Bestel
-                </div> */}
-              
                 </StyledTableCell></tr>
           </TableBody>
         </Table>

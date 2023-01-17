@@ -82,7 +82,6 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
-//app.use(bodyParser.urlencoded( extended: false ));
 
 app.UseAuthorization();
 

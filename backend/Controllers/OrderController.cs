@@ -106,12 +106,20 @@ namespace backend.Controllers
 
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
+
+        protected string BetalingHTML(string reference, string succes, string stoelen)
+{
+        var html = System.IO.File.ReadAllText(@"./Succesvol.html");
+        html = html.Replace("{{reference}}", reference).Replace("{{succes}}", succes).Replace("{{kaartjes}}",stoelen);
+
+        return html;
+}
         
         [HttpPost("/api/Betaling/")]
-        //[Consumes("application/x-www-form-urlencoded")]
         public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
         {
-            string s = "Betaling is: ";
+            string s = "Succesvol";
+            string k = " ";
             if (_context.Betaling == null)
                 {
                     return Problem("Entity set 'BetalingContext.Betaling'  is null.");
@@ -125,14 +133,17 @@ namespace backend.Controllers
                     var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
                     secondArray.ForEach(x => x.Status = false);
                     await programma_context.SaveChangesAsync();
-                    s + "mislukt";
+                    s = "Mislukt";
+                    k = "Stoelen zijn vrij gezet";
                 }
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
-            
-            
-            //return NoContent();
-            return CreatedAtAction("GetBetaling", new { id = betaling.BetalingId }, betaling);
+
+            var html = BetalingHTML(betaling.reference, s,k);
+
+            return Redirect("http://frontend.localhost/");
+     
+        
         }
 
         // DELETE: api/Order/5
