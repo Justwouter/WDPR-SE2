@@ -19,7 +19,7 @@ const routeChange = () =>{
                     
                     <div className='logo' onClick={routeChange}></div>
                     <div className='laak' ><HeadItem text="LAAK"  /></div>
-                    <div className='lijn'><HeadItem text="_________________"/></div>
+                    <div className='lijn'><HeadItem text="____________________"/></div>
                     <div className='theater'><HeadItem  text="THEATER" /></div>
                     
                     

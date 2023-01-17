@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
 const ProgrammaForm = (props) => {
-    const [ StoelenLijst, setStoelenLijst ] = useState([]);
     const [Programma, setProgramma] = useState(() => {
       return {
-        // programmaId: props.Programma ? props.Programma.programmaId : '',
         titel: props.Programma ? props.Programma.titel : '',
         van: props.Programma ? props.Programma.van : '',
         tot: props.Programma ? props.Programma.tot : '',
         descriptie: props.Programma ? props.Programma.descriptie : '',
-        zaal: props.Programma ? props.Programma.zaal : '',
+        zaal: props.Programma ? props.Programma.zaal : '1',
         stoelenLijst: props.Programma ? props.Programma.stoelenLijst : ''
-        //LEDENLIJST + ZAAL later
       };
     });
   
-    const {  titel, van, tot, descriptie, zaal,stoelenLijst } = Programma;
+    const {  titel, van, tot, descriptie, zaal } = Programma;
     
     const handleOnSubmit = (event) => {
       event.preventDefault();
@@ -26,9 +23,10 @@ const ProgrammaForm = (props) => {
         tot,
         descriptie,
         zaal,
-        stoelenLijst
+        stoelenLijst: maakStoelenLijst(zaal)
       };
       props.handleOnSubmit(Programma);
+      
     };
   
     const handleInputChange = (event) => {
@@ -39,32 +37,25 @@ const ProgrammaForm = (props) => {
         
       }));
     }
-    const handleInputChangeZ = (event) => {
-      const {name, value } = event.target;
+    const handleSelect= (event) => {
+      const { value } = event.target;
       setProgramma((prevState) => ({
         ...prevState,
-        [name]:value,
-        stoelenLijst: maakStoelenLijst(value)
-        
+        zaal: value,
         
       }));
     }
+   
 
-    useEffect(() => {
-      async function fetchData(){
-          const response = await fetch('http://api.localhost:/Zaal');
-          const data = await response.json();
-          setStoelenLijst(data);
-        
-      }
-      fetchData()
-    }, []);
+    const zalen =[{"eersteR": 20, "tweedeR": 100,  "derdeR" : 120},
+                  {"eersteR": 20, "tweedeR": 160,  "derdeR" : 0},
+                  {"eersteR": 10, "tweedeR": 80,  "derdeR" : 0},
+                  {"eersteR": 40, "tweedeR": 200,  "derdeR" : 200}];
 
     function maakStoelenLijst(zaal){
-      
-      var eersteR = StoelenLijst[zaal-1]['eersteR']
-      var tweedeR = StoelenLijst[zaal-1]['tweedeR']
-      var derdeR = StoelenLijst[zaal-1]['derdeR']
+      var eersteR = zalen[zaal-1]['eersteR']
+      var tweedeR = zalen[zaal-1]['tweedeR']
+      var derdeR = zalen[zaal-1]['derdeR']
   
   
       let sLijst = []
@@ -100,17 +91,21 @@ const ProgrammaForm = (props) => {
     }
 return (
     <div className="main-form">
-      <div className='vTitel'>Programma toevoegen</div>
+      <div className='vTitel'><div >Programma toevoegen</div></div>
+      
+      <div className='fBox'>
       <Form onSubmit={handleOnSubmit}>
         <Form.Group controlId="titel">
           <Form.Label>Titel: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className='veld'
             type="text"
             name="titel"
             value={titel}
-            placeholder="Titel: "
+            placeholder={"Titel"}
             onChange={handleInputChange}
+        
           
           />
           <br></br>
@@ -118,7 +113,8 @@ return (
         <Form.Group controlId="van">
           <Form.Label>Begintijd: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className='veld'
             type="datetime-local"
             name="van"
             value={van}
@@ -130,7 +126,8 @@ return (
         <Form.Group controlId="tot">
           <Form.Label>Eindtijd: </Form.Label>
           <Form.Control
-            className="input-control"
+            required={true}
+            className='veld'
             type="datetime-local"
             name="tot"
             value={tot}
@@ -142,35 +139,35 @@ return (
         <Form.Group controlId="descriptie">
           <Form.Label>Descriptie: </Form.Label>
           <Form.Control
-            className="input-control"
+            className='veld'
+            as="textarea" rows={3}
+            required={true}
             type="text"
             name="descriptie"
             value={descriptie}
-            placeholder="descriptie: "
+            placeholder="Descriptie: "
             onChange={handleInputChange}
           />
           <br></br>
         </Form.Group>
         <Form.Group controlId="stoelenlijst">
-          <Form.Label>Zaal: </Form.Label>
-          <Form.Control
-            className="input-control"
-            type="number"
-            min="1"
-            max="4"
-            name="zaal"
-            value={zaal}
-            placeholder="Kies zaal 1 t/m 4: "
-            
-            onChange={handleInputChangeZ}
-          />
-          <br></br>
+          <Form.Label>Zaal: </Form.Label><br></br>
+          <Form.Select className='veld' required={true} onChange={handleSelect} aria-label="Kies zaal">
+            <option value={1}>Zaal 1</option>
+            <option value={2}>Zaal 2</option>
+            <option value={3}>Zaal 3</option>
+            <option value={4}>Zaal 4</option>
+
+          </Form.Select>
+          <br></br><br></br><br></br>
         </Form.Group>
-        <Button variant="primary" type="submit" className="submit-btn" >
-          Programma toevoegen
+        <div className='fButton'><div>
+        <Button variant="primary" type="submit"  >
+          Toevoegen
           
-        </Button>
+        </Button></div></div>
       </Form>
+      </div>
     </div>
   );
 

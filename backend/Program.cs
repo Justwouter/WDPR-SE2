@@ -1,11 +1,12 @@
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
 
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -15,8 +16,8 @@ builder.Services.AddDbContext<ProgrammaContext>(options =>
 builder.Services.AddDbContext<TheaterContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TheaterContext")));
 
-builder.Services.AddDbContext<ZaalContext>(options =>
-  options.UseSqlite(builder.Configuration.GetConnectionString("ZaalContext")));
+builder.Services.AddDbContext<OrderContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("OrderContext")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
@@ -76,6 +77,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// app.UseHttpsRedirection();
 //app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 

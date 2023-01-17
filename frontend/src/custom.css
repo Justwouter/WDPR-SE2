@@ -5,6 +5,8 @@
   --adoRedCrayola: #FD024F;
 }
 
+/* >Fold All */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,900&display=swap');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
@@ -22,12 +24,46 @@ body {
   font-style: normal;
   color: #FD024F;
   font-size: 5rem;
+ 
 }
+.table1{
+  background-color: var(--adoXiketic);
+  max-width: 25px;
+  
+}
+.table1 ul{
+  font-family: 'Poppins', sans-serif;
+  font-style: 600;
 
-.style3 {
-  font-family: 'Arimo';
-  font-style: normal;
+}
+.table2{
+  background-color: var(--adoXiketic);
+
+  max-width: 25px;
+}
+.table2 ul{
+  font-family: 'Poppins', sans-serif;
+  font-style: 600;
+  font-size: 1.5rem;
+}
+.table3{
+  background-color: var(--adoXiketic);
+
+  max-width: 200px;
+}
+.table3 ul{
+  font-family: 'Poppins', sans-serif;
+  font-style:400;
+  font-size: 1rem;
+}
+.table3 .style3 {
+  font-family: 'Poppins', sans-serif;
+  font-style:700;
   font-size: 2rem;
+}
+.table4{
+  max-width: 25px;
+  background-color: var(--adoXiketic);
 }
 
 .style4 {
@@ -40,18 +76,91 @@ body {
 .Card {
   background-color: #1B1725;
 }
-
-code {
-  color: #E01A76;
+.bestelKnop {
+  color: #ffffff;
+  padding: 20px;
+  background-color: var(--adoRedCrayola);
+  max-width: 100px;
+  border-style: none;
+  font-family: 'Poppins', sans-serif;
+  font-style: 500;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  transition: transform 0.5s;
 }
+.bestelKnop:hover{
+  color: var(--adoXiketic);
+  background-color: var(--adoRedCrayola);
+  transform: scale3d(1.2, 1.20, 1);
+}
+
 
 /* ProgrammaForm */
-.main-form {
-  font-family: 'Roboto';
-  font-style: bold;
-  font-size: 1.5rem;
-  color: white;
+.vTitel{
+  font-family: 'Poppins', sans-serif;
+  font-style: 900;
+  font-size: 2.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+.fButton{
+  display: flex;
+  justify-content: center;
+ 
+}
+.fButton button{
+  background-color: var(--adoRedCrayola) ;
+  border-style: none;
+  font-family: 'Poppins', sans-serif;
+  font-style: 500;
+  font-size: 2rem;
+  border-radius: 15px;
+  transition: transform 0.5s;
+}
+.fButton button:hover{
+  background-color: var(--adoRedCrayola);
+  transform: scale3d(1.2, 1.20, 1);
+}
+
+.fBox {
+  font-family: 'Poppins', sans-serif;
+  font-style: 500;
+  font-size: 1.5rem;
+  color: var(--adoXiketic);
+  width: 100%;
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  display: inline-block;
+  background-color: var(--adoGoldCrayola);
+  justify-content: center;
+
+  border-radius: 25px;
+  
+}
+
+.fBox .veld {
+  padding-left: 15px;
+  padding-right: 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: #ffffff91;
+  transition: 0.2s background-color ease-in-out, 0.2s box-shadow ease-in-out;
+}
+
+.veld:hover {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 8px 30px 0px rgba(0, 0, 0, 0.05);
+}
+
+.main-form{
+  width: 100%;
+  padding-left: 400px;
+  padding-right: 400px;
+}
+
 
 body {
   background-color: #1B1725;
@@ -112,14 +221,10 @@ body {
   animation: fadeInAnimation 0.5s ease forwards;
 }
 
-.kCodes:hover {
-
-  transform: scale3d(1.1, 1.1, 1);
-}
-
 .inhoud {
   margin-top: -35px;
   margin-left: 10px;
+
 }
 
 .stoel {
@@ -165,6 +270,7 @@ body {
 }
 
 .kaart button {
+  border-style: none;
   display: inline-block;
   position: absolute;
   margin-left: 400px;
@@ -180,6 +286,7 @@ body {
 }
 
 .kaart button:hover {
+  background-color: #1B1725;
   cursor: pointer;
   transform: scale3d(1.10, 1.10, 1);
 }
@@ -212,7 +319,7 @@ body {
 }
 
 .info {
-  max-width: 80%;
+  max-width: 100%;
   text-align: left;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
@@ -424,12 +531,22 @@ body {
   padding: 0 10px;
 }
 
-.footer-basic ul a {
+/* .footer-basic ul a {
   color: inherit;
   text-decoration: none;
   opacity: 0.8;
-}
+} */
 
 .footer-basic ul a:hover {
   opacity: 1;
+}
+
+/* LOGIN FORM */
+.login{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--adoRedCrayola);
 }

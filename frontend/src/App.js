@@ -2,6 +2,7 @@ import React from 'react';
 import ProgrammaToevoegen from './components/ProgrammaToevoegen';
 import ProgrammaLijst from './components/ProgrammaLijst';
 import StoelReserveren from './components/StoelReserveren';
+
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { Route } from 'react-router';
 import './custom.css';
@@ -11,6 +12,8 @@ import Programma from './components/Programma';
 import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
 import Registration from "./components/Registration";
+import BetalingsForm from './components/Bestellen/BetalingsForm';
+
 
 const App = () => {
   return (
@@ -23,6 +26,8 @@ const App = () => {
             <Route element={<Login />} path="/Login" />
             <Route element={<Registration />} path="/Registration" />
             <Route element={<Programma />} path="/Programma" />
+            <Route element={<BetalingsForm />} path="/BetalingsForm"/>
+           {/* //<Route element={<SuccesvolB />} path="/SuccesvolB"/> */}
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
