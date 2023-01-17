@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #Yes the urls could also be changed by the prod/dev compose files but where is the fun in that?
 ReplaceInFile() {
-    for condition in $2; do
+    rules=("${@:2}")
+    for condition in "${rules[@]}"; do
         sed -i "$condition" "$1"
     done
     sed -i "$lineEnding" "$1"
@@ -15,24 +16,24 @@ deploy() {
             cd "$folder" || exit
             files=$(find . -name '*.js' -o -name '*.cs')
             for file in $files; do
-                ReplaceInFile "$file" "$DevSedConditions"
+                ReplaceInFile "$file" "${DevSedConditions[@]}"
             done
         done
         #Add a separate check for docker-compose, this is easier than excluding all script files in the root dir.
         cd "$startLocation" || exit
-        ReplaceInFile docker-compose.yml "$DevSedConditions"
+        ReplaceInFile docker-compose.yml "${DevSedConditions[@]}"
     else
         #Check if a file contains a specific url & change it to its production value
         for folder in "${folderlocations[@]}"; do
             cd "$folder" || exit
             files=$(find . -name '*.js' -o -name '*.cs')
             for file in $files; do
-                ReplaceInFile "$file" "$ProdSedConditions"
+                ReplaceInFile "$file" "${ProdSedConditions[@]}"
             done
         done
         #Add a seperate check for docker-compose, this is easier than excluding all script files in the root dir.
         cd "$startLocation" || exit
-        ReplaceInFile docker-compose.yml "$ProdSedConditions"
+        ReplaceInFile docker-compose.yml "${ProdSedConditions[@]}"
     fi
 }
 
