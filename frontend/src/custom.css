@@ -110,7 +110,7 @@ body {
  
 }
 .fButton button{
-  background-color: var(--adoRedCrayola) ;
+  background-color: var(--adoXiketic) ;
   border-style: none;
   font-family: 'Poppins', sans-serif;
   font-style: 500;
@@ -123,25 +123,31 @@ body {
   transform: scale3d(1.2, 1.20, 1);
 }
 
+.BG_Box{
+  background-color: var(--adoGoldCrayola);
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  width: 1250px;
+}
+
 .fBox {
   font-family: 'Poppins', sans-serif;
   font-style: 500;
   font-size: 1.5rem;
   color: var(--adoXiketic);
   width: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
   padding-top: 5%;
   padding-bottom: 5%;
   display: inline-block;
-  background-color: var(--adoGoldCrayola);
   justify-content: center;
-
-  border-radius: 25px;
   
 }
 
 .fBox .veld {
+  width: 100%;
   padding-left: 15px;
   padding-right: 20px;
   border: none;
@@ -154,11 +160,17 @@ body {
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 8px 30px 0px rgba(0, 0, 0, 0.05);
 }
+.veld:focus {
+  outline: none;
+  background-color: rgb(255, 255, 255);
+}
 
 .main-form{
   width: 100%;
-  padding-left: 400px;
-  padding-right: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 
@@ -381,6 +393,36 @@ body {
   }
 }
 
+@keyframes shakeAnimation {
+  0% {
+    opacity: 0;
+    margin-left: -75px;
+    margin-right: 75px;
+  }
+
+  25% {
+    opacity: 0.5;
+    margin-left: 50px;
+    margin-right: -50px;
+  }
+
+  50% {
+    opacity: 1;
+    margin-left: -25px;
+    margin-right: 25px;
+  }
+
+  75% {
+    margin-left: 20px;
+    margin-right: -20px;
+  }
+
+  100% {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
 @keyframes pulse-effect {
   0% {
     transform: scale(0.95);
@@ -513,8 +555,6 @@ body {
   width: 100%;
 
   padding: 40px 0;
-  /* background-color: #ffffff;
-  color: #4b4c4d; */
   color: whitesmoke;
 }
 
@@ -531,22 +571,92 @@ body {
   padding: 0 10px;
 }
 
-/* .footer-basic ul a {
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.8;
-} */
 
 .footer-basic ul a:hover {
   opacity: 1;
 }
 
 /* LOGIN FORM */
-.login{
+.BG{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: var(--adoRedCrayola);
+  
+}
+
+.Content{
+  width: 550px;
+  background-color: var(--adoMediumPurple);
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 15px;
+}
+
+.Switch{
+  padding-top: 3%;
+  padding-bottom: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+}
+
+.HuidigeKnop{
+  text-align: center;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.95rem;
+  background-color: var(--adoXiketic);
+  
+}
+
+.RegistreerSwitch{
+  color: #ffffff;
+  text-align: center;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.541);
+  font-weight: 600;
+  font-size: 1.95rem;
+ 
+}
+.RegistreerSwitch:hover{
+  color: var(--adoXiketic);
+  background-color: white;
+}
+
+.BG button{
+  color: #ffffff;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+.BG button:focus{
+  outline: none;
+}
+
+.LoginSwitch{
+  color: #ffffff;
+  text-align: center;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.541);
+  font-weight: 600;
+  font-size: 1.95rem;
+}
+.LoginSwitch:hover{
+  color: var(--adoXiketic);
+  background-color: white;
+}
+
+.eBG{
+  background-color: #FD024F;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: 1rem !important;
+  animation: shakeAnimation 0.2s ease forwards;
 }

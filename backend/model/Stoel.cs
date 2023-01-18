@@ -8,7 +8,7 @@ public class Stoel
     public int Nr {get; set;}
 
 
-    public string Rang {get; set;}
+    public string Rang {get; set;} = null!;
     public Boolean Status {get; set;} // Bezet of niet
 
     public int ProgrammaId {get; set;}

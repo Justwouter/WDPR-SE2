@@ -27,7 +27,6 @@ const routeChange = () =>{
                         <HeadItem link="/programmalijst" text="Programma" />
                         <HeadItem link="/programmatoevoegen" text="Toevoegen" />
                         <HeadItem link="/Login" text="Login" />
-                        <HeadItem link="/Registration" text="Registreer" />
                     </div>
                     
                 </ul>

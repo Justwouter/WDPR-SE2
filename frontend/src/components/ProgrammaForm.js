@@ -92,7 +92,7 @@ const ProgrammaForm = (props) => {
 return (
     <div className="main-form">
       <div className='vTitel'><div >Programma toevoegen</div></div>
-      
+      <div className='BG_Box'>
       <div className='fBox'>
       <Form onSubmit={handleOnSubmit}>
         <Form.Group controlId="titel">
@@ -167,6 +167,7 @@ return (
           
         </Button></div></div>
       </Form>
+      </div>
       </div>
     </div>
   );
