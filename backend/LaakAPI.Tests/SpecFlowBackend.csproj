@@ -46,7 +46,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\backend\backend.csproj" />
+      <ProjectReference Include="..\LaakAPI\backend.csproj" />
     </ItemGroup>
 
 </Project>
