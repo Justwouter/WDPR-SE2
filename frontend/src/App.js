@@ -12,7 +12,7 @@ import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
 import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
-import AdminPanel from './components/AdminPanel';
+import AdminPanel from './components/AdminPanel/AdminPanel';
 
 
 const App = () => {

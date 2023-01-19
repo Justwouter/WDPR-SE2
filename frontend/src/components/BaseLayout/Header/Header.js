@@ -81,7 +81,7 @@ function Header() {
             {AdminComponents && (
               <div>
                 <HeadItem link='/AdminPanel' text='Admin Panel' />
-                <HeadItem link='/programmatoevoegen' text='Toevoegen' />
+                {/* <HeadItem link='/programmatoevoegen' text='Toevoegen' /> */}
               </div>
             )}
           </div>
