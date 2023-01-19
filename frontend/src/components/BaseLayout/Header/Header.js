@@ -6,9 +6,8 @@ function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
   useEffect(() => {
-    async function fetchData () {
+    async function fetchData() {
       const jwtToken = localStorage.getItem('jwt').replace('"', '')
-      console.log(jwtToken)
       fetch('http://api.localhost/api/Role/CheckElevation', {
         method: 'GET',
         headers: {
@@ -51,6 +50,7 @@ function Header() {
       setAdminComponents(false)
     }
   }, [])
+
 
   let navigate = useNavigate()
   const routeChange = () => {

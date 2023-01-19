@@ -27,6 +27,8 @@ const AdminPanel = props => {
     }
     fetchData()
   }, [])
+
+  
   if (RequestFinished) {
     if (ShowAdminComponents) {
       return (
@@ -39,7 +41,7 @@ const AdminPanel = props => {
     }
   }
   else{
-    return <h1>Please wait</h1>
+    return
   }
 }
 
