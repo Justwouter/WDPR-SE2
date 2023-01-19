@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router'
+import ProgrammaToevoegen from './Programma/ProgrammaToevoegen'
 
 const AdminPanel = props => {
   const [RequestFinished, RequestisFinished] = useState(false)
@@ -34,6 +35,7 @@ const AdminPanel = props => {
       return (
         <div>
           <h1>Welcome Mr.Admin</h1>
+          <ProgrammaToevoegen/>
         </div>
       )
     } else {

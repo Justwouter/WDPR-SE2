@@ -1,5 +1,4 @@
 import React from 'react';
-import ProgrammaToevoegen from './components/Programma/ProgrammaToevoegen';
 import ProgrammaLijst from './components/Programma/ProgrammaLijst';
 import StoelReserveren from './components/StoelReserveren';
 
@@ -29,7 +28,6 @@ const App = () => {
             <Route element={<Programma />} path="/Programma" />
             <Route element={<BetalingsForm />} path="/BetalingsForm"/>
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
-            <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
             <Route element={<AdminPanel/>} path="/AdminPanel"/>
             <Route element={<Navigate to="/" />} path="*" />

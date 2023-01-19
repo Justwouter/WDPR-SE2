@@ -45,6 +45,7 @@ function Header() {
     const jwtToken = parseJwt(localStorage.getItem('jwt'))
     if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
       setAdminComponents(true)
+      console.log("User is Autorized")
     }
     else {
       setAdminComponents(false)
