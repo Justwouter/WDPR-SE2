@@ -14,7 +14,6 @@ public class TheaterContext : IdentityDbContext
     public DbSet<Performance> Optredens { get; set; } = default!;
     public DbSet<User> Gebruikers { get; set; } = default!;
 
-    private readonly UserManager<IdentityUser> _userManager;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -33,7 +32,7 @@ public class TheaterContext : IdentityDbContext
     public void seedDatabaseUsers(ModelBuilder builder)
     {
         //Default very secure admin account
-        User defaultAdmin = new User() { Id = "0", UserName = "Admin", Type = "Admin", Password = "Admin1!", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" };
+        User defaultAdmin = new User() { Id = "1", UserName = "Admin", Type = "Medewerker", Password = "Admin1!", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" };
         PasswordHasher<User> ph = new PasswordHasher<User>();
         defaultAdmin.PasswordHash = ph.HashPassword(defaultAdmin, "Admin1!");
 
@@ -43,7 +42,7 @@ public class TheaterContext : IdentityDbContext
         builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
         {
             RoleId = "1",
-            UserId = "0"
+            UserId = "1"
         });
 
     }

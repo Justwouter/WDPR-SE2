@@ -33,7 +33,7 @@ namespace backend.Controllers
         }
 
          // GET: api/Betaling
-        [HttpGet("/Betaling")]
+        [HttpGet("/api/Betaling")]
         public async Task<ActionResult<IEnumerable<Betaling>>> GetBetaling()
         {
           if (_context.Betaling == null)
