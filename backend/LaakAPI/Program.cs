@@ -66,6 +66,9 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+//Supplies the actual AccountService to the AccountController
+builder.Services.AddTransient<IAccountService, AccountService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

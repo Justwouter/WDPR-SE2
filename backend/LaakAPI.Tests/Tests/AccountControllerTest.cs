@@ -1,6 +1,5 @@
 using backend.Controllers;
 using backend.model;
-using backend.Service;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NuGet.Protocol;

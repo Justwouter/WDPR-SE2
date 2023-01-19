@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace backend.Service;
-
 public class AccountService : IAccountService
 {
     private readonly UserManager<IdentityUser> _userManager;
