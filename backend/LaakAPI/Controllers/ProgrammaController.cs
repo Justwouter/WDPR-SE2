@@ -13,13 +13,13 @@ namespace backend.Controllers
     public class ProgrammaController : ControllerBase
     {
         private readonly ProgrammaContext _context;
-        private readonly ZaalContext _contextZaal;
+        
         
 
-        public ProgrammaController(ProgrammaContext context, ZaalContext zaalContext)
+        public ProgrammaController(ProgrammaContext context)
         {
             _context = context;
-            _contextZaal = zaalContext;
+        
         }
 
         // GET: api/Programma
@@ -31,6 +31,16 @@ namespace backend.Controllers
               return NotFound();
           }
             return await _context.Programma.ToListAsync();
+        }
+
+        [HttpGet("/StoelenLijst")]
+        public async Task<ActionResult<IEnumerable<Stoel>>> GetStoelenLijst()
+        {
+          if (_context.Stoel == null)
+          {
+              return NotFound();
+          }
+            return await _context.Stoel.ToListAsync();
         }
 
         [HttpGet("{id}/StoelenLijst")]
@@ -121,6 +131,25 @@ namespace backend.Controllers
 
             return NoContent();
         }
+
+        //Handle multiple stoelid
+        [HttpPut("Stoel/Update/")]
+        public async Task<IActionResult> PutStoelen([FromQuery] int[] k)
+        {
+            if (_context.Stoel == null)
+            {
+                return Problem("Entity set 'ProgrammaContext.Stoel'  is null.");
+            }
+
+            var secondArray= await _context.Stoel.Where (h=> k.Contains(h.StoelId)).ToListAsync();
+            secondArray.ForEach(x => x.Status = true);
+
+            await _context.SaveChangesAsync();
+           
+            return NoContent(); 
+           
+        }
+
 
 
         // POST: api/Programma
