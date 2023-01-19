@@ -6,7 +6,7 @@ searchfiles() {
 }
 
 migrateAll() {
-
+    cd "$searchLocation" || exit
     for file in $(searchfiles "data" "*Context.cs"); do
         db_context=$(basename "${file%.*}")
         if [ $# -eq 0 ]; then
@@ -28,7 +28,7 @@ migrateSingleContext() {
 }
 
 functionSelector() {
-    cd "$startLocation/backend" || exit
+    cd "" || exit
     if [ "$1" = "-ua" ]; then
         shift
         migrateAll "$@"
@@ -81,7 +81,7 @@ functionSelector() {
 }
 
 startLocation=$(pwd)
-
+searchLocation="$startLocation/backend/LaakAPI"
 functionSelector "$@"
 
 cd "$startLocation" || exit

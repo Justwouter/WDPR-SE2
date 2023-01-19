@@ -8,7 +8,7 @@ if ($null -eq $args[0]) {
 $startLocation = Get-Location
 
 try {
-    Set-Location "$startlocation/backend"    
+    Set-Location "$startlocation/backend/LaakAPI"    
     
 
     #I Don't have the mental capacity to deal with this rn so it will bes scuffed
