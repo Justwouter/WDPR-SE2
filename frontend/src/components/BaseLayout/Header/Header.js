@@ -7,15 +7,14 @@ function Header() {
     const [AdminComponents, setAdminComponents] = useState(false);
     useEffect(() => {
         async function fetchData() {
-            const jwtToken = localStorage.getItem('jwt').replace("\"","")
+            const jwtToken = localStorage.getItem('jwt').replace("\"", "")
             console.log(jwtToken)
             fetch('http://api.localhost/api/Role/CheckElevation', {
                 method: 'GET',
                 headers: {
                     'Accept': 'text/plain',
                     'Content-Type': 'text/plain',
-                    'Access-Control-Allow-Origin': '*',
-                    'Authorization': jwtToken
+                    'Authorization': "Bearer "+jwtToken
                 },
 
             }).then(response => {

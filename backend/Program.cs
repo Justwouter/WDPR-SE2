@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddDbContext<ProgrammaContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("ProgrammaContext")));
@@ -22,7 +22,7 @@ builder.Services.AddDbContext<OrderContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
                 .AddDefaultTokenProviders();
-                
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
@@ -47,8 +47,8 @@ builder.Services.AddAuthentication(opt =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = "http://api.localhost",
-        ValidAudience = "http://api.localhost",
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
+        ValidAudiences = new[]{"http://api.localhost", "http://frontend.localhost"},
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
 
@@ -67,6 +67,9 @@ builder.Services.AddSwaggerGen(c =>
         Description = "JWT Authorization header using the Bearer scheme."
     });
 });
+//Allows the use of configuration in the controller classes
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 
 var app = builder.Build();
 

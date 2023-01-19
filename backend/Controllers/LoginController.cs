@@ -53,7 +53,7 @@ public class AccountController : ControllerBase
             {
                 var secret = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(
-                        "awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"));
+                        _configuration["Jwt:Key"]));
 
                 var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };

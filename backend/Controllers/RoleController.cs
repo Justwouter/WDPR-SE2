@@ -130,7 +130,8 @@ namespace backend.Controllers
             return (_roleManager.Roles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        [HttpGet("CheckElevation")]//, Authorize(Roles = "Medewerker")
+        //Just here to check if a user has admin premissions
+        [HttpGet("CheckElevation"), Authorize(Roles = "Medewerker")]
         public async Task<IActionResult> GetUserEleveation()
         {
             return Ok();

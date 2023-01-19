@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace backend.Controllers
 {
@@ -120,7 +119,6 @@ namespace backend.Controllers
             return BadRequest();
         }
 
-        // POST: api/Login
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IdentityUser>> PostUser(User user)
