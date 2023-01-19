@@ -59,7 +59,11 @@ public class AccountController : ControllerBase
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };
                 var roles = await _userManager.GetRolesAsync(_user);
                 foreach (var role in roles)
+                {
                     claims.Add(new Claim(ClaimTypes.Role, role));
+                    claims.Add(new Claim("role", role));
+                }
+
                 var tokenOptions = new JwtSecurityToken
                 (
                     issuer: "http://api.localhost",
@@ -70,7 +74,6 @@ public class AccountController : ControllerBase
                 );
                 return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });
             }
-
         return Unauthorized();
     }
 }

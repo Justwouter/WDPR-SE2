@@ -13,6 +13,7 @@ import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
 import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
+import AdminPanel from './components/AdminPanel';
 
 
 const App = () => {
@@ -27,11 +28,12 @@ const App = () => {
             <Route element={<Registration />} path="/Registration" />
             <Route element={<Programma />} path="/Programma" />
             <Route element={<BetalingsForm />} path="/BetalingsForm"/>
-           {/* //<Route element={<SuccesvolB />} path="/SuccesvolB"/> */}
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
+            <Route element={<AdminPanel/>} path="/AdminPanel"/>
             <Route element={<Navigate to="/" />} path="*" />
+            
           </Route>
         </Routes>
       </BrowserRouter>
