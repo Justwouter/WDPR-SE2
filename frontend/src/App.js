@@ -1,6 +1,6 @@
 import React from 'react';
-import ProgrammaToevoegen from './components/ProgrammaToevoegen';
-import ProgrammaLijst from './components/ProgrammaLijst';
+import ProgrammaToevoegen from './components/Programma/ProgrammaToevoegen';
+import ProgrammaLijst from './components/Programma/ProgrammaLijst';
 import StoelReserveren from './components/StoelReserveren';
 
 import { BrowserRouter, Routes } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Route } from 'react-router';
 import './custom.css';
 import { Navigate } from "react-router-dom";
 import Home from './components/Home';
-import Programma from './components/Programma';
+import Programma from './components/Programma/Programma';
 import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
 import Registration from "./components/Registration";

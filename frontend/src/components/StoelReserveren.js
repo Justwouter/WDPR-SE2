@@ -7,8 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import {useLocation} from 'react-router-dom'
 import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import ProgrammaLijst from './ProgrammaLijst';
-
+import ProgrammaLijst from './Programma/ProgrammaLijst';
 
 
 const Item = styled(Paper)(({ theme }) => ({
