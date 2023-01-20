@@ -28,7 +28,7 @@ try {
                 
             }
         }
-        dotnet ef database update $args[$AdditionalModifierNumber] $args[$AdditionalModifierNumber + 1]
+        # dotnet ef database update $args[$AdditionalModifierNumber] $args[$AdditionalModifierNumber + 1]
     }
     elseif ($args.Contains("-ua")) {
         $files = Get-Location | Get-ChildItem -Recurse | Where-Object { $_.extension -eq ".cs" -and $_.FullName -like "*Context.cs"}
@@ -37,7 +37,7 @@ try {
             $contextName = $fileName -replace ".{3}$"
             Write-Output($fileName)
             dotnet ef migrations add $counter -c $contextName
-            dotnet ef database update -c $contextName
+            # dotnet ef database update -c $contextName # Appearently in 7.0.2 migrations auto apply
         }
     }
     else {
@@ -52,7 +52,7 @@ try {
                 dotnet ef migrations add $migration_name 
             }
         }
-        dotnet ef database update 
+        # dotnet ef database update # Appearently in 7.0.2 migrations auto apply
     }
 }
 finally {

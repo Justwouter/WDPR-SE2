@@ -9,13 +9,14 @@ migrateAll() {
     cd "$searchLocation" || exit
     for file in $(searchfiles "data" "*Context.cs"); do
         db_context=$(basename "${file%.*}")
+        echo "$db_context"
         if [ $# -eq 0 ]; then
             migrateSingleContext $RANDOM --context "$db_context"
 
         else
-            migrateSingleContext "$1-$db_context" --context "$db_context"
+            migrateSingleContext "$db_context-$1" --context "$db_context"
         fi
-        updateSingleContext --context "$db_context"
+        # updateSingleContext --context "$db_context" # Appearently in 7.0.2 migrations auto apply
     done
 }
 

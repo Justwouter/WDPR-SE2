@@ -16,6 +16,9 @@ builder.Services.AddDbContext<ProgrammaContext>(options =>
 builder.Services.AddDbContext<TheaterContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TheaterContext")));
 
+builder.Services.AddDbContext<OrderContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("OrderContext")));
+
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
