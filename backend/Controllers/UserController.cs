@@ -31,7 +31,7 @@ namespace backend.Controllers
         }
 
         // GET: api/User
-        [HttpGet, Authorize(Roles = "Medewerker")]
+        [HttpGet] //, Authorize(Roles = "Medewerker")
         public async Task<ActionResult<IEnumerable<IdentityUser>>> GetUser()
         {
             if (_userManager.Users == null)

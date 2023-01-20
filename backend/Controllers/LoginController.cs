@@ -69,7 +69,7 @@ public class AccountController : ControllerBase
                     issuer: "http://api.localhost",
                     audience: "http://api.localhost",
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(10),
+                    expires: DateTime.Now.AddDays(2),
                     signingCredentials: signingCredentials
                 );
                 return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });

@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(opt =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = "http://api.localhost",
-        ValidAudiences = new[]{"http://api.localhost", "http://frontend.localhost"},
+        ValidAudiences = new[] { "http://api.localhost", "http://frontend.localhost" },
         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
@@ -57,6 +57,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kekcoon Inc. Official API", Version = "v0.69" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -79,7 +80,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-        
+
 // app.UseHttpsRedirection();
 //app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);

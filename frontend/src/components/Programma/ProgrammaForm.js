@@ -91,7 +91,7 @@ const ProgrammaForm = (props) => {
     }
 return (
     <div className="main-form">
-      <div className='vTitel'><div >Programma toevoegen</div></div>
+      {/* <div className='vTitel'><div >Programma toevoegen</div></div> */}
       
       <div className='fBox'>
       <Form onSubmit={handleOnSubmit}>
