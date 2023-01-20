@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
@@ -19,6 +20,7 @@ namespace backend.Controllers
         {
             _context = context;
             programma_context = programmaContext;
+          
         }
 
         // GET: api/Order
@@ -106,20 +108,13 @@ namespace backend.Controllers
 
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
-
-        protected string BetalingHTML(string reference, string succes, string stoelen)
-{
-        var html = System.IO.File.ReadAllText(@"./Succesvol.html");
-        html = html.Replace("{{reference}}", reference).Replace("{{succes}}", succes).Replace("{{kaartjes}}",stoelen);
-
-        return html;
-}
         
         [HttpPost("/api/Betaling/")]
         public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
         {
             string s = "Succesvol";
             string k = " ";
+            Boolean Succesvol = true;
             if (_context.Betaling == null)
                 {
                     return Problem("Entity set 'BetalingContext.Betaling'  is null.");
@@ -129,22 +124,32 @@ namespace backend.Controllers
                                 
             int[] kaarten =  Array.ConvertAll(getKaart.Split(','), int.Parse);
 
-            if(betaling.succes == false){
-                    var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
-                    secondArray.ForEach(x => x.Status = false);
-                    await programma_context.SaveChangesAsync();
+             if(betaling.succes == "false"){
                     s = "Mislukt";
                     k = "Stoelen zijn vrij gezet";
+                    Succesvol = false;
                 }
+            
+            var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
+            secondArray.ForEach(x => x.Status = Succesvol);
+            await programma_context.SaveChangesAsync();        
+
+           
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
 
-            var html = BetalingHTML(betaling.reference, s,k);
-
+            string tekst =    "BetalingNR: " + betaling.reference + "@" 
+                            +   "Betaling is: " + s + "@"
+                            +   k ;
+            tekst = tekst.Replace("@", "@" + System.Environment.NewLine);
             return Redirect("http://frontend.localhost/");
-     
-        
+            //return CreatedAtAction("GetBetaling", new { id = betaling.BetalingId }, betaling);//Content("<script language='javascript' type='text/javascript'>alert('" +tekst + "');window.location.href='http://frontend.localhost/';</script>");
         }
+
+        // public IActionResult tempData(){
+        //       var bericht = TempData["bericht"].ToString();
+        //       return Redirect("http://frontend.localhost/");
+        // }
 
         // DELETE: api/Order/5
         [HttpDelete("{id}")]

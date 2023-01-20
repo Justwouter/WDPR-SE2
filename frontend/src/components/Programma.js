@@ -6,6 +6,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Card from '@mui/material/Card';
 import {Link} from 'react-router-dom';
+import {getMaand, getDagNr, getDagNaam, getUur, getDuur} from './utils.js';
 
 const Programma = ({
   programmaId,
@@ -25,60 +26,31 @@ const Programma = ({
     },
   }));
   
-  function getMaand(){
-    let maandArray = ['Jan', 'Feb', 'Ma', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return maandArray[new Date(van).getMonth()];
-  }
-  function getDagNr(){
-    return new Date(van).getDate();
-  }
-  function getDagNaam(){
-    let dagArray = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'];
-    return dagArray[new Date(van).getDay()];
-  }
-  function getUur(date){
-    let s = (new Date(van).getMinutes()<10 ? '0' : '') + new Date(van).getMinutes();
-    return (new Date(van).getHours()<10 ? '0'  : '') + new Date(van).getHours() + ':' + s  ;
-  }
-
-  function getDuur(){
-    var diff = (new Date(tot).getTime() - new Date(van).getTime());
-    var minuten = Math.round((diff/1000)/60);
-    return minuten ;
-  }
 
     return (
-      
       <TableContainer   component={Card}>
-        <Table  sx={{minWidth: 700  }} aria-label="customized table">
+      
+        <Table  sx={{minWidth: 700  }} aria-label={titel}>
           <TableBody >
             <tr>
                 <StyledTableCell className='table1'align="center">
-                    <ul className='style2' >{getDagNr()}</ul><br></br>
-                    <ul>{getMaand()}</ul>
+                    <div className='style2' >{getDagNr(van)}</div><br></br>
+                    <div>{getMaand(van)}</div>
                   </StyledTableCell>
                 <StyledTableCell className='table2' align="center">
-                  <ul>{getDagNaam()}<br></br>
-                  {getUur(van)}<br></br>Zaal {zaal}</ul>
+             
+                  <div>{getDagNaam(van)}<br></br>
+                  {getUur(van)}<br></br>Zaal {zaal}</div>
                   </StyledTableCell>
                 <StyledTableCell className='table3' align="left">
-                  <ul className='style3'>{titel}</ul><br></br>
-                  <ul className='style4'>Duur: {getDuur()} minuten</ul> <br></br>
-                  <ul>{descriptie}</ul></StyledTableCell>
+          
+                  <h1 className='style3'>{titel}</h1><br></br>
+                  <div className='style4'>Duur: {getDuur(van,tot)} minuten</div> <br></br>
+                  <div>{descriptie}</div></StyledTableCell>
                 
                 <StyledTableCell className='table4' align="center">
                 <Link  className='bestelKnop' to= {'/Programma/StoelReserveren'}
-                  state= {{ sID: programmaId,
-                            sTitel: titel, 
-                            sDescriptie: descriptie,
-                            sZaal: zaal,
-                            sBeginUur: getUur(van),
-                            sDuur: getDuur(),
-                            sDagNr: getDagNr(),
-                            sDagNaam: getDagNaam(),
-                            sMaand: getMaand(),
-                            sEindUur: getUur(tot)}}
-              
+                  state= {{ sID: programmaId}}
                 >Bestel</Link>
                 </StyledTableCell></tr>
           </TableBody>

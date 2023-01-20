@@ -660,3 +660,154 @@ body {
   font-size: 1rem !important;
   animation: shakeAnimation 0.2s ease forwards;
 }
+
+/* HOME IMG SLIDER */
+.c_slider{
+  max-width: 2560px;
+  height: 1050px;
+  margin: 0px auto 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 1000px) {
+  .c_slider {
+    margin: 0px 10px 0;
+  }
+}
+
+.slide{
+  width: 100%;
+  height: 100%;
+ 
+  /* padding-left: 50px;
+  padding-right: 50px; */
+  position: absolute;
+  
+  opacity: 0;
+  transition: opacity ease-in-out 0.4s;
+}
+
+.slide img{
+ 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Actief-anim{
+  opacity: 1;
+}
+
+.c_radiobox {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.radiobox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #f1f1f1;
+  margin: 0 5px;
+  background: #f1f1f100;
+}
+.radiobox.Actief {
+  background: rgb(255, 255, 255);
+  
+}
+
+.g_Titel{
+  margin-bottom: -175px;
+  max-width: 2560px;
+  display: inline-block;
+  flex-direction: column;
+  position: absolute;
+  /* backdrop-filter: blur(15px); */
+  padding-right: 40px;
+  padding-bottom: 40px;
+
+}
+
+.g_lijn{
+  border-style: solid;
+  border-color: white;
+  border-width: 0.5px;
+  width: 800px;
+  margin-left: -175px;
+ 
+}
+
+.g_lijn2{
+  border-style: solid;
+  border-color: white;
+  border-width: 0.5px;
+  width: 900px;
+  margin-left: 1800px;
+  margin-top: 400px;
+  
+ 
+  
+}
+
+.Seizoen{
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 9rem;
+  padding-left: 45px;
+  padding-top: 25px;
+  /* text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.75) */
+  
+}
+.SeizoenT2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 7rem;
+  margin-left: 180px;
+}
+
+.g_ProgTitel{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  float: right;
+  margin-right: 250px;
+  margin-top: 300px;
+  margin-left: 1100px;
+  text-align: right;
+}
+
+.g_datumBG{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  
+  height: 50px;
+  background-color: var(--adoRedCrayola);
+  border-style: solid;
+  border-color: var(--adoRedCrayola);
+  border-width: 100px;
+  width: 500px;
+  border-radius: 0px 100px 100px 0px;
+  text-align: center;
+}
+.g_dT{
+  margin-top: -60px;
+  font-size: 2rem;
+  color: var(--adoXiketic);
+}
+
+.g_dT2{
+  font-size: 3rem;
+}
+.g_link{
+  width: 500px;
+  background-color: #ffffff;
+  color: white;
+  text-decoration: none;
+}
+.g_link:hover{
+  text-decoration: none;
+}

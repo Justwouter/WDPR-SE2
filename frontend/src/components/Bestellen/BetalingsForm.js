@@ -5,6 +5,7 @@ import { useLocation} from 'react-router-dom';
 import ProgrammaLijst from '../ProgrammaLijst';
 
 
+
 const BetalingsForm = (props) => {
 
     const { state } = useLocation(); 
@@ -107,16 +108,16 @@ const handleOnSubmit = async (Order) => {
     await fetch('https://fakepay.azurewebsites.net/', {
       method: 'POST',
       headers: {
-          'Accept': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Accept': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Access-Control-Allow-Origin': '*'},
       body: formBody
       }) 
         .then(response => {
-        return response.text()
-      })
-        .then(response => {
-        return setHTML(response)
+        
+        return response;
+      }).then(res => {
+        setHTML(res)
       })
     }
 
@@ -125,6 +126,7 @@ const handleOnSubmit = async (Order) => {
     return(
       <div className='main-form'>
       <div className='vTitel'>Gegevens</div>
+      <div className='BG_Box'>
       <div className="fBox">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="naam">
@@ -163,18 +165,22 @@ const handleOnSubmit = async (Order) => {
         <Button type="submit" className="submit-btn" >Betaal</Button> 
         </div></div>
       </Form>
-    </div>
+    </div></div>
             {/* HET IS 8:00 AAAAAAAAAAAAAAAAAAAAAAAH */}
             
         </div>
     )}else if(state?.sGStoelen == null){
         return(<ProgrammaLijst/>)
-    
-      
-  
-    }else{
+    }
+    else {
       return(
-        <div dangerouslySetInnerHTML = {{__html: code}} />);
+       
+        <div
+         dangerouslySetInnerHTML = {{__html: (code)}} /> 
+    
+         
+        )
+        
       
     }
 }
