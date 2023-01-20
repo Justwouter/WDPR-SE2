@@ -110,7 +110,7 @@ namespace backend.Controllers
         }
         
         [HttpPost("/api/Betaling/")]
-        public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
+        public async Task<ActionResult<string>> PostBetaling( [FromForm] Betaling betaling)
         {
             string s = "Succesvol";
             string k = " ";
@@ -138,11 +138,13 @@ namespace backend.Controllers
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
 
-            string tekst =    "BetalingNR: " + betaling.reference + "@" 
-                            +   "Betaling is: " + s + "@"
-                            +   k ;
-            tekst = tekst.Replace("@", "@" + System.Environment.NewLine);
-            return Redirect("http://frontend.localhost/");
+            string tekst =    "BetalingNR: " + betaling.reference + "." 
+                            +   "Betaling is: " + s + "."
+                            +   k + "." 
+                            + "Kaartjes: " + getKaart;
+            tekst = tekst.Replace(".", "." + System.Environment.NewLine);
+            //return Redirect("http://frontend.localhost/");
+            return tekst;
             //return CreatedAtAction("GetBetaling", new { id = betaling.BetalingId }, betaling);//Content("<script language='javascript' type='text/javascript'>alert('" +tekst + "');window.location.href='http://frontend.localhost/';</script>");
         }
 

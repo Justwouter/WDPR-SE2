@@ -115,7 +115,7 @@ const handleOnSubmit = async (Order) => {
       }) 
         .then(response => {
         
-        return response;
+        return response.text();
       }).then(res => {
         setHTML(res)
       })
