@@ -6,26 +6,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-[Route("api/[controller]")]
-[ApiController]
-public class AccountController : ControllerBase
+public class AccountService : IAccountService
 {
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly IConfiguration _configuration;
-    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-        IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+    public AccountService(UserManager<IdentityUser> userManager)
     {
         _userManager = userManager;
-        _signInManager = signInManager;
-        _configuration = configuration;
-        _roleManager = roleManager;
     }
 
-    [HttpPost]
-    [Route("registreer")]
     public async Task<ActionResult<IEnumerable<User>>> Registreer([FromBody] User user)
     {
         var resultaat = await _userManager.CreateAsync(user, user.Password);
@@ -33,7 +22,7 @@ public class AccountController : ControllerBase
         {
             user.Type = "Bezoeker";
             resultaat = await _userManager.AddToRoleAsync(user, "Bezoeker");
-            return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
+            return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : new StatusCodeResult(201);
         }
 
         if (user.Type.Equals("Medewerker"))
@@ -41,10 +30,9 @@ public class AccountController : ControllerBase
             resultaat = await _userManager.AddToRoleAsync(user, "Medewerker");
         }
 
-        return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
+        return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : new StatusCodeResult(201);
     }
 
-    [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] User user)
     {
         var _user = await _userManager.FindByNameAsync(user.UserName);
@@ -56,7 +44,7 @@ public class AccountController : ControllerBase
                         "awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"));
 
                 var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
-                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };
+                var claims = new List<Claim> { new Claim( ClaimTypes.Name, user.UserName) };
                 var roles = await _userManager.GetRolesAsync(_user);
                 foreach (var role in roles)
                     claims.Add(new Claim(ClaimTypes.Role, role));
@@ -68,9 +56,10 @@ public class AccountController : ControllerBase
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: signingCredentials
                 );
-                return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });
+                return new OkObjectResult(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });
             }
 
-        return Unauthorized();
+        return new UnauthorizedResult();
     }
+
 }

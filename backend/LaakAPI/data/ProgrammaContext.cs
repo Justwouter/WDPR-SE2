@@ -11,8 +11,7 @@ public class ProgrammaContext : DbContext
     public ProgrammaContext(DbContextOptions<ProgrammaContext> options)
         : base(options)
     {
-
-
+        Database.EnsureCreated();
     }
 
     public DbSet<Programma> Programma { get; set; } = default!;
@@ -25,4 +24,3 @@ public class ProgrammaContext : DbContext
     }
 
 }
-

@@ -1,14 +1,14 @@
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddDbContext<ProgrammaContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("ProgrammaContext")));
@@ -19,10 +19,11 @@ builder.Services.AddDbContext<TheaterContext>(options =>
 builder.Services.AddDbContext<OrderContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("OrderContext")));
 
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
                 .AddDefaultTokenProviders();
-                
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
@@ -68,6 +69,9 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+//Supplies the actual AccountService to the AccountController
+builder.Services.AddTransient<IAccountService, AccountService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -78,7 +82,6 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
-//app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
@@ -88,3 +91,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
