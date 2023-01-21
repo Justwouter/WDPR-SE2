@@ -765,8 +765,8 @@ body {
 .SeizoenT2{
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
-  font-size: 7rem;
-  margin-left: 180px;
+  font-size: 4rem;
+  margin-left: 220px;
 }
 
 .g_ProgTitel{
@@ -801,13 +801,10 @@ body {
 
 .g_dT2{
   font-size: 3rem;
+ 
 }
-.g_link{
-  width: 500px;
-  background-color: #ffffff;
-  color: white;
-  text-decoration: none;
-}
+
 .g_link:hover{
   text-decoration: none;
 }
+

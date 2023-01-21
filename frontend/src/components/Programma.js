@@ -1,12 +1,15 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
+import {Link} from 'react-router-dom';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Card from '@mui/material/Card';
-import {Link} from 'react-router-dom';
+import {StoelReserveren} from './utils.js';
+
 import {getMaand, getDagNr, getDagNaam, getUur, getDuur} from './utils.js';
+
 
 const Programma = ({
   programmaId,
@@ -49,8 +52,7 @@ const Programma = ({
                   <div>{descriptie}</div></StyledTableCell>
                 
                 <StyledTableCell className='table4' align="center">
-                <Link  className='bestelKnop' to= {'/Programma/StoelReserveren'}
-                  state= {{ sID: programmaId}}
+                <Link  className='bestelKnop' onClick={() => {StoelReserveren(programmaId)}} to="/Programma/StoelReserveren"
                 >Bestel</Link>
                 </StyledTableCell></tr>
           </TableBody>

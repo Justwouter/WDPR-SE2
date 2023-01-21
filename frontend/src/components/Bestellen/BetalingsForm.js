@@ -9,9 +9,7 @@ import ProgrammaLijst from '../ProgrammaLijst';
 const BetalingsForm = (props) => {
 
     const { state } = useLocation(); 
-
-
-    //TEST
+    
     const mijnKaarten = state.sGStoelen.reduce((result , item) => {
         return `${result}${item},`
       }, "");
@@ -20,11 +18,6 @@ const BetalingsForm = (props) => {
         return `${result}k=${item}&`
       }, "")
     
-
- 
-   
-
-    //console.log(state);
     const [Order, setGast] = useState(() => {
       return {
         naam: props.Order ? props.Order.naam : '',
@@ -46,6 +39,7 @@ const BetalingsForm = (props) => {
         betalingNr,
         kaart: mijnKaarten.slice(0,-1)
       };
+      localStorage.setItem("bnr", betalingNr)
       handleOnSubmit(Order);
     };
   
@@ -157,7 +151,7 @@ const handleOnSubmit = async (Order) => {
           />
           <br></br>
         </Form.Group>
-        <Form.Label>Kaartjes: {mijnKaarten}</Form.Label><br></br>
+        <Form.Label>Kaartjes: {mijnKaarten.slice(0,-1)}</Form.Label><br></br>
         <Form.Label>Kosten: {state.sGStoelen.length * 25} </Form.Label>
         
         <br></br><br></br>
@@ -172,17 +166,14 @@ const handleOnSubmit = async (Order) => {
     )}else if(state?.sGStoelen == null){
         return(<ProgrammaLijst/>)
     }
-    else {
+    else{
       return(
        
         <div
          dangerouslySetInnerHTML = {{__html: (code)}} /> 
-    
-         
         )
-        
-      
     }
+    
 }
 
 export default   BetalingsForm;

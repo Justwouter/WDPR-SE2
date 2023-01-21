@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {getUur} from './utils.js';
-import {Link} from 'react-router-dom';
-const Home = (props) => {
+const Home = () => {
     const [ loading, setLoading ] = useState(true);
     const [ programmas, setProgramma ] = useState([]);
     const [iSlide, setISlide] = useState(1);
-
+    
     const beweegRB = index => {
         setISlide(index)
     }
@@ -28,11 +27,7 @@ const Home = (props) => {
             (oldCount) => oldCount + 1), 5000);
             
         return () => {
-            
-           
             clearInterval(id);
-           
-          
         };
       }, [iSlide,programmas.length]);
   
@@ -40,31 +35,34 @@ const Home = (props) => {
         var d = new Date(date);
         return d.getDate() + ' - ' + (d.getMonth() +1) + ' - ' + d.getFullYear()
     }
+
+ 
+
     return loading ? "Laden..." : (
         <div className='c_slider'>
             
             <div>
             {programmas.map((obj, index) => {
                 return (
-                    <div  key={index} 
+                    <div key={index} 
                             className={iSlide === index + 1 ? "slide Actief-anim" : "slide"}
                             >
-                        
-                        <div className='g_Titel'>
+                        <div className='g_Titel' >
                             <h1 className='Seizoen'>WINTER</h1>
                             <div className='g_lijn'></div>
-                            <div className='SeizoenT2'>Seizoen</div>
+                            <div className='SeizoenT2'>Programma</div>
                             <div className='g_ProgTitel'>{obj.titel}</div>
                             <div className='g_lijn2'></div>
-                            <Link className='g_link' to= {'/Programma/StoelReserveren'}
-                                state= {{ sID: (obj.programmaId)}}>
-                            <div className='g_datumBG'> 
+                            
+                            <div className='g_datumBG' > 
                                 <div className='g_dT'>{dateFormat(obj.van)}</div>
-                                <div className='g_dT2'>{getUur(obj.van) + " - " + getUur(obj.tot)}</div></div>
-                            </Link>
+                                <div className='g_dT2' >
+                                        {getUur(obj.van) + " - " + getUur(obj.tot)}</div>
+                            </div>
                         </div>
                         
-                      <img src={process.env.PUBLIC_URL+ '/Afbeeldingen/'+obj.genre + '.jpg'} alt={obj.genre} />
+                      <img  src={process.env.PUBLIC_URL+ '/Afbeeldingen/'+obj.genre + '.jpg'} alt={obj.genre}
+                              />
                         
                     </div>
                 )

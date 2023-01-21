@@ -1,3 +1,4 @@
+  
   export const getMaand = (vanDate) => {
     let maandArray = ['Jan', 'Feb', 'Ma', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return maandArray[new Date(vanDate).getMonth()];
@@ -19,3 +20,7 @@
     var minuten = Math.round((diff/1000)/60);
     return minuten ;
   }
+
+  export const StoelReserveren = (i) =>{
+    localStorage.setItem("pid", i);
+}

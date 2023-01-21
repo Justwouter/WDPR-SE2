@@ -4,7 +4,6 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
-import {useLocation} from 'react-router-dom'
 import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import ProgrammaLijst from './ProgrammaLijst';
@@ -36,18 +35,19 @@ const Item = styled(Paper)(({ theme }) => ({
   const [ stoelen, setStoelenLijst ] = useState([]);
   const [ gekozenStoelen, setStoelen] = useState([]);
 
-  const { state } = useLocation(); 
+
+  const pid = localStorage.getItem("pid");
   
   
  
   useEffect(() => {
     async function fetchData(){
-        const response = await fetch('http://api.localhost/api/Programma/'+state.sID);
+        const response = await fetch('http://api.localhost/api/Programma/'+pid);
         const data = await response.json();
         setProgramma(data);
   
 
-        const response2 = await fetch('http://api.localhost/api/Programma/'+state.sID+'/StoelenLijst');
+        const response2 = await fetch('http://api.localhost/api/Programma/'+pid+'/StoelenLijst');
         const data2 = await response2.json();
         setStoelA(data2.filter(a => a.rang === "A" ));
         setStoelB(data2.filter(b => b.rang === "B" ));
@@ -56,7 +56,7 @@ const Item = styled(Paper)(({ theme }) => ({
     }
     fetchData().catch(err => {
       console.error(); })
-  },[state?.sID] )
+  },[pid] )
 
   const ToggleKeuzeStoel = (stoel) => {
     const index = gekozenStoelen.indexOf(stoel);
@@ -85,7 +85,7 @@ const Item = styled(Paper)(({ theme }) => ({
       </Grid>)}
 
 
-    if(state?.sID != null){
+    if(pid!= null){
       return (
         <Box  justifyContent="center" className="grid"  sx={{ flexGrow: 3 }}>
           <div className='hTitel'>
@@ -116,7 +116,7 @@ const Item = styled(Paper)(({ theme }) => ({
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
             {gekozenStoelen.length !== 0 && 
             <div><Link to= {"/BetalingsForm"} 
-            state= {{ sID: state.sID,
+            state= {{ sID: pid,
               sGStoelen: gekozenStoelen}}
             
             ><Button>Reserveer
