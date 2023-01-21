@@ -16,7 +16,7 @@ const UserManagerTable2 = () => {
     const [columnDefs] = useState([
         { field: 'userName', headerName: 'Username', filter: true },
         { field: 'id', headerName: 'Internal ID', filter: true },
-        { field: 'role', headerName: 'Roles', filter: true },
+        { field: 'roles', headerName: 'Roles', filter: true },
     ]);
 
     const defaultColDef = useMemo(() => ({
@@ -31,7 +31,7 @@ const UserManagerTable2 = () => {
     useEffect(() => {
         const jwtToken = localStorage.getItem('jwt').replace('"', '')
         setApiDone(false) //Here until a refresh button has been made
-        fetch('http://api.localhost/api/User', {
+        fetch('http://api.localhost/api/User/GetRolesAndUsers', {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + jwtToken
