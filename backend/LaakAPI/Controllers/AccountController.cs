@@ -1,4 +1,5 @@
 using backend.model;
+using backend.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
@@ -16,9 +17,15 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [Route("registreer")]
-    public async Task<ActionResult<IEnumerable<User>>> Registreer([FromBody] User user)
+    public async Task<IActionResult> Registreer([FromBody] User user)
     {
-        return await _accountService.Registreer(user);
+        var result = await _accountService.Registreer(user);
+        if (result != null)
+        {
+            return Created("theaterlaak.site", user);
+        }
+
+        return BadRequest("Uhoh, something went wrong.");
     }
 
     [HttpPost("login")]
