@@ -75,6 +75,6 @@ const UserManagerTable2 = () => {
 
 export default UserManagerTable2;
 
-//https://ag-grid.com/react-data-grid/column-properties/#reference-columns-colId
+//https://ag-grid.com/react-data-grid/
 //Semi-open source lib licenced under the MIT License
 //Some things like a custom context menu are locked to the enterprist lib =(
