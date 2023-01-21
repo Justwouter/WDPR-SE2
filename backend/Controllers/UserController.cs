@@ -82,6 +82,19 @@ namespace backend.Controllers
             }
         }
 
+
+        [HttpGet("checkIdForRoles/{id}")]
+        public async Task<IActionResult> GetRolesForUser(string id)
+        {
+            List<object> userlist = new List<object>();
+            foreach (User user in await _userManager.Users.ToListAsync()){
+                var userroles = await _userManager.GetRolesAsync(user);
+                var anonymous= new { userName=user.UserName , id=user.Id, roles=userroles};
+                userlist.Add(anonymous);
+            }
+            return Ok(userlist);
+        }
+
         // GET: api/User/{id}
         [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IdentityUser>> GetUser(string id)

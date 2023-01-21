@@ -8,7 +8,7 @@ const AdminPanel = props => {
   const [ShowAdminComponents, setAdminComponents] = useState(false)
 
   useEffect(() => {
-    async function fetchData () {
+    async function fetchData() {
       const jwtToken = localStorage.getItem('jwt').replace('"', '')
       console.log(jwtToken)
       fetch('http://api.localhost/api/Role/CheckElevation', {
@@ -30,21 +30,26 @@ const AdminPanel = props => {
     fetchData()
   }, [])
 
-  
+
   if (RequestFinished) {
     if (ShowAdminComponents) {
       return (
         <div>
           <h1>Welcome Mr.Admin</h1>
-          <ProgrammaToevoegen/>
-          <UserManager/>
+          <ProgrammaToevoegen />
+          <div className='main-form '>
+            {/* <div className='fBox'> */}
+              <UserManager />
+            {/* </div> */}
+
+          </div>
         </div>
       )
     } else {
       return <Navigate to='/' replace />
     }
   }
-  else{
+  else {
     return
   }
 }

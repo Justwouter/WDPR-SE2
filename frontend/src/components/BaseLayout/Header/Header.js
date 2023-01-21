@@ -7,21 +7,20 @@ function Header() {
   const [AdminComponents, setAdminComponents] = useState(false)
   useEffect(() => {
     async function fetchData() {
-      const jwtToken = localStorage.getItem('jwt').replace('"', '')
-      fetch('http://api.localhost/api/Role/CheckElevation', {
-        method: 'GET',
-        headers: {
-          Accept: 'text/plain',
-          'Content-Type': 'text/plain',
-          Authorization: 'Bearer ' + jwtToken
-        }
-      }).then(response => {
-        if (response.status === 200) {
-          setAdminComponents(true)
-        } else {
-          setAdminComponents(false)
-        }
-      })
+      let jwtRAW = localStorage.getItem('jwt')
+      if (jwtRAW != null && jwtRAW.length > 0) {
+        const jwtToken = jwtRAW.replace('"', '')
+        fetch('http://api.localhost/api/Role/CheckElevation', {
+          method: 'GET',
+          headers: {
+            Accept: 'text/plain',
+            'Content-Type': 'text/plain',
+            Authorization: 'Bearer ' + jwtToken
+          }
+        }).then(response => {
+          response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+        })
+      }
     }
     fetchData()
   }, [])
@@ -42,10 +41,15 @@ function Header() {
 
       return JSON.parse(jsonPayload)
     }
-    const jwtToken = parseJwt(localStorage.getItem('jwt'))
-    if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
-      setAdminComponents(true)
-      console.log("User is Autorized")
+    let jwtRAW = localStorage.getItem('jwt')
+    if (jwtRAW != null && jwtRAW.length > 0) {
+      const jwtToken = parseJwt(jwtRAW)
+      if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
+        setAdminComponents(true)
+      }
+      else {
+        setAdminComponents(false)
+      }
     }
     else {
       setAdminComponents(false)
