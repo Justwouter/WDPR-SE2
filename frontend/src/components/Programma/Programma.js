@@ -6,9 +6,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Card from '@mui/material/Card';
-import {StoelReserveren} from './utils.js';
-
-import {getMaand, getDagNr, getDagNaam, getUur, getDuur} from './utils.js';
+import {getMaand, getDagNr, getDagNaam, getUur, getDuur, StoelReserveren} from '../utils';
 
 
 const Programma = ({
