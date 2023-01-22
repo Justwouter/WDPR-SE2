@@ -41,8 +41,8 @@ deploy() {
 startLocation=$(pwd)
 folderlocations=("$startLocation/frontend/src/" "$startLocation/backend/LaakAPI")
 CR=$(printf '\r')
-DevSedConditions=('s#https://api.theaterlaak.site#http://api.localhost#g' 's#https://test.theaterlaak.site#http://test.localhost#g' 's#https://theaterlaak.site#http://frontend.localhost#g' )
-ProdSedConditions=('s#http://api.localhost#https://api.theaterlaak.site#g' 's#http://test.localhost#https://test.theaterlaak.site#g' 's#http://frontend.localhost#https://theaterlaak.site#g' )
+DevSedConditions=('s#https://api.theaterlaak.site#http://api.localhost#g' 's#https://test.theaterlaak.site#http://test.localhost#g' 's#https://theaterlaak.site#http://frontend.localhost#g' 's/api.theaterlaak.site/api.localhost/g' 's/test.theaterlaak.site/test.localhost/g' 's/theaterlaak.site/frontend.localhost/g')
+ProdSedConditions=('s#http://api.localhost#https://api.theaterlaak.site#g' 's#http://test.localhost#https://test.theaterlaak.site#g' 's#http://frontend.localhost#https://theaterlaak.site#g' 's/api.localhost/api.theaterlaak.site/g' 's/test.localhost/test.theaterlaak.site/g' 's/frontend.localhost/theaterlaak.site/g')
 lineEnding="$ ! s/\$/$CR/" #Inserts a carriage return after every line ending except the last otherwise newlines will be appended to a file everytime this condition is used.
 
 deploy "$@"
