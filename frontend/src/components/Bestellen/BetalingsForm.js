@@ -4,31 +4,25 @@ import { Button, Form } from 'react-bootstrap';
 import { useLocation} from 'react-router-dom';
 import ProgrammaLijst from '../Programma/ProgrammaLijst';
 
+
 const BetalingsForm = (props) => {
 
     const { state } = useLocation(); 
-
-
-    //TEST
-    const mijnKaarten = state.sGStoelen.reduce((result , item) => {
+    
+    const mijnKaarten = state?.sGStoelen.reduce((result , item) => {
         return `${result}${item},`
       }, "");
   
-    const mijnKaartenUrl = state.sGStoelen.reduce((result, item) => {
+    const mijnKaartenUrl = state?.sGStoelen.reduce((result, item) => {
         return `${result}k=${item}&`
       }, "")
     
-
- 
-   
-
-    //console.log(state);
     const [Order, setGast] = useState(() => {
       return {
         naam: props.Order ? props.Order.naam : '',
         email: props.Order ? props.Order.email : '',
         betalingNr: props.Order ? props.Order.betalingNr : JSON.stringify(Date.now()),
-        kaart: props.Order ? props.Order.kaart : mijnKaarten.slice(0,-1)
+        kaart: props.Order ? props.Order.kaart : mijnKaarten?.slice(0,-1)
    
       };
     });
@@ -44,6 +38,8 @@ const BetalingsForm = (props) => {
         betalingNr,
         kaart: mijnKaarten.slice(0,-1)
       };
+      localStorage.setItem("bnr", betalingNr)
+
       handleOnSubmit(Order);
     };
   
@@ -64,14 +60,14 @@ const BetalingsForm = (props) => {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ title: 'Kaartjes verstuurd' })
           };
-          await fetch('http://api.localhost/api/Programma/Stoel/Update?'+ mijnKaartenUrl.slice(0,-1), requestOptions);
+          await fetch('http://api.localhost/api/Programma/Stoel/Update?'+ mijnKaartenUrl?.slice(0,-1), requestOptions);
       }
       updatePost();
   }, [mijnKaartenUrl]);
 
 
   var details = {
-    'amount': state.sGStoelen.length * 25,
+    'amount': state?.sGStoelen.length * 25,
     'reference': betalingNr,
     'url': 'http://api.localhost/api/Betaling'
   };
@@ -106,24 +102,25 @@ const handleOnSubmit = async (Order) => {
     await fetch('https://fakepay.azurewebsites.net/', {
       method: 'POST',
       headers: {
-          'Accept': 'application/x-www-form-urlencoded;charset=UTF-8',
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Accept': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/x-www-form-urlencoded',
           'Access-Control-Allow-Origin': '*'},
       body: formBody
       }) 
         .then(response => {
-        return response.text()
-      })
-        .then(response => {
-        return setHTML(response)
+        
+        return response.text();
+      }).then(res => {
+        setHTML(res)
       })
     }
 
 
-    if(html === undefined && state?.sGStoelen != null){
+    if(html === undefined && state?.sGStoelen != null ){
     return(
       <div className='main-form'>
       <div className='vTitel'>Gegevens</div>
+      <div className='BG_Box'>
       <div className="fBox">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="naam">
@@ -151,10 +148,11 @@ const handleOnSubmit = async (Order) => {
             value={email}
             placeholder="Email"
             onChange={handleInputChange}
+            pattern= ".+@.+"
           />
           <br></br>
         </Form.Group>
-        <Form.Label>Kaartjes: {mijnKaarten}</Form.Label><br></br>
+        <Form.Label>Kaartjes: {mijnKaarten.slice(0,-1)}</Form.Label><br></br>
         <Form.Label>Kosten: {state.sGStoelen.length * 25} </Form.Label>
         
         <br></br><br></br>
@@ -162,20 +160,21 @@ const handleOnSubmit = async (Order) => {
         <Button type="submit" className="submit-btn" >Betaal</Button> 
         </div></div>
       </Form>
-    </div>
+    </div></div>
             {/* HET IS 8:00 AAAAAAAAAAAAAAAAAAAAAAAH */}
             
         </div>
     )}else if(state?.sGStoelen == null){
         return(<ProgrammaLijst/>)
-    
-      
-  
-    }else{
-      return(
-        <div dangerouslySetInnerHTML = {{__html: code}} />);
-      
     }
+    else{
+      return(
+       
+        <div
+         dangerouslySetInnerHTML = {{__html: (code)}} /> 
+        )
+    }
+    
 }
 
 export default   BetalingsForm;

@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Identity;
 
 public class TheaterContext : IdentityDbContext
 {
-    public TheaterContext(DbContextOptions<TheaterContext> options) : base(options) { }
+    public TheaterContext(DbContextOptions<TheaterContext> options) : base(options)
+    {
+        Database.EnsureCreated();
+    }
 
     public DbSet<Performance> Optredens { get; set; } = default!;
     public DbSet<User> Gebruikers { get; set; } = default!;
-
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -49,6 +51,3 @@ public class TheaterContext : IdentityDbContext
 
     }
 }
-
-
-

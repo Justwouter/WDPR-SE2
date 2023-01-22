@@ -12,6 +12,7 @@ import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
 import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
+import Succesvol from './components/Bestellen/Succesvol';
 import AdminPanel from './components/AdminPanel/AdminPanel';
 // import Donatie from './components/Donatie';
 
@@ -28,6 +29,7 @@ const App = () => {
             <Route element={<Registration />} path="/Registration" />
             <Route element={<Programma />} path="/Programma" />
             <Route element={<BetalingsForm />} path="/BetalingsForm"/>
+            <Route element={<Succesvol />} path="/Succesvol"/>
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
             <Route element={<AdminPanel/>} path="/AdminPanel"/>
