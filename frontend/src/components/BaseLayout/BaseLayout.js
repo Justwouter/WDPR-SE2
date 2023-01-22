@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from './Header/Header';
-
+import HeaderMobile from './Header/HeaderMobile';
 import { Outlet } from 'react-router';
 
 
@@ -9,9 +9,10 @@ const BaseLayout = () => {
         document.title = "Kekcoon Inc."
     });
     return (
-        
+
         <React.StrictMode>
-            <Header />
+            {window.innerWidth > 1200 ? <Header/> : <HeaderMobile/>}
+            {/* <Header /> */}
             <Outlet />
         </React.StrictMode>
     )
