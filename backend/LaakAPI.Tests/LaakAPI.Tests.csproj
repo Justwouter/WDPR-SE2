@@ -27,4 +27,8 @@
       <ProjectReference Include="..\LaakAPI\backend.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Systems\Services" />
+    </ItemGroup>
+
 </Project>
