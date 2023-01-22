@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router'
 import ProgrammaToevoegen from '../Programma/ProgrammaToevoegen'
 import UserManager from './UserManager/UserManager'
+import { getCookie } from '../utils'
 
 const AdminPanel = props => {
   const [RequestFinished, RequestisFinished] = useState(false)
@@ -9,8 +10,7 @@ const AdminPanel = props => {
 
   useEffect(() => {
     async function fetchData() {
-      const jwtToken = localStorage.getItem('jwt').replace('"', '')
-      console.log(jwtToken)
+      const jwtToken = getCookie("jwt").replace('"', '')
       fetch('http://api.localhost/api/Role/CheckElevation', {
         method: 'GET',
         headers: {

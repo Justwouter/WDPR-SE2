@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import HeadItem from './HeadItem'
 import { useNavigate } from 'react-router-dom'
+import { getCookie } from '../../utils'
 
 function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
   useEffect(() => {
     async function fetchData() {
-      let jwtRAW = localStorage.getItem('jwt')
+      let jwtRAW = getCookie("jwt")
+      // let jwtRAW = localStorage.getItem('jwt')
       if (jwtRAW != null && jwtRAW.length > 0) {
         const jwtToken = jwtRAW.replace('"', '')
         fetch('http://api.localhost/api/Role/CheckElevation', {
@@ -41,7 +43,8 @@ function Header() {
 
       return JSON.parse(jsonPayload)
     }
-    let jwtRAW = localStorage.getItem('jwt')
+    let jwtRAW = getCookie("jwt")
+    // let jwtRAW = localStorage.getItem('jwt')
     if (jwtRAW != null && jwtRAW.length > 0) {
       const jwtToken = parseJwt(jwtRAW)
       if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
