@@ -14,7 +14,9 @@
 /* Custom stuff */
 body {
   background-color: black;
-  padding-top: 175px;
+  padding-top: 146px; /*Set this to header hight to avoid black bars! */
+  bottom: 0px;
+  height: 100%;
 }
 
 
@@ -673,7 +675,7 @@ body {
 
 @media screen and (max-width: 1000px) {
   .c_slider {
-    margin: 0px 10px 0;
+    padding: 0px 10px 0;
   }
 }
 

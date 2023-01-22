@@ -9,7 +9,7 @@ function Header() {
 
 let navigate = useNavigate(); 
 const routeChange = () =>{ 
-  let path = `frontend.local/`; 
+  let path = `/`; 
   navigate(path);
 }
     return (
