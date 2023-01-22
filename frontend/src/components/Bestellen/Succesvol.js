@@ -1,9 +1,13 @@
 import React, {useState, useEffect}from 'react';
+import QRCode from "react-qr-code";
 import { useNavigate } from "react-router";
 const Succesvol = (props) => {
 
     const [ order, setOrder ] = useState([]);
     const [ Betaling, setBetaling ] = useState([]);
+    const [ kaartjes, setKaartjes] = useState([]);
+  
+
     const navigate = useNavigate();
     useEffect(() => {
         
@@ -15,6 +19,7 @@ const Succesvol = (props) => {
           const data2 = await response2.json();
           setOrder(data);
           setBetaling(data2);
+          setKaartjes(data["kaart"]);
           localStorage.setItem("pid",null)
         }
         fetchData().catch(err => {
@@ -27,10 +32,22 @@ const Succesvol = (props) => {
         <div>
             <h1>Order: {order["betalingNr"]}</h1>
             <h1>Betaling is {Betaling["succes"] === "false"?"mislukt":"succesvol"}</h1>
-            <h1>Kaartjes: {order["kaart"]}</h1>
+            <h1>Kaartjes: {kaartjes}</h1>
+            
             {Betaling["succes"] !== "false" &&
             <div>
               <h1>Kaartjes verstuurd naar: {order["email"]}</h1>
+              {(JSON.stringify(kaartjes).replace(/"/g, "").split(',')).map((Number, index) => (
+                <div className='qrcode' key={index}>
+                  <div className='item'>{Number}</div>
+                 <QRCode
+                  title="qr"
+                  value={Number}
+                  size={100}
+                  />
+                  </div>
+                ))}
+               
             </div>
             
             }
