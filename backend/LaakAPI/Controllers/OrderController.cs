@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
@@ -19,6 +20,7 @@ namespace backend.Controllers
         {
             _context = context;
             programma_context = programmaContext;
+          
         }
 
         // GET: api/Order
@@ -33,7 +35,7 @@ namespace backend.Controllers
         }
 
          // GET: api/Betaling
-        [HttpGet("/Betaling")]
+        [HttpGet("/api/Betaling")]
         public async Task<ActionResult<IEnumerable<Betaling>>> GetBetaling()
         {
           if (_context.Betaling == null)
@@ -41,6 +43,24 @@ namespace backend.Controllers
               return NotFound();
           }
             return await _context.Betaling.ToListAsync();
+        }
+
+        [HttpGet("/api/Betaling/{bnr}")]
+        public async Task<ActionResult<Betaling>> GetBetalingBnr(string bnr)
+        {
+          if (_context.Betaling == null)
+          {
+              return NotFound();
+          }
+            var b = _context.Betaling.Where(w => w.reference == bnr).Select(w => w.BetalingId).Single();
+            var betaling = await _context.Betaling.FindAsync(b);
+
+            if (betaling == null)
+            {
+                return NotFound();
+            }
+
+            return betaling;
         }
 
         // GET: api/Order/5
@@ -59,6 +79,24 @@ namespace backend.Controllers
             }
 
             return order;
+        }
+
+        [HttpGet("By/{bnr}")]
+        public async Task<ActionResult<Order>> GetOrderBnr(string bnr)
+        {
+          if (_context.Order == null)
+          {
+              return NotFound();
+          }
+            var order = _context.Order.Where(w => w.BetalingNr == bnr).Select(w => w.OrderId).Single();
+            var order2 = await _context.Order.FindAsync(order);
+
+            if (order2 == null)
+            {
+                return NotFound();
+            }
+
+            return order2;
         }
 
         // PUT: api/Order/5
@@ -106,45 +144,40 @@ namespace backend.Controllers
 
             return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
         }
-
-        protected string BetalingHTML(string reference, string succes, string stoelen)
-{
-        var html = System.IO.File.ReadAllText(@"./Succesvol.html");
-        html = html.Replace("{{reference}}", reference).Replace("{{succes}}", succes).Replace("{{kaartjes}}",stoelen);
-
-        return html;
-}
         
+
         [HttpPost("/api/Betaling/")]
-        public async Task<ActionResult<Betaling>> PostBetaling( [FromForm] Betaling betaling)
+
+        public async Task<ActionResult> PostBetaling( [FromForm] Betaling betaling)
         {
-            string s = "Succesvol";
-            string k = " ";
+         
+            Boolean Succesvol = false;
+
             if (_context.Betaling == null)
                 {
                     return Problem("Entity set 'BetalingContext.Betaling'  is null.");
                 }
             
-            var getKaart = _context.Order.Where(w => w.BetalingNr == betaling.reference).Select(w => w.Kaart).Single();
-                                
-            int[] kaarten =  Array.ConvertAll(getKaart.Split(','), int.Parse);
-
-            if(betaling.succes == false){
-                    var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
-                    secondArray.ForEach(x => x.Status = false);
-                    await programma_context.SaveChangesAsync();
-                    s = "Mislukt";
-                    k = "Stoelen zijn vrij gezet";
+            //Zet alle stoelen weer vrij als de betaling is mislukt
+             if(betaling.account == "NL55ABNA5660751954" || betaling.account == "NL02INGB8635612388" && new Random().Next(1,10) > 5){
+                    Succesvol = true;
+                    betaling.succes = "true";
                 }
+            var getKaart = _context.Order.Where(w => w.BetalingNr == betaling.reference).Select(w => w.Kaart).Single();
+            int[] kaarten =  Array.ConvertAll(getKaart.Split(','), int.Parse);
+            
+            var secondArray= await programma_context.Stoel.Where (h=> kaarten.Contains(h.StoelId)).ToListAsync();
+            secondArray.ForEach(x => x.Status = Succesvol);
+            
+
+            await programma_context.SaveChangesAsync();
             _context.Betaling.Add(betaling);
             await _context.SaveChangesAsync();
 
-            var html = BetalingHTML(betaling.reference, s,k);
-
-            return Redirect("http://frontend.localhost/");
-     
-        
+            return Redirect("http://frontend.localhost/Succesvol");
         }
+
+  
 
         // DELETE: api/Order/5
         [HttpDelete("{id}")]

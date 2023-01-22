@@ -16,7 +16,7 @@ migrateAll() {
         else
             migrateSingleContext "$db_context-$1" --context "$db_context"
         fi
-        # updateSingleContext --context "$db_context" # Appearently in 7.0.2 migrations auto apply
+        updateSingleContext --context "$db_context" # Appearently in 7.0.2 migrations auto apply
     done
 }
 
@@ -29,7 +29,7 @@ migrateSingleContext() {
 }
 
 functionSelector() {
-    cd "" || exit
+    cd "$searchLocation" || exit
     if [ "$1" = "-ua" ]; then
         shift
         migrateAll "$@"

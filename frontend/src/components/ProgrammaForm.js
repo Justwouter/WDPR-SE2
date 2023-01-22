@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
+
 const ProgrammaForm = (props) => {
     const [Programma, setProgramma] = useState(() => {
       return {
         titel: props.Programma ? props.Programma.titel : '',
+        genre: props.Programma ? props.Programma.genre : 'Cabaret',
         van: props.Programma ? props.Programma.van : '',
         tot: props.Programma ? props.Programma.tot : '',
         descriptie: props.Programma ? props.Programma.descriptie : '',
@@ -13,12 +15,13 @@ const ProgrammaForm = (props) => {
       };
     });
   
-    const {  titel, van, tot, descriptie, zaal } = Programma;
+    const {  titel, genre, van, tot, descriptie, zaal } = Programma;
     
     const handleOnSubmit = (event) => {
       event.preventDefault();
       const Programma = {
         titel,
+        genre,
         van,
         tot,
         descriptie,
@@ -42,7 +45,13 @@ const ProgrammaForm = (props) => {
       setProgramma((prevState) => ({
         ...prevState,
         zaal: value,
-        
+      }));
+    }
+    const handleSelect2= (event) => {
+      const { value } = event.target;
+      setProgramma((prevState) => ({
+        ...prevState,
+        genre: value,
       }));
     }
    
@@ -92,7 +101,7 @@ const ProgrammaForm = (props) => {
 return (
     <div className="main-form">
       <div className='vTitel'><div >Programma toevoegen</div></div>
-      
+      <div className='BG_Box'>
       <div className='fBox'>
       <Form onSubmit={handleOnSubmit}>
         <Form.Group controlId="titel">
@@ -105,14 +114,29 @@ return (
             value={titel}
             placeholder={"Titel"}
             onChange={handleInputChange}
-        
-          
           />
           <br></br>
+        </Form.Group>
+        <Form.Group controlId="genre">
+          <Form.Label>Genre: </Form.Label>
+          <Form.Select className='veld' required={true} onChange={handleSelect2}>
+            <option value={"Cabaret"}>Cabaret</option>
+            <option value={"Dans"}>Dans</option>
+            <option value={"Musical"}>Musical</option>
+            <option value={"Zang"}>Zang</option>
+            <option value={"Toneel"}>Toneel</option>
+            <option value={"Muziek"}>Muziek</option>
+            <option value={"Opera"}>Opera</option>
+            <option value={"Klassieke_Concerten"}>Klassieke Concerten</option>
+            <option value={"Komedie"}>Komedie</option>
+          
+          </Form.Select>
+          <br></br><br></br>
         </Form.Group>
         <Form.Group controlId="van">
           <Form.Label>Begintijd: </Form.Label>
           <Form.Control
+       
             required={true}
             className='veld'
             type="datetime-local"
@@ -126,6 +150,7 @@ return (
         <Form.Group controlId="tot">
           <Form.Label>Eindtijd: </Form.Label>
           <Form.Control
+    
             required={true}
             className='veld'
             type="datetime-local"
@@ -152,7 +177,7 @@ return (
         </Form.Group>
         <Form.Group controlId="stoelenlijst">
           <Form.Label>Zaal: </Form.Label><br></br>
-          <Form.Select className='veld' required={true} onChange={handleSelect} aria-label="Kies zaal">
+          <Form.Select className='veld' required={true} onChange={handleSelect} >
             <option value={1}>Zaal 1</option>
             <option value={2}>Zaal 2</option>
             <option value={3}>Zaal 3</option>
@@ -167,6 +192,7 @@ return (
           
         </Button></div></div>
       </Form>
+      </div>
       </div>
     </div>
   );

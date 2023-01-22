@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router";
+import {Link} from 'react-router-dom';
 export default function Registration() {
     const [userName, setUserName] = new useState("");
     const [email, setEmail] = new useState("");
@@ -66,32 +67,48 @@ export default function Registration() {
 
     return (
         <div>
-            <h1>Registreer</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="userName">Gebruikersnaam:</label>
-                <input type="text"
-                       id="userName"
-                       value={userName}
-                       onInput={(e) => setUserName(e.target.value)}/>
-                <br/>
-                <br/>
-                <label htmlFor="email">Email:</label>
-                <input type="text"
-                       id="email"
-                       value={email}
-                       onInput={(e) => setEmail(e.target.value)}/>
-                <br/>
-                <br/>
-                <label htmlFor="password">Wachtwoord:</label>
-                <input type="password"
-                       id="password"
-                       value={password}
-                       onInput={(e) => setPassword(e.target.value)}/>
-                <br/>
-                <br/>
-                {formError && <div className="error">{formError}</div>}
-                <button>Registreer nu</button>
+            <div className="BG">
+                <div className="Content">
+                    <div className="Switch">
+                        <Link   style={{textDecoration: 'none'}} 
+                                className='LoginSwitch' 
+                                to= {'/Login'}>
+                                Login
+                                </Link>
+                                
+                        <div className="HuidigeKnop">Registreer</div>
+                        </div>
+            <div className="fBox">
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="userName">Gebruikersnaam:</label>
+                    <input  className="veld"
+                            type="text"
+                            id="userName"
+                            value={userName}
+                            onInput={(e) => setUserName(e.target.value)}/><br/><br/>
+                    <label htmlFor="email">Email:</label>
+                    <input  className="veld"
+                            type="text"
+                            id="email"
+                            value={email}
+                            onInput={(e) => setEmail(e.target.value)}/><br/><br/>
+                    <label htmlFor="password">Wachtwoord:</label>
+                    <input  className="veld"
+                            type="password"
+                            id="password"
+                            value={password}
+                            onInput={(e) => setPassword(e.target.value)}/><br/><br/>
+                {formError &&
+                <div className="eBG">
+                    <div className="error">{formError}</div> </div> }<br></br>
+                
+                <div className="fButton">
+                    <button>Registreer</button></div>
             </form>
+            
+            </div>  
+            </div>
+            </div>
         </div>
     );
 }
