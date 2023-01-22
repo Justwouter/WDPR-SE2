@@ -5,12 +5,12 @@ services:
     image: mcr.microsoft.com/dotnet/sdk:7.0
     container_name: backend
     command: >
-      bash -c "dotnet build && dotnet run"
+      bash -c "dotnet run"
     working_dir: /app
     # depends_on:
       # - database
     volumes:
-      - ./backend:/app
+      - ./backend/LaakAPI:/app
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - url=https://api.localhost  #Caddy config
@@ -55,7 +55,7 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.test-app.rule=Host(`test.frontend.localhost`)"
+      - "traefik.http.routers.test-app.rule=Host(`test.localhost`)"
 
 
   traefik: #Reverse proxy, please don't touch

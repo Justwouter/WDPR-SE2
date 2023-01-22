@@ -4,10 +4,10 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
-import {useLocation} from 'react-router-dom'
 import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import ProgrammaLijst from './ProgrammaLijst';
+import ProgrammaLijst from './Programma/ProgrammaLijst';
+import {getMaand, getDagNr, getDagNaam, getUur, getDuur} from './utils.js';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,39 +27,43 @@ const Item = styled(Paper)(({ theme }) => ({
 
   const StoelReserveren = () => {
 
+  const [ programma, setProgramma ] = useState([]);
   const [ stoelA, setStoelA ] = useState([]);
   const [ stoelB, setStoelB ] = useState([]);
   const [ stoelC, setStoelC ] = useState([]);
   const [ stoelen, setStoelenLijst ] = useState([]);
   const [ gekozenStoelen, setStoelen] = useState([]);
 
-  const { state } = useLocation(); 
+
+  const pid = localStorage.getItem("pid");
+  
   
  
   useEffect(() => {
     async function fetchData(){
-        const response = await fetch('http://api.localhost/api/Programma/'+state.sID+'/StoelenLijst');
+        const response = await fetch('http://api.localhost/api/Programma/'+pid);
         const data = await response.json();
-        setStoelA(data.filter(a => a.rang === "A" ));
-        setStoelB(data.filter(b => b.rang === "B" ));
-        setStoelC(data.filter(c => c.rang === "C" ));
-        setStoelenLijst(data);
+        setProgramma(data);
+  
+
+        const response2 = await fetch('http://api.localhost/api/Programma/'+pid+'/StoelenLijst');
+        const data2 = await response2.json();
+        setStoelA(data2.filter(a => a.rang === "A" ));
+        setStoelB(data2.filter(b => b.rang === "B" ));
+        setStoelC(data2.filter(c => c.rang === "C" ));
+        setStoelenLijst(data2);
     }
     fetchData().catch(err => {
-      console.error();
-    })
-  },[state?.sID] )
+      console.error(); })
+  },[pid] )
 
-  const ToggleKeuzeStoel = (stoel,i) => {
+  const ToggleKeuzeStoel = (stoel) => {
     const index = gekozenStoelen.indexOf(stoel);
-   
     if (index === -1 && (gekozenStoelen.length < 25) === true ){
       setStoelen((o) => [...o,stoel])
     }else{
       setStoelen(p => p.filter(p => p !== stoel));
     }
-    console.log(stoel + " - " + i)
-    //console.log(stoelen.filter(s => s.stoelId == stoel))
   };
 
   const MaakRangGrid = (rang) => {
@@ -73,7 +77,6 @@ const Item = styled(Paper)(({ theme }) => ({
                 : gekozenStoelen.indexOf(rang[i]["stoelId"]) !== -1
                 ? "gekozen"
                 : "vrij" } 
-                
               onClick= {()=> ToggleKeuzeStoel(rang[i]["stoelId"])}
             >{"" + rang[i]["nr"] } 
             </Item>
@@ -81,17 +84,18 @@ const Item = styled(Paper)(({ theme }) => ({
       </Grid>)}
 
 
-    if(state?.sID != null){
+    if(pid!= null){
       return (
         <Box  justifyContent="center" className="grid"  sx={{ flexGrow: 3 }}>
           <div className='hTitel'>
-            <div className='titel'>{state.sTitel} - Zaal {state.sZaal} </div>
-            <div className='tijd'>{ state.sBeginUur + '-' + state.sEindUur}</div>
+            <h1 className='titel'>{programma["titel"]} - Zaal {programma["zaal"]} </h1>
+            <div className='tijd'>{getUur(programma["van"]) + '-' + getUur(programma["tot"])}</div>
           </div><br></br>
   
-          <div className='info'>{state.sDescriptie}</div><br></br>
-          <div className='duur'>Duur: {state.sDuur}min</div>
-          <div className='duur'>{state.sDagNaam} {state.sDagNr} {state.sMaand}</div><br></br><br></br>
+          <div className='info'>{programma["descriptie"]}</div><br></br>
+          <div className='duur'>Duur: {getDuur(programma["van"],programma["tot"])}min</div>
+          <div className='duur'>Genre: {programma["genre"]}</div>
+          <div className='duur'>{getDagNaam(programma["van"])} {getDagNr(programma["van"])} {getMaand(programma["van"])}</div><br></br><br></br>
        
   
         <div className='rTitel'>Eersterang</div> 
@@ -109,15 +113,21 @@ const Item = styled(Paper)(({ theme }) => ({
         <div className='kaart'><br></br><br></br>
         <div className='stoel'>
             <div className='kTitel'> Stoelen : {gekozenStoelen.length}</div>
-            <div><Link to= {'/BetalingsForm'}><Button>Reserveer
+            {gekozenStoelen.length !== 0 && 
+            <div><Link to= {"/BetalingsForm"} 
+            state= {{ sID: pid,
+              sGStoelen: gekozenStoelen}}
+              onClick={() => {localStorage.setItem("gStoelen", gekozenStoelen)}} 
+            ><Button>Reserveer
               </Button>
             
-            </Link></div></div>
-  
+            </Link></div>
+            }
+            </div>
         <div className='inhoud'>
-          <ul><br></br>
+          <div><br></br>
             {gekozenStoelen.map((value,index) => ( 
-              <div className='kCodes'  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId === value)[0]["nr"] + '\u00A0'}</div>))}</ul></div></div>
+              <div className='kCodes'  key={index}>{ value+ "SD" + stoelen.filter(s => s.stoelId === value)[0]["nr"] + '\u00A0'}</div>))}</div></div></div>
       </Box>
     );
     }else{
@@ -128,7 +138,4 @@ const Item = styled(Paper)(({ theme }) => ({
     
 }
  
- export default   StoelReserveren;
-    
-
-
+ export default StoelReserveren;

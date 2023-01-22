@@ -1,0 +1,7 @@
+.mobile-menu {
+    display: none;
+}
+
+.open .mobile-menu {
+    display: flex;
+}

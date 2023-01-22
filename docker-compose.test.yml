@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    labels:
+    labels:      
       - "traefik.http.routers.backend.entrypoints=web"
       - 'traefik.port=7290'
   frontend:
