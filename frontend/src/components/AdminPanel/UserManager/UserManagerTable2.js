@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import { getCookie } from '../../utils'
 
 
 
@@ -29,7 +30,7 @@ const UserManagerTable2 = () => {
 
     //Load data from API
     useEffect(() => {
-        const jwtToken = localStorage.getItem('jwt').replace('"', '')
+        const jwtToken = getCookie('jwt').replace('"', '')
         setApiDone(false) //Here until a refresh button has been made
         fetch('http://api.localhost/api/User/GetRolesAndUsers', {
             method: 'GET',
