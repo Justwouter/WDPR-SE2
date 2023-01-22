@@ -832,3 +832,21 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   top: 0;
   width: auto;
 }
+
+.qrcode{
+  display: inline-block;
+  max-width: 1500px;
+  padding-left: 75px;
+  background-color: var(--adoRedCrayola);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  margin-left: 20px;
+  border-radius: 20px;
+  
+}
+
+.item{
+  display: inline-block;
+  padding-right: 50px;
+}
