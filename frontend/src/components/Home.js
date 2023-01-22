@@ -21,7 +21,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        if(iSlide === programmas.length+1) {
+        if(iSlide >= programmas.length+1) {
             setISlide(1);
         }
         const id = setInterval(() => setISlide(
