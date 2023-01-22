@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
+
 const ProgrammaForm = (props) => {
     const [Programma, setProgramma] = useState(() => {
       return {
@@ -135,6 +136,7 @@ return (
         <Form.Group controlId="van">
           <Form.Label>Begintijd: </Form.Label>
           <Form.Control
+       
             required={true}
             className='veld'
             type="datetime-local"

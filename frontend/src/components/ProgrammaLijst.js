@@ -28,7 +28,9 @@ const ProgrammaLijst = () => {
             
             
           ))
-        ) : (
+        ) 
+        
+        : (
           <p className="message">Er zijn nog geen programmas!</p>
         )}
       </div>

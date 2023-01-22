@@ -10,11 +10,11 @@ const BetalingsForm = (props) => {
 
     const { state } = useLocation(); 
     
-    const mijnKaarten = state.sGStoelen.reduce((result , item) => {
+    const mijnKaarten = state?.sGStoelen.reduce((result , item) => {
         return `${result}${item},`
       }, "");
   
-    const mijnKaartenUrl = state.sGStoelen.reduce((result, item) => {
+    const mijnKaartenUrl = state?.sGStoelen.reduce((result, item) => {
         return `${result}k=${item}&`
       }, "")
     
@@ -23,7 +23,7 @@ const BetalingsForm = (props) => {
         naam: props.Order ? props.Order.naam : '',
         email: props.Order ? props.Order.email : '',
         betalingNr: props.Order ? props.Order.betalingNr : JSON.stringify(Date.now()),
-        kaart: props.Order ? props.Order.kaart : mijnKaarten.slice(0,-1)
+        kaart: props.Order ? props.Order.kaart : mijnKaarten?.slice(0,-1)
    
       };
     });
@@ -40,6 +40,7 @@ const BetalingsForm = (props) => {
         kaart: mijnKaarten.slice(0,-1)
       };
       localStorage.setItem("bnr", betalingNr)
+
       handleOnSubmit(Order);
     };
   
@@ -60,14 +61,14 @@ const BetalingsForm = (props) => {
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ title: 'Kaartjes verstuurd' })
           };
-          await fetch('http://api.localhost/api/Programma/Stoel/Update?'+ mijnKaartenUrl.slice(0,-1), requestOptions);
+          await fetch('http://api.localhost/api/Programma/Stoel/Update?'+ mijnKaartenUrl?.slice(0,-1), requestOptions);
       }
       updatePost();
   }, [mijnKaartenUrl]);
 
 
   var details = {
-    'amount': state.sGStoelen.length * 25,
+    'amount': state?.sGStoelen.length * 25,
     'reference': betalingNr,
     'url': 'http://api.localhost/api/Betaling'
   };
@@ -116,7 +117,7 @@ const handleOnSubmit = async (Order) => {
     }
 
 
-    if(html === undefined && state?.sGStoelen != null){
+    if(html === undefined && state?.sGStoelen != null ){
     return(
       <div className='main-form'>
       <div className='vTitel'>Gegevens</div>
@@ -148,6 +149,7 @@ const handleOnSubmit = async (Order) => {
             value={email}
             placeholder="Email"
             onChange={handleInputChange}
+            pattern= ".+@.+"
           />
           <br></br>
         </Form.Group>

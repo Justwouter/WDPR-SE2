@@ -15,6 +15,7 @@ const Succesvol = (props) => {
           const data2 = await response2.json();
           setOrder(data);
           setBetaling(data2);
+          localStorage.setItem("pid",null)
         }
         fetchData().catch(err => {
           console.error();
@@ -30,7 +31,9 @@ const Succesvol = (props) => {
             {Betaling["succes"] !== "false" &&
             <div>
               <h1>Kaartjes verstuurd naar: {order["email"]}</h1>
-            </div>}
+            </div>
+            
+            }
            
         </div>
     )

@@ -118,7 +118,7 @@ const Item = styled(Paper)(({ theme }) => ({
             <div><Link to= {"/BetalingsForm"} 
             state= {{ sID: pid,
               sGStoelen: gekozenStoelen}}
-            
+              onClick={() => {localStorage.setItem("gStoelen", gekozenStoelen)}} 
             ><Button>Reserveer
               </Button>
             

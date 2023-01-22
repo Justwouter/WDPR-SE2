@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {getUur} from './utils.js';
+import _ from 'lodash';
 const Home = () => {
     const [ loading, setLoading ] = useState(true);
     const [ programmas, setProgramma ] = useState([]);
@@ -40,10 +41,11 @@ const Home = () => {
 
     return loading ? "Laden..." : (
         <div className='c_slider'>
-            
             <div>
-            {programmas.map((obj, index) => {
-                return (
+
+            {!_.isEmpty(programmas) ? 
+            (programmas.map((obj, index) => 
+                (
                     <div key={index} 
                             className={iSlide === index + 1 ? "slide Actief-anim" : "slide"}
                             >
@@ -63,20 +65,23 @@ const Home = () => {
                         
                       <img  src={process.env.PUBLIC_URL+ '/Afbeeldingen/'+obj.genre + '.jpg'} alt={obj.genre}
                               />
-                        
+                    <div className='c_radiobox'>
+                        {Array.from({length: 5}).map((item, index) => (
+                            <div  key={index}  onClick={() => beweegRB(index + 1)}
+                                className={iSlide === index + 1 ? "radiobox Actief" : "radiobox"}
+                                ></div>
+                            ))}
                     </div>
-                )
-            })}
-
-            <div className='c_radiobox'>
-                {Array.from({length: 5}).map((item, index) => (
-                    <div  key={index}  onClick={() => beweegRB(index + 1)}
-                            className={iSlide === index + 1 ? "radiobox Actief" : "radiobox"}
-                            ></div>
-                ))}
+                    
+                        </div>
+                
+                ))) : (
+                    <p className="message">Er zijn nog geen programmas!</p>
+                  )}
+                
             </div>
           </div>
-        </div>
+    
     );
         
 
