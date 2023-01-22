@@ -22,7 +22,7 @@ public class AccountController : ControllerBase
         var result = await _accountService.Registreer(user);
         if (result != null)
         {
-            return Created("theaterlaak.site", user);
+            return Created("frontend.localhost", user);
         }
 
         return BadRequest("Uhoh, something went wrong.");
