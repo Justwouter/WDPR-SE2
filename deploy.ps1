@@ -8,14 +8,14 @@ if ($args.Contains("-r")) {
         $files = Get-Location | Get-ChildItem -Recurse | Where-Object { $_.extension -eq ".js" -or $_.extension -eq ".cs" }
 
         for ($i = 0; $i -lt $files.Count; $i++) {
-            ((Get-Content -path $files[$i].FullName -Raw) -replace 'https://https://api.theaterlaak.site', 'http://api.localhost' -replace 'https://theaterlaak.site', 'http://frontend.localhost' -replace 'https://test.theaterlaak.site', 'http://test.localhost') | Set-Content -Path $files[$i].FullName -NoNewline
+            ((Get-Content -path $files[$i].FullName -Raw) -replace 'https://https://api.theaterlaak.site', 'http://api.localhost' -replace 'https://test.theaterlaak.site', 'http://test.localhost' -replace 'https://theaterlaak.site', 'http://frontend.localhost') | Set-Content -Path $files[$i].FullName -NoNewline
         }
     
         
     }
 
     Set-Location $startLocation
-    ((Get-Content .\docker-compose.yml -Raw) -replace 'https://api.theaterlaak.site', 'http://api.localhost' -replace 'https://theaterlaak.site', 'http://frontend.localhost' -replace 'https://test.theaterlaak.site', 'http://test.localhost') | Set-Content .\docker-compose.yml -NoNewline
+    ((Get-Content .\docker-compose.yml -Raw) -replace 'https://api.theaterlaak.site', 'http://api.localhost' -replace 'https://test.theaterlaak.site', 'http://test.localhost' -replace 'https://theaterlaak.site', 'http://frontend.localhost') | Set-Content .\docker-compose.yml -NoNewline
     # ((Get-Content .\Proxy\Caddy\Caddyfile -Raw) -replace 'https://api.theaterlaak.site', 'http://api.localhost' -replace 'theaterlaak.site', 'http://frontend.localhost') | Set-Content .\Proxy\Caddy\Caddyfile -NoNewline
     
 
