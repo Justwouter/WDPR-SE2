@@ -36,7 +36,7 @@ const Succesvol = (props) => {
             
             {Betaling["succes"] !== "false" &&
             <div>
-              <h1>Kaartjes verstuurd naar: {"email"}</h1>
+              <h1>Kaartjes verstuurd naar: {order["email"]}</h1>
               {(JSON.stringify(kaartjes).replace(/"/g, "").split(',')).map((Number, index) => (
                 <div className='qrcode' key={index}>
                   <div className='item'>{Number}</div>
