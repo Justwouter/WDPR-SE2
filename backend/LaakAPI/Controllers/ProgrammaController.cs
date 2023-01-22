@@ -33,7 +33,7 @@ namespace backend.Controllers
             return await _context.Programma.ToListAsync();
         }
 
-        [HttpGet("/StoelenLijst")]
+        [HttpGet("StoelenLijst")]
         public async Task<ActionResult<IEnumerable<Stoel>>> GetStoelenLijst()
         {
           if (_context.Stoel == null)

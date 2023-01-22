@@ -6,6 +6,8 @@ services:
         - "traefik.http.routers.backend.entrypoints=websecure" 
         - "traefik.http.routers.backend.tls=true"
         - "traefik.http.routers.backend.tls.certresolver=staging" 
+        - "traefik.http.routers.web.middlewares=allowed_hosts"
+        - "traefik.http.middlewares.allowed_hosts.headers.allowedHosts=theaterlaak.site"
   frontend:
     labels:
       - "traefik.http.routers.frontend.entrypoints=websecure" 

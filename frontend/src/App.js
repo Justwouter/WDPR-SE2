@@ -1,6 +1,5 @@
 import React from 'react';
-import ProgrammaToevoegen from './components/ProgrammaToevoegen';
-import ProgrammaLijst from './components/ProgrammaLijst';
+import ProgrammaLijst from './components/Programma/ProgrammaLijst';
 import StoelReserveren from './components/StoelReserveren';
 
 import { BrowserRouter, Routes } from 'react-router-dom';
@@ -8,12 +7,14 @@ import { Route } from 'react-router';
 import './custom.css';
 import { Navigate } from "react-router-dom";
 import Home from './components/Home';
-import Programma from './components/Programma';
+import Programma from './components/Programma/Programma';
 import BaseLayout from './components/BaseLayout/BaseLayout';
 import Login from './components/Login'
 import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
 import Succesvol from './components/Bestellen/Succesvol';
+import AdminPanel from './components/AdminPanel/AdminPanel';
+// import Donatie from './components/Donatie';
 
 
 const App = () => {
@@ -30,9 +31,11 @@ const App = () => {
             <Route element={<BetalingsForm />} path="/BetalingsForm"/>
             <Route element={<Succesvol />} path="/Succesvol"/>
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
-            <Route element={<ProgrammaToevoegen />} path="/ProgrammaToevoegen" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
+            <Route element={<AdminPanel/>} path="/AdminPanel"/>
+            {/* <Route element={<Donatie/>} path="/Doneer"/> */}
             <Route element={<Navigate to="/" />} path="*" />
+            
           </Route>
         </Routes>
       </BrowserRouter>

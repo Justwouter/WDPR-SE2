@@ -19,8 +19,10 @@ body {
   height: 100%;
 }
 
-
+/* --------------------------------------------- */
 /* ProgrammaLijst Font styles */
+/* --------------------------------------------- */
+
 .style2 {
   font-family: 'Arimo';
   font-style: normal;
@@ -96,8 +98,10 @@ body {
   transform: scale3d(1.2, 1.20, 1);
 }
 
+/* --------------------------------------------- */
+/* ----------------ProgrammaForm---------------- */
+/* --------------------------------------------- */
 
-/* ProgrammaForm */
 .vTitel{
   font-family: 'Poppins', sans-serif;
   font-style: 900;
@@ -181,7 +185,10 @@ body {
   color: white;
 }
 
+/* ---------------------------------------------- */
 /* Boxes Stoel reserveren  */
+/* ---------------------------------------------- */
+
 .reserveerd {
   background-color: #5e5e5e !important;
   pointer-events: none;
@@ -218,7 +225,10 @@ body {
   margin-right: 5%;
 }
 
+/* ---------------------------------------------- */
 /* Kaartjes Stoel reserveren */
+/* ---------------------------------------------- */
+
 .kCodes {
   display: inline-flex;
   text-align: left;
@@ -305,7 +315,10 @@ body {
   transform: scale3d(1.10, 1.10, 1);
 }
 
+/* ---------------------------------------------- */
 /* INFORMATIE SECTIE Stoel reserveren */
+/* ---------------------------------------------- */
+
 .hTitel {
   display: inline-block;
 }
@@ -442,7 +455,11 @@ body {
   }
 }
 
-/* Header */
+/* ---------------------------------------------- */
+/* --------------------Header-------------------- */
+/* ---------------------------------------------- */
+
+
 .logo {
   background-color: var(--adoRedCrayola);
   width: 100px;
@@ -549,7 +566,10 @@ body {
   opacity: 1;
 }
 
-/* Footer */
+/* ---------------------------------------------- */
+/* --------------------Footer-------------------- */
+/* ---------------------------------------------- */
+
 .footer-basic {
   position: fixed;
   left: 0;

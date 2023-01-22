@@ -9,10 +9,12 @@ using Microsoft.IdentityModel.Tokens;
 public class AccountService : IAccountService
 {
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly IConfiguration _configuration;
 
-    public AccountService(UserManager<IdentityUser> userManager)
+    public AccountService(UserManager<IdentityUser> userManager, IConfiguration configuration)
     {
         _userManager = userManager;
+        _configuration = configuration;
     }
 
     public async Task<ActionResult<IEnumerable<User>>> Registreer([FromBody] User user)
@@ -41,19 +43,23 @@ public class AccountService : IAccountService
             {
                 var secret = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes(
-                        "awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"));
+                        _configuration["Jwt:Key"]));
 
                 var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
                 var claims = new List<Claim> { new Claim( ClaimTypes.Name, user.UserName) };
                 var roles = await _userManager.GetRolesAsync(_user);
                 foreach (var role in roles)
+                {
                     claims.Add(new Claim(ClaimTypes.Role, role));
+                    claims.Add(new Claim("role", role));
+                }
+
                 var tokenOptions = new JwtSecurityToken
                 (
                     issuer: "http://api.localhost",
                     audience: "http://api.localhost",
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(10),
+                    expires: DateTime.Now.AddDays(2),
                     signingCredentials: signingCredentials
                 );
                 return new OkObjectResult(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });

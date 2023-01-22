@@ -2,8 +2,7 @@
 import React, {useState, useEffect}from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useLocation} from 'react-router-dom';
-import ProgrammaLijst from '../ProgrammaLijst';
-
+import ProgrammaLijst from '../Programma/ProgrammaLijst';
 
 
 const BetalingsForm = (props) => {

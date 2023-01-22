@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getUur } from './utils.js';
 import _ from 'lodash';
+
+
 const Home = () => {
     const [loading, setLoading] = useState(true);
     const [programmas, setProgramma] = useState([]);

@@ -7,4 +7,5 @@ public class User : IdentityUser
 {
     public string? Type { get; set; }
     public string Password { get; set; }
+    public int? TotalDonation {get;set;}
 }
