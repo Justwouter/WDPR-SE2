@@ -13,7 +13,7 @@ import Login from './components/Login'
 import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
 import AdminPanel from './components/AdminPanel/AdminPanel';
-import Donatie from './components/Donatie';
+// import Donatie from './components/Donatie';
 
 
 const App = () => {
@@ -31,7 +31,7 @@ const App = () => {
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
             <Route element={<AdminPanel/>} path="/AdminPanel"/>
-            <Route element={<Donatie/>} path="/Doneer"/>
+            {/* <Route element={<Donatie/>} path="/Doneer"/> */}
             <Route element={<Navigate to="/" />} path="*" />
             
           </Route>
