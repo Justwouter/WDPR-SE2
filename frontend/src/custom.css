@@ -14,11 +14,15 @@
 /* Custom stuff */
 body {
   background-color: black;
-  padding-top: 175px;
+  padding-top: 146px; /*Set this to header hight to avoid black bars! */
+  bottom: 0px;
+  height: 100%;
 }
 
-
+/* --------------------------------------------- */
 /* ProgrammaLijst Font styles */
+/* --------------------------------------------- */
+
 .style2 {
   font-family: 'Arimo';
   font-style: normal;
@@ -94,8 +98,10 @@ body {
   transform: scale3d(1.2, 1.20, 1);
 }
 
+/* --------------------------------------------- */
+/* ----------------ProgrammaForm---------------- */
+/* --------------------------------------------- */
 
-/* ProgrammaForm */
 .vTitel{
   font-family: 'Poppins', sans-serif;
   font-style: 900;
@@ -110,7 +116,7 @@ body {
  
 }
 .fButton button{
-  background-color: var(--adoRedCrayola) ;
+  background-color: var(--adoXiketic) ;
   border-style: none;
   font-family: 'Poppins', sans-serif;
   font-style: 500;
@@ -123,25 +129,31 @@ body {
   transform: scale3d(1.2, 1.20, 1);
 }
 
+.BG_Box{
+  background-color: var(--adoGoldCrayola);
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  width: 1250px;
+}
+
 .fBox {
   font-family: 'Poppins', sans-serif;
   font-style: 500;
   font-size: 1.5rem;
   color: var(--adoXiketic);
   width: 100%;
-  padding-left: 100px;
-  padding-right: 100px;
   padding-top: 5%;
   padding-bottom: 5%;
   display: inline-block;
-  background-color: var(--adoGoldCrayola);
   justify-content: center;
-
-  border-radius: 25px;
   
 }
 
 .fBox .veld {
+  width: 100%;
   padding-left: 15px;
   padding-right: 20px;
   border: none;
@@ -154,11 +166,17 @@ body {
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 8px 30px 0px rgba(0, 0, 0, 0.05);
 }
+.veld:focus {
+  outline: none;
+  background-color: rgb(255, 255, 255);
+}
 
 .main-form{
   width: 100%;
-  padding-left: 400px;
-  padding-right: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 
@@ -167,7 +185,10 @@ body {
   color: white;
 }
 
+/* ---------------------------------------------- */
 /* Boxes Stoel reserveren  */
+/* ---------------------------------------------- */
+
 .reserveerd {
   background-color: #5e5e5e !important;
   pointer-events: none;
@@ -204,7 +225,10 @@ body {
   margin-right: 5%;
 }
 
+/* ---------------------------------------------- */
 /* Kaartjes Stoel reserveren */
+/* ---------------------------------------------- */
+
 .kCodes {
   display: inline-flex;
   text-align: left;
@@ -291,7 +315,10 @@ body {
   transform: scale3d(1.10, 1.10, 1);
 }
 
+/* ---------------------------------------------- */
 /* INFORMATIE SECTIE Stoel reserveren */
+/* ---------------------------------------------- */
+
 .hTitel {
   display: inline-block;
 }
@@ -381,6 +408,36 @@ body {
   }
 }
 
+@keyframes shakeAnimation {
+  0% {
+    opacity: 0;
+    margin-left: -75px;
+    margin-right: 75px;
+  }
+
+  25% {
+    opacity: 0.5;
+    margin-left: 50px;
+    margin-right: -50px;
+  }
+
+  50% {
+    opacity: 1;
+    margin-left: -25px;
+    margin-right: 25px;
+  }
+
+  75% {
+    margin-left: 20px;
+    margin-right: -20px;
+  }
+
+  100% {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
 @keyframes pulse-effect {
   0% {
     transform: scale(0.95);
@@ -398,7 +455,11 @@ body {
   }
 }
 
-/* Header */
+/* ---------------------------------------------- */
+/* --------------------Header-------------------- */
+/* ---------------------------------------------- */
+
+
 .logo {
   background-color: var(--adoRedCrayola);
   width: 100px;
@@ -505,7 +566,10 @@ body {
   opacity: 1;
 }
 
-/* Footer */
+/* ---------------------------------------------- */
+/* --------------------Footer-------------------- */
+/* ---------------------------------------------- */
+
 .footer-basic {
   position: fixed;
   left: 0;
@@ -513,8 +577,6 @@ body {
   width: 100%;
 
   padding: 40px 0;
-  /* background-color: #ffffff;
-  color: #4b4c4d; */
   color: whitesmoke;
 }
 
@@ -531,22 +593,281 @@ body {
   padding: 0 10px;
 }
 
-/* .footer-basic ul a {
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.8;
-} */
 
 .footer-basic ul a:hover {
   opacity: 1;
 }
 
 /* LOGIN FORM */
-.login{
+.BG{
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
+}
+
+.Content{
+  width: 550px;
+  background-color: var(--adoMediumPurple);
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 15px;
+}
+
+.Switch{
+  padding-top: 3%;
+  padding-bottom: 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+}
+
+.HuidigeKnop{
+  text-align: center;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.95rem;
+  background-color: var(--adoXiketic);
+  
+}
+
+.RegistreerSwitch{
+  color: #ffffff;
+  text-align: center;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.541);
+  font-weight: 600;
+  font-size: 1.95rem;
+ 
+}
+.RegistreerSwitch:hover{
+  color: var(--adoXiketic);
+  background-color: white;
+}
+
+.BG button{
+  color: #ffffff;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+.BG button:focus{
+  outline: none;
+}
+
+.LoginSwitch{
+  color: #ffffff;
+  text-align: center;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgba(255, 255, 255, 0.541);
+  font-weight: 600;
+  font-size: 1.95rem;
+}
+.LoginSwitch:hover{
+  color: var(--adoXiketic);
+  background-color: white;
+}
+
+.eBG{
+  background-color: #FD024F;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: 1rem !important;
+  animation: shakeAnimation 0.2s ease forwards;
+}
+
+/* HOME IMG SLIDER */
+.c_slider{
+  max-width: 2560px;
+  height: 1050px;
+  margin: 0px auto 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 1000px) {
+  .c_slider {
+    padding: 0px 10px 0;
+  }
+}
+
+.slide{
+  width: 100%;
+  height: 100%;
+ 
+  /* padding-left: 50px;
+  padding-right: 50px; */
+  position: absolute;
+  
+  opacity: 0;
+  transition: opacity ease-in-out 0.4s;
+}
+
+.slide img{
+ 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Actief-anim{
+  opacity: 1;
+}
+
+.c_radiobox {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.radiobox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #f1f1f1;
+  margin: 0 5px;
+  background: #f1f1f100;
+}
+.radiobox.Actief {
+  background: rgb(255, 255, 255);
+  
+}
+
+.g_Titel{
+  margin-bottom: -175px;
+  max-width: 2560px;
+  display: inline-block;
+  flex-direction: column;
+  position: absolute;
+  /* backdrop-filter: blur(15px); */
+  padding-right: 40px;
+  padding-bottom: 40px;
+
+}
+
+.g_lijn{
+  border-style: solid;
+  border-color: white;
+  border-width: 0.5px;
+  width: 800px;
+  margin-left: -175px;
+ 
+}
+
+.g_lijn2{
+  border-style: solid;
+  border-color: white;
+  border-width: 0.5px;
+  width: 900px;
+  margin-left: 1800px;
+  margin-top: 400px;
+  
+ 
+  
+}
+
+.Seizoen{
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 9rem;
+  padding-left: 45px;
+  padding-top: 25px;
+  /* text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.75) */
+  
+}
+.SeizoenT2{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  margin-left: 220px;
+}
+
+.g_ProgTitel{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  float: right;
+  margin-right: 250px;
+  margin-top: 300px;
+  margin-left: 1100px;
+  text-align: right;
+}
+
+.g_datumBG{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  
+  height: 50px;
   background-color: var(--adoRedCrayola);
+  border-style: solid;
+  border-color: var(--adoRedCrayola);
+  border-width: 100px;
+  width: 500px;
+  border-radius: 0px 100px 100px 0px;
+  text-align: center;
+}
+.g_dT{
+  margin-top: -60px;
+  font-size: 2rem;
+  color: var(--adoXiketic);
+}
+
+.g_dT2{
+  font-size: 3rem;
+ 
+}
+
+.g_link:hover{
+  text-decoration: none;
+}
+
+.main-form input {
+  border: none;
+  box-sizing: border-box;
+  outline: 0;
+  padding: .75rem;
+  position: relative;
+  width: 100%;
+}
+
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.qrcode{
+  display: inline-block;
+  max-width: 1500px;
+  padding-left: 75px;
+  background-color: var(--adoRedCrayola);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-radius: 20px;
+  
+}
+
+.item{
+  display: inline-block;
+  padding-right: 50px;
 }

@@ -51,7 +51,6 @@ namespace backend.Controllers
 
         // PUT: api/Role/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRole(string id, Role role)
         {
@@ -129,6 +128,13 @@ namespace backend.Controllers
         private bool RoleExists(string id)
         {
             return (_roleManager.Roles?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        //Just here to check if a user has admin premissions
+        [HttpGet("CheckElevation"), Authorize(Roles = "Medewerker")]
+        public async Task<IActionResult> GetUserEleveation()
+        {
+            return Ok();
         }
     }
 }

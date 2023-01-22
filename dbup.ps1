@@ -30,8 +30,20 @@ try {
         }
         # dotnet ef database update $args[$AdditionalModifierNumber] $args[$AdditionalModifierNumber + 1]
     }
+    elseif ($args.Contains("-ua") -and $args.Contains("-d")) {
+        Write-Output("Using dbup in update only mode")
+        $files = Get-Location | Get-ChildItem -Recurse | Where-Object { $_.extension -eq ".cs" -and $_.FullName -like "*Context.cs" }
+        for ($counter = 0; $counter -lt $files.Count; $counter++) {
+            $fileName = $files[$counter].Name
+            $contextName = $fileName -replace ".{3}$"
+            Write-Output($fileName)
+            dotnet ef database update -c $contextName
+        }
+        
+    }
     elseif ($args.Contains("-ua")) {
-        $files = Get-Location | Get-ChildItem -Recurse | Where-Object { $_.extension -eq ".cs" -and $_.FullName -like "*Context.cs"}
+        Write-Output("Using dbup in migrate and update mode")
+        $files = Get-Location | Get-ChildItem -Recurse | Where-Object { $_.extension -eq ".cs" -and $_.FullName -like "*Context.cs" }
         for ($counter = 0; $counter -lt $files.Count; $counter++) {
             $fileName = $files[$counter].Name
             $contextName = $fileName -replace ".{3}$"
@@ -40,6 +52,7 @@ try {
             # dotnet ef database update -c $contextName # Appearently in 7.0.2 migrations auto apply
         }
     }
+
     else {
         if ( -not($args.Contains(("-u")))) {
             if ($args.Contains("-d")) {

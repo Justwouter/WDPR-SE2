@@ -49,8 +49,8 @@ builder.Services.AddAuthentication(opt =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = "http://api.localhost",
-        ValidAudience = "http://api.localhost",
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
+        ValidAudiences = new[] { "http://api.localhost", "http://frontend.localhost" },
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
 
@@ -59,6 +59,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kekcoon Inc. Official API", Version = "v0.69" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -69,6 +70,9 @@ builder.Services.AddSwaggerGen(c =>
         Description = "JWT Authorization header using the Bearer scheme."
     });
 });
+//Allows the use of configuration in the controller classes
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 
 //Supplies the actual AccountService to the AccountController
 builder.Services.AddTransient<IAccountService, AccountService>();
@@ -92,6 +96,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-
-

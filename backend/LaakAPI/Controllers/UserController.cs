@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace backend.Controllers
 {
@@ -30,9 +29,9 @@ namespace backend.Controllers
             _roleManager = roleManager;
             _context = context;
         }
-        
+
         // GET: api/User
-        [HttpGet, Authorize(Roles = "Medewerker")]
+        [HttpGet] //, Authorize(Roles = "Medewerker")
         public async Task<ActionResult<IEnumerable<IdentityUser>>> GetUser()
         {
             if (_userManager.Users == null)
@@ -55,12 +54,46 @@ namespace backend.Controllers
             var result = await _userManager.IsInRoleAsync(user, roleName);
             if (result)
             {
-                return Ok("The user does have " + roleName + " as a role.");
+                return Ok("The user has " + roleName + " as a role.");
             }
             else
             {
-                return Ok("The user does NOT have " + roleName + " as a role.");
+                return NoContent();
             }
+        }
+
+        [HttpGet("checkNameForRole")]
+        public async Task<IActionResult> CheckRoleByName(string userName, string roleName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.IsInRoleAsync(user, roleName);
+            if (result)
+            {
+                return Ok("The user has " + roleName + " as a role.");
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+
+        [HttpGet("GetRolesAndUsers"), Authorize(Roles = "Medewerker")]
+        public async Task<IActionResult> GetRolesAndUsers()
+        {
+            List<object> userlist = new List<object>();
+            foreach (User user in await _userManager.Users.ToListAsync())
+            {
+                var userroles = await _userManager.GetRolesAsync(user);
+                var anonymous = new { userName = user.UserName, id = user.Id, roles = userroles };
+                userlist.Add(anonymous);
+            }
+            return Ok(userlist);
         }
 
         // GET: api/User/{id}
@@ -100,7 +133,6 @@ namespace backend.Controllers
             return BadRequest();
         }
 
-        // POST: api/Login
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IdentityUser>> PostUser(User user)
@@ -116,12 +148,12 @@ namespace backend.Controllers
             // return CreatedAtAction("GetUser", new { id = user.Id }, user);
             return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
         }
-        
+
         [NonAction]
         public async Task<IdentityResult> CreateUserAsync(string email, string password)
         {
             var user = new IdentityUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);    
+            var result = await _userManager.CreateAsync(user, password);
             return result;
         }
 
@@ -144,12 +176,6 @@ namespace backend.Controllers
 
             return NoContent();
         }
-
-        // private bool UserExists(int id)
-        // {
-        //     return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
-        // }
-
 
     }
 }
