@@ -6,6 +6,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
+namespace backend.Service;
+
+public interface IAccountService
+{
+    Task<IdentityUser> Registreer([FromBody] User user);
+    Task<IActionResult> Login([FromBody] User user);
+}
+
 public class AccountService : IAccountService
 {
     private readonly UserManager<IdentityUser> _userManager;
@@ -17,22 +25,25 @@ public class AccountService : IAccountService
         _configuration = configuration;
     }
 
-    public async Task<ActionResult<IEnumerable<User>>> Registreer([FromBody] User user)
+    public async Task<IdentityUser> Registreer([FromBody] User user)
     {
         var resultaat = await _userManager.CreateAsync(user, user.Password);
-        if (user.Type == null)
+        if (resultaat.Succeeded)
         {
-            user.Type = "Bezoeker";
-            resultaat = await _userManager.AddToRoleAsync(user, "Bezoeker");
-            return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : new StatusCodeResult(201);
+            if (user.Type == null)
+            {
+                user.Type = "Bezoeker";
+                await _userManager.AddToRoleAsync(user, "Bezoeker");
+            }
+            if (user.Type.Equals("Medewerker"))
+            {
+                await _userManager.AddToRoleAsync(user, "Medewerker");
+            }
+            return await _userManager.FindByNameAsync(user.UserName);
+            
         }
 
-        if (user.Type.Equals("Medewerker"))
-        {
-            resultaat = await _userManager.AddToRoleAsync(user, "Medewerker");
-        }
-
-        return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : new StatusCodeResult(201);
+        return null;
     }
 
     public async Task<IActionResult> Login([FromBody] User user)

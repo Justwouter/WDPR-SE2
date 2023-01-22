@@ -9,7 +9,7 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
-            var user = {userName: gebruikersnaam, Password: password}
+            var user = { userName: gebruikersnaam, Password: password }
             fetch('http://api.localhost/api/Account/login', {
                 method: "POST",
                 headers: {
@@ -18,10 +18,14 @@ export default function Login() {
                     'Access-Control-Allow-Origin': '*'
                 },
                 body: JSON.stringify(user)
-            }).then((response) => response.json())
+            }).then((response) => {
+                if (response.status === 401) {
+                    return null;
+                }
+                return response.json();
+            })
                 .then((data) => {
-                    document.cookie = "jwt="+data.token;
-                    window.localStorage.setItem("jwt", data.token);
+                    document.cookie = "jwt=" + data.token;
                     window.location.href = 'http://frontend.localhost/';
                 })
         }
