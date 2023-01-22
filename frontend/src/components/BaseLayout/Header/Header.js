@@ -82,6 +82,7 @@ function Header() {
             <HeadItem link='/programmalijst' text='Programma' />
             <HeadItem link='/Login' text='Login' />
             <HeadItem link='/Registration' text='Registreer' />
+            <HeadItem link='/Doneer' text='Doneer' />
             {AdminComponents && (
               <div>
                 <HeadItem link='/AdminPanel' text='Admin Panel' />
