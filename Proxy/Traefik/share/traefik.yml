@@ -39,22 +39,22 @@ certificatesResolvers:
       caServer: "https://acme-staging-v02.api.letsencrypt.org/directory"
       httpChallenge:
         entryPoint: web
-#
-#   production:
-#     acme:
-#       email: Admin@theaterlaak.site
-#       storage: /etc/traefik/certs/acme.json
-#       caServer: "https://acme-v02.api.letsencrypt.org/directory"
-#       httpChallenge:
-#         entryPoint: web
+
+  production:
+    acme:
+      email: Admin@theaterlaak.site
+      storage: /etc/traefik/certs/acme.json
+      caServer: "https://acme-v02.api.letsencrypt.org/directory"
+      httpChallenge:
+        entryPoint: web
 
 #(Optional) Overwrite Default Certificates
 tls:
   stores:
     default:
       defaultCertificate:
-        certFile: /etc/traefik/certs/cert1.pem  #Yea ain't putting certs in a git repo
-        keyFile: /etc/traefik/certs/privkey1.pem
+        certFile: /etc/traefik/certs/cert.pem  #Yea ain't putting certs in a git repo
+        keyFile: /etc/traefik/certs/privkey.pem
 # (Optional) Disable TLS version 1.0 and 1.1
 #   options:
 #     default:

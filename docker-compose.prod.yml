@@ -5,16 +5,16 @@ services:
     labels:
         - "traefik.http.routers.backend.entrypoints=websecure" 
         - "traefik.http.routers.backend.tls=true"
-        - "traefik.http.routers.backend.tls.certresolver=staging" 
+        - "traefik.http.routers.backend.tls.certresolver=production" 
         - "traefik.http.routers.web.middlewares=allowed_hosts"
         - "traefik.http.middlewares.allowed_hosts.headers.allowedHosts=theaterlaak.site"
   frontend:
     command: > 
-      bash -c "npm install -g serve && serve -s build --no-request-logging --cors "
+      bash -c "npm install -g serve && serve -s build --no-request-logging "
     labels:
       - "traefik.http.routers.frontend.entrypoints=websecure" 
       - "traefik.http.routers.frontend.tls=true"
-      - "traefik.http.routers.frontend.tls.certresolver=staging"  
+      - "traefik.http.routers.frontend.tls.certresolver=production"  
   traefik:
     volumes:
       - ./Proxy/Traefik/share/:/etc/traefik #Config files
@@ -25,4 +25,4 @@ services:
     labels:
       - "traefik.http.routers.test-app.entrypoints=websecure"
       - "traefik.http.routers.test-app.tls=true"
-      - "traefik.http.routers.test-app.tls.certresolver=staging"
+      - "traefik.http.routers.test-app.tls.certresolver=production"

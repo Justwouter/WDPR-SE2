@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  test-app:
+    #Simple test app mostly to check if traefik is working wihout waiting for front/backend
+    image: containous/whoami:v1.3.0
+    hostname: whoami
+    container_name: whoami
+    restart: unless-stopped
+    labels:
+      - "traefik.http.routers.test-app.entrypoints=web"
+      - "traefik.enable=true"
+      - "traefik.http.routers.test-app.rule=Host(`test.theaterlaak.site`) || Host(`theaterlaak.site`) || Host(`api.theaterlaak.site`) || Host(`www.theaterlaak.site`)"
+
+  traefik:
+    #Reverse proxy, please don't touch
+    image: "traefik:v2.9.6"
+    container_name: "traefik"
+    command:
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "80:80"
+      - "8080:8080" #Dashboard, remove in prod
+
+    restart: unless-stopped
