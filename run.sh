@@ -4,6 +4,9 @@
 runfunc() {
     if [[ "$1" == *"-dcd"* || "$1" == *"prod"* ]]; then
         ./deploy.sh
+        cd ./frontend || exit
+        npm run build
+        cd "$startLocation" || exit
         docker-compose -f docker-compose.yml -f docker-compose.prod.yml up "${@:2}"
         return
     elif [[ "$1" == *"-dc"* || "$1" == *"dev"* ]]; then
