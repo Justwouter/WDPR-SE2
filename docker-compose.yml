@@ -28,8 +28,7 @@ services:
   frontend: #React frontend
     image: node
     container_name: frontend
-    command: > 
-      bash -c "npm install -g serve && serve -s build"
+    
     working_dir: /app
     depends_on:
       - backend

@@ -6,6 +6,7 @@ services:
       - "traefik.http.routers.backend.entrypoints=web"
       - 'traefik.port=7290'
   frontend:
+    command: ["npm", "run"]
     labels:
       - "traefik.http.routers.frontend.entrypoints=web"
       - 'traefik.port=3000'

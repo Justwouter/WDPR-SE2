@@ -9,6 +9,8 @@ services:
         - "traefik.http.routers.web.middlewares=allowed_hosts"
         - "traefik.http.middlewares.allowed_hosts.headers.allowedHosts=theaterlaak.site"
   frontend:
+    command: > 
+      bash -c "npm install -g serve && serve -s build --no-request-logging --cors "
     labels:
       - "traefik.http.routers.frontend.entrypoints=websecure" 
       - "traefik.http.routers.frontend.tls=true"

@@ -4,6 +4,7 @@ ReplaceInFile() {
     rules=("${@:2}")
     for condition in "${rules[@]}"; do
         sed -i "$condition" "$1"
+        echo "$1"
     done
     sed -i "$lineEnding" "$1"
 
