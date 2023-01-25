@@ -2,6 +2,9 @@ $startLocation=Get-Location
 
 if ($args.contains("-dcd")) {
     ./deploy
+    cd ./frontend
+    npm run build
+    cd $startLocation
     docker-compose -f docker-compose.yml -f docker-compose.prod.yml up $args[1..($args.Count-1)]
     continue
 }
