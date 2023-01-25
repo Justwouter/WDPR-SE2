@@ -34,5 +34,5 @@ jobs:
           docker-compose down
           git checkout Stable
           git pull
-          ./run.sh -dcd
+          ./run -dcd
 
