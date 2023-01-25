@@ -83,6 +83,7 @@ function Header() {
 
           <div id='HeaderItems' className='basic'>
             <HeadItem link='/programmalijst' text='Programma' />
+            <HeadItem link='/Over-ons' text='Over ons'/>
             <HeadItem link='/Login' text='Login' />
             <HeadItem link='/Registration' text='Registreer' />
             {/* <HeadItem link='/Doneer' text='Doneer' /> */}

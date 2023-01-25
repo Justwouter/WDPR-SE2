@@ -14,6 +14,7 @@ import Registration from "./components/Registration";
 import BetalingsForm from './components/Bestellen/BetalingsForm';
 import Succesvol from './components/Bestellen/Succesvol';
 import AdminPanel from './components/AdminPanel/AdminPanel';
+import OverOns from './components/DonatiePanel/OverOns';
 // import Donatie from './components/Donatie';
 
 
@@ -33,6 +34,7 @@ const App = () => {
             <Route element={<ProgrammaLijst />} path="/ProgrammaLijst" />
             <Route element={<StoelReserveren/>} path="/Programma/StoelReserveren" />
             <Route element={<AdminPanel/>} path="/AdminPanel"/>
+            <Route element={<OverOns/>} path="/Over-ons"/>
             {/* <Route element={<Donatie/>} path="/Doneer"/> */}
             <Route element={<Navigate to="/" />} path="*" />
             
