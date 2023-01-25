@@ -9,15 +9,27 @@ const AdminPanel = props => {
   const [ShowAdminComponents, setAdminComponents] = useState(false)
 
   useEffect(() => {
-    async function fetchData () {
-      checkElevationAPI(getCookie('jwt')).then(response => {
-        response != null && response.status === 200
-          ? setAdminComponents(true)
-          : setAdminComponents(false)
+    async function fetchData() {
+      const jwtToken = getCookie("jwt").replace('"', '')
+      fetch('http://api.localhost/api/Role/CheckElevation', {
+        method: 'GET',
+        headers: {
+          Accept: 'text/plain',
+          'Content-Type': 'text/plain',
+          Authorization: 'Bearer ' + jwtToken
+        }
+      }).then(response => {
+        if (response.status === 200) {
+          setAdminComponents(true)
+        } else {
+          setAdminComponents(false)
+        }
+        RequestisFinished(true)
       })
     }
     fetchData()
   }, [])
+
 
   if (RequestFinished) {
     if (ShowAdminComponents) {
@@ -27,15 +39,17 @@ const AdminPanel = props => {
           <ProgrammaToevoegen />
           <div className='main-form '>
             {/* <div className='fBox'> */}
-            <UserManager />
+              <UserManager />
             {/* </div> */}
+
           </div>
         </div>
       )
     } else {
       return <Navigate to='/' replace />
     }
-  } else {
+  }
+  else {
     return
   }
 }

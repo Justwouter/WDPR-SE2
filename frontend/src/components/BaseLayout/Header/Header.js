@@ -1,36 +1,64 @@
 import React, { useEffect, useState } from 'react'
 import HeadItem from './HeadItem'
 import { useNavigate } from 'react-router-dom'
-import { getCookie, checkElevationAPI, parseJwt } from '../../utils'
+import { getCookie } from '../../utils'
 
-function Header () {
+function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
   useEffect(() => {
-    async function fetchData () {
-      checkElevationAPI(getCookie('jwt')).then(response => {
-        response != null && response.status === 200
-          ? setAdminComponents(true)
-          : setAdminComponents(false)
-      })
+    async function fetchData() {
+      let jwtRAW = getCookie("jwt")
+      // let jwtRAW = localStorage.getItem('jwt')
+      if (jwtRAW != null && jwtRAW.length > 0) {
+        const jwtToken = jwtRAW.replace('"', '')
+        fetch('http://api.localhost/api/Role/CheckElevation', {
+          method: 'GET',
+          headers: {
+            Accept: 'text/plain',
+            'Content-Type': 'text/plain',
+            Authorization: 'Bearer ' + jwtToken
+          }
+        }).then(response => {
+          response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+        })
+      }
     }
-
     fetchData()
   }, [])
 
   useEffect(() => {
-    let jwtRAW = getCookie('jwt')
+    function parseJwt(token) {
+      var base64Url = token.split('.')[1]
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      var jsonPayload = decodeURIComponent(
+        window
+          .atob(base64)
+          .split('')
+          .map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+          })
+          .join('')
+      )
+
+      return JSON.parse(jsonPayload)
+    }
+    let jwtRAW = getCookie("jwt")
+    // let jwtRAW = localStorage.getItem('jwt')
     if (jwtRAW != null && jwtRAW.length > 0) {
       const jwtToken = parseJwt(jwtRAW)
-      if ((jwtToken.role === 'Medewerker') | (jwtToken.role === 'Admin')) {
+      if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
         setAdminComponents(true)
-      } else {
+      }
+      else {
         setAdminComponents(false)
       }
-    } else {
+    }
+    else {
       setAdminComponents(false)
     }
   }, [])
+
 
   let navigate = useNavigate()
   const routeChange = () => {
