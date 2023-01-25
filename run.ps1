@@ -5,7 +5,7 @@ if ($args.contains("-dcd")) {
     cd ./frontend
     npm run build
     cd $startLocation
-    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up #$args[1..($args.Count-1)]
+    docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d #$args[1..($args.Count-1)]
     continue
 }
 elseif ($args.contains("-dc")) {

@@ -24,8 +24,9 @@ jobs:
       uses: appleboy/ssh-action@v0.1.7
       with:
         host: ${{ secrets.HOST }}
+        port: ${{ secrets.PORT }}
         username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
+        password: ${{ secrets.PASSWORD }}
         script: |
           # Run commands to deploy code to your Raspberry Pi here
           echo "Deploying..."
@@ -33,5 +34,9 @@ jobs:
           docker-compose down
           git checkout Stable
           git pull
-          Start-Process -FilePath "./run.sh" -ArgumentList "-dc"
+          ./deploy
+          cd ./frontend
+          npm run build
+          cd ..
+          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
