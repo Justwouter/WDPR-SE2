@@ -34,5 +34,9 @@ jobs:
           docker-compose down
           git checkout Stable
           git pull
-          ./run -dcd
+          ./deploy
+          cd ./frontend
+          npm run build
+          cd ..
+          docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
