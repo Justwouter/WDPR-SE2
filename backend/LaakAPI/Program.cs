@@ -73,7 +73,6 @@ builder.Services.AddSwaggerGen(c =>
 //Allows the use of configuration in the controller classes
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
-
 //Supplies the actual AccountService to the AccountController
 builder.Services.AddTransient<IAccountService, AccountService>();
 

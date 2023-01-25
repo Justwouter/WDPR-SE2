@@ -3,10 +3,6 @@ import UserManagerTable2 from './UserManagerTable2';
 
 const UserManager = () => {
   
-
- 
-
-
   return (
     <React.Fragment>
       <UserManagerTable2  />

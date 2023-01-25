@@ -103,7 +103,7 @@ export default function Registration() {
                     <div className="error">{formError}</div> </div> }<br></br>
                 
                 <div className="fButton">
-                    <button>Registreer</button></div>
+                    <button>Registreer Nu!</button></div>
             </form>
             
             </div>  

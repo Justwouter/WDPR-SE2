@@ -20,7 +20,7 @@ namespace backend.Controllers
         }
 
         // GET: api/Role
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<IEnumerable<IdentityRole>>> GetRole()
         {
             if (_roleManager.Roles == null)
@@ -51,7 +51,7 @@ namespace backend.Controllers
 
         // PUT: api/Role/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = "Medewerker")]
         public async Task<IActionResult> PutRole(string id, Role role)
         {
             if (id != role.Id)
@@ -83,7 +83,7 @@ namespace backend.Controllers
         // POST: api/Role
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         // [HttpPost, Authorize(Roles = "Medewerker")]
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Medewerker")]
         public async Task<ActionResult<Role>> PostRole(Role role)
         {
             await _roleManager.CreateAsync(role);
