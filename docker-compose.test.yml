@@ -2,11 +2,11 @@ version: '3'
 
 services:
   backend:
-    labels:      
+    labels:
       - "traefik.http.routers.backend.entrypoints=web"
       - 'traefik.port=7290'
   frontend:
-    command: ["npm", "run"]
+    command: [ "npm", "start" ]
     labels:
       - "traefik.http.routers.frontend.entrypoints=web"
       - 'traefik.port=3000'
