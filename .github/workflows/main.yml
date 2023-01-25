@@ -1,0 +1,37 @@
+name: CI/CD pipeline
+
+on:
+  push:
+    branches:
+      - Stable
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Test
+      run: |
+        # Run your tests here
+        echo "(Not)Running tests..."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to Raspberry Pi
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          # Run commands to deploy code to your Raspberry Pi here
+          echo "Deploying..."
+          ProjectDir
+          docker-compose down
+          git checkout Stable
+          git pull
+          Start-Process -FilePath "./run.sh" -ArgumentList "-dc"
+
