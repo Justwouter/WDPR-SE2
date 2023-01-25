@@ -28,14 +28,14 @@ describe('Registration component', () => {
         expect(getByText('Gebruikersnaam:')).toBeInTheDocument();
         expect(getByText('Email:')).toBeInTheDocument();
         expect(getByText('Wachtwoord:')).toBeInTheDocument();
-        expect(getByText('Registreer nu')).toBeInTheDocument();
+        expect(getByText('Registreer Nu!')).toBeInTheDocument();
     });
 
     it('should show an error message when the form is submitted without a username', async () => {
         const { getByText, getByLabelText } = await render(<BrowserRouter> <Registration/></BrowserRouter>);
         const emailInput = getByLabelText('Email:');
         const passwordInput = getByLabelText('Wachtwoord:');
-        const submitButton = getByText('Registreer nu');
+        const submitButton = getByText('Registreer Nu!');
 
         fireEvent.input(emailInput, { target: { value: 'mail@mail.nl' } });
         fireEvent.input(passwordInput, { target: { value: 'String1!' } });
@@ -47,7 +47,7 @@ describe('Registration component', () => {
         const { getByText, getByLabelText } = render(<BrowserRouter> <Registration/></BrowserRouter>);
         const usernameInput = getByLabelText('Gebruikersnaam:');
         const passwordInput = getByLabelText('Wachtwoord:');
-        const submitButton = getByText('Registreer nu');
+        const submitButton = getByText('Registreer Nu!');
 
         fireEvent.input(usernameInput, { target: { value: 'testuser' } });
         fireEvent.input(passwordInput, { target: { value: 'String1!' } });
@@ -61,7 +61,7 @@ describe('Registration component', () => {
         const usernameInput = getByLabelText('Gebruikersnaam:');
         const emailInput = getByLabelText('Email:');
         const passwordInput = getByLabelText('Wachtwoord:');
-        const submitButton = getByText('Registreer nu');
+        const submitButton = getByText('Registreer Nu!');
 
         fireEvent.input(usernameInput, { target: { value: 'testuser' } });
         fireEvent.input(emailInput, { target: { value: 'invalidemail' } });
@@ -76,7 +76,7 @@ describe('Registration component', () => {
         const { getByText, getByLabelText } = render(<BrowserRouter> <Registration/></BrowserRouter>);
         const usernameInput = getByLabelText('Gebruikersnaam:');
         const emailInput = getByLabelText('Email:');
-        const submitButton = getByText('Registreer nu');
+        const submitButton = getByText('Registreer Nu!');
 
         fireEvent.input(usernameInput, { target: { value: 'testuser' } });
         fireEvent.input(emailInput, { target: { value: 'test@email.com' } });
@@ -88,7 +88,7 @@ describe('Registration component', () => {
 
     it('should show an error message when the form is submitted without any values', () => {
         const { getByText, getByLabelText } = render(<BrowserRouter> <Registration/></BrowserRouter>);
-        const submitButton = getByText('Registreer nu');
+        const submitButton = getByText('Registreer Nu!');
         fireEvent.click(submitButton);
 
         expect(getByText('Gebruikersnaam is noodzakelijk en Email is noodzakelijk en Wachtwoord is noodzakelijk')).toBeInTheDocument();
@@ -100,7 +100,7 @@ describe('Registration component', () => {
     //     const usernameInput = getByLabelText('Gebruikersnaam:');
     //     const emailInput = getByLabelText('Email:');
     //     const passwordInput = getByLabelText('Wachtwoord:');
-    //     const submitButton = getByText('Registreer nu');
+    //     const submitButton = getByText('Registreer Nu!');
     //
     //     fireEvent.input(usernameInput, { target: { value: 'testuser' } });
     //     fireEvent.input(emailInput, { target: { value: 'test@email.com' } });

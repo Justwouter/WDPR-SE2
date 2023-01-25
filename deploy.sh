@@ -4,6 +4,7 @@ ReplaceInFile() {
     rules=("${@:2}")
     for condition in "${rules[@]}"; do
         sed -i "$condition" "$1"
+        echo "$1"
     done
     sed -i "$lineEnding" "$1"
 
@@ -14,7 +15,7 @@ deploy() {
         #When argument -r is passed, restore urls to their localhost equivalent.
         for folder in "${folderlocations[@]}"; do
             cd "$folder" || exit
-            files=$(find . -name '*.js' -o -name '*.cs')
+            files=$(find . -type f \( -name "*.js" -o -name "*.cs" \) ! -path "*/Migrations/*" ! -path "*/obj/*" ! -path "*/bin/*" -print)
             for file in $files; do
                 ReplaceInFile "$file" "${DevSedConditions[@]}"
             done
@@ -26,7 +27,7 @@ deploy() {
         #Check if a file contains a specific url & change it to its production value
         for folder in "${folderlocations[@]}"; do
             cd "$folder" || exit
-            files=$(find . -name '*.js' -o -name '*.cs')
+            files=$(find . -type f \( -name "*.js" -o -name "*.cs" \) ! -path "*/Migrations/*" ! -path "*/obj/*" ! -path "*/bin/*" -print)
             for file in $files; do
                 ReplaceInFile "$file" "${ProdSedConditions[@]}"
             done
@@ -44,5 +45,8 @@ CR=$(printf '\r')
 DevSedConditions=('s#https://api.theaterlaak.site#http://api.localhost#g' 's#https://test.theaterlaak.site#http://test.localhost#g' 's#https://theaterlaak.site#http://frontend.localhost#g' 's/api.theaterlaak.site/api.localhost/g' 's/test.theaterlaak.site/test.localhost/g' 's/theaterlaak.site/frontend.localhost/g')
 ProdSedConditions=('s#http://api.localhost#https://api.theaterlaak.site#g' 's#http://test.localhost#https://test.theaterlaak.site#g' 's#http://frontend.localhost#https://theaterlaak.site#g' 's/api.localhost/api.theaterlaak.site/g' 's/test.localhost/test.theaterlaak.site/g' 's/frontend.localhost/theaterlaak.site/g')
 lineEnding="$ ! s/\$/$CR/" #Inserts a carriage return after every line ending except the last otherwise newlines will be appended to a file everytime this condition is used.
+# files=$(find . -type f \( -name "*.js" -o -name "*.cs" \) ! -path "*/Migrations/*" ! -path "*/obj/*" ! -path "*/bin/*" ! -path "*/node_modules/*" ! -path "*/_tests_/*" ! -path "*/cypress/*" -print) #Find query for all .js and .cs files but skipping lib & test files
 
 deploy "$@"
+
+#Should probably split it out a bit & make the specific locations optional

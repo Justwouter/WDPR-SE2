@@ -11,8 +11,8 @@ const BaseLayout = () => {
     return (
 
         <React.StrictMode>
-            {window.innerWidth > 1200 ? <Header/> : <HeaderMobile/>}
-            {/* <Header /> */}
+            {/* {window.innerWidth > 1200 ? <Header/> : <HeaderMobile/>} */}
+            <Header />
             <Outlet />
         </React.StrictMode>
     )
