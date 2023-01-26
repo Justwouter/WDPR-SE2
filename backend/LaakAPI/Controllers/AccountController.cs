@@ -34,4 +34,16 @@ public class AccountController : ControllerBase
         return await _accountService.Login(user);
     }
 
+    [HttpGet("rollen")]
+    public async Task<IActionResult> getRoles(string id)
+    {
+        return await _accountService.getRoles(id);
+    }
+
+    [HttpPut("rollen")]
+    public async Task<IActionResult> addRole(string id, string role)
+    {
+        return await _accountService.addRole(id, role);
+    }
+
 }

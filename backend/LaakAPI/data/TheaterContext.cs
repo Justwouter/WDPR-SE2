@@ -15,6 +15,7 @@ public class TheaterContext : IdentityDbContext
     }
 
     public DbSet<User> Gebruikers { get; set; } = default!;
+    public DbSet<Donatie> Donaties {get; set;} = default!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
