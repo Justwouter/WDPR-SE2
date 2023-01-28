@@ -10,47 +10,41 @@ namespace backend.Service;
 
 public interface IAccountService
 {
-    Task<IdentityUser> Registreer([FromBody] User user);
-    Task<IActionResult> Login([FromBody] User user);
+    Task<IdentityUser> Registreer([FromBody] UserRegistrationDTO user);
+    Task<IActionResult> Login([FromBody] UserLoginDTO user);
     Task<IActionResult> getRoles(string id);
     Task<IActionResult> addRole(string id, string role);
 }
 
 public class AccountService : IAccountService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<IUser> _userManager;
     private readonly IConfiguration _configuration;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountService(UserManager<IdentityUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+    public AccountService(UserManager<IUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _configuration = configuration;
         _roleManager = roleManager;
     }
 
-    public async Task<IdentityUser> Registreer([FromBody] User user)
+    public async Task<IdentityUser> Registreer( UserRegistrationDTO user)
     {
-        var resultaat = await _userManager.CreateAsync(user, user.Password);
+        var _user = new IUser() {UserName = user.UserName, Email = user.Email};
+        var resultaat = await _userManager.CreateAsync(_user, user.Password);
         if (resultaat.Succeeded)
         {
-            if (user.Type == null)
+            if (_userManager.GetRolesAsync(_user).Result.IsNullOrEmpty())
             {
-                user.Type = "Bezoeker";
-                await _userManager.AddToRoleAsync(user, "Bezoeker");
+                await _userManager.AddToRoleAsync(_user, "Bezoeker");
             }
-            if (user.Type.Equals("Medewerker"))
-            {
-                await _userManager.AddToRoleAsync(user, "Medewerker");
-            }
-            return await _userManager.FindByNameAsync(user.UserName);
-
+            return await _userManager.FindByNameAsync(_user.UserName);
         }
-
         return null;
     }
 
-    public async Task<IActionResult> Login([FromBody] User user)
+    public async Task<IActionResult> Login(UserLoginDTO user)
     {
         var _user = await _userManager.FindByNameAsync(user.UserName);
         if (_user != null)

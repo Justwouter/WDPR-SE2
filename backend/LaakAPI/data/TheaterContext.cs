@@ -14,7 +14,7 @@ public class TheaterContext : IdentityDbContext
         Database.EnsureCreated();
     }
 
-    public DbSet<User> Gebruikers { get; set; } = default!;
+    public DbSet<IUser> Gebruikers { get; set; } = default!;
     public DbSet<Donatie> Donaties {get; set;} = default!;
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -35,11 +35,11 @@ public class TheaterContext : IdentityDbContext
     public void seedDatabaseUsers(ModelBuilder builder)
     {
         //Default very secure admin account
-        User defaultAdmin = new User() { Id = "1", UserName = "Admin", Type = "Medewerker", Password = "Admin1!", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" };
-        PasswordHasher<User> ph = new PasswordHasher<User>();
+        var defaultAdmin = new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" };
+        PasswordHasher<IUser> ph = new PasswordHasher<IUser>();
         defaultAdmin.PasswordHash = ph.HashPassword(defaultAdmin, "Admin1!");
 
-        builder.Entity<User>().HasData(defaultAdmin);
+        builder.Entity<IUser>().HasData(defaultAdmin);
 
         //Temporary mark the admin account as a "Medewerker" instead of "Admin"
         builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
