@@ -32,11 +32,14 @@ jobs:
           echo "Deploying..."
           ProjectDir
           docker-compose down
+          ./deploy -r
           git checkout Stable
           git pull
           ./deploy
           cd ./frontend
           npm run build
+          cd ../backend
+          dotnet restore
           cd ..
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
