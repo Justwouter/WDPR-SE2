@@ -17,7 +17,7 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [Route("registreer")]
-    public async Task<IActionResult> Registreer([FromBody] User user)
+    public async Task<IActionResult> Registreer([FromBody] UserRegistrationDTO user)
     {
         var result = await _accountService.Registreer(user);
         if (result != null)
@@ -29,7 +29,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] User user)
+    public async Task<IActionResult> Login([FromBody] UserLoginDTO user)
     {
         return await _accountService.Login(user);
     }

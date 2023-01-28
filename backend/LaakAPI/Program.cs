@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
-
+using backend.model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +20,7 @@ builder.Services.AddDbContext<OrderContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("OrderContext")));
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<IUser, IdentityRole>()
                 .AddEntityFrameworkStores<TheaterContext>()
                 .AddDefaultTokenProviders();
 

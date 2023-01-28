@@ -1,9 +1,7 @@
 import React from "react";
-import { useAuthUser } from "react-auth-kit";
 
 export default function OverOns() {
-    const auth = useAuthUser();
-    console.log(auth);
+
     return (
         <div>
             <h1>Over ons</h1>

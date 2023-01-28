@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace backend.model;
 
-public class User : IdentityUser
+public class IUser : IdentityUser
 {
-    public string? Type { get; set; }
-    public string Password { get; set; }
-    public string? DonatieToken {get; set;}
+        public string? DonatieToken {get; set;}
 }
