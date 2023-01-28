@@ -1,9 +1,33 @@
-import React from "react";
-import { useAuthUser } from "react-auth-kit";
+import React, { useEffect, useState } from "react";
+import { getCookie, parseJwt } from "../utils";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function OverOns() {
-    const auth = useAuthUser();
-    console.log(auth);
+    const [toestemming, setToestemming] = useState(false);
+    let navigate = useNavigate();
+
+    async function changeToestemming() {
+        var jwt = getCookie("jwt");
+        if (jwt === null) {
+            setToestemming(false);
+            return;
+        }
+        var id = parseJwt(jwt).Id;
+        var status = await fetch("http://api.localhost/api/Donatie/" + id)
+        .then(result => result.status);
+        setToestemming(status === 200);
+        console.log(toestemming)
+    }
+
+    useEffect (() => {
+        changeToestemming()
+    }, [])
+
+    function askPermission() {
+        var id = parseJwt(getCookie("jwt")).Id;
+        window.location.href = "https://ikdoneer.azurewebsites.net/Toegang?url=http%3A%2F%2Fapi.localhost%2Fapi%2FDonatie%2FAddToken%2F"+id;
+    }
+
     return (
         <div>
             <h1>Over ons</h1>
@@ -19,7 +43,7 @@ export default function OverOns() {
             <div>
                 <h4>Steun ons</h4>
                 <p>Donaties zijn altijd welkom.</p>
-                                
+                {toestemming ? <Link to="/Donatie">Doneer</Link> : <button onClick={askPermission}>Vraag eerst toestemming</button>}
             </div>
         </div>
     )

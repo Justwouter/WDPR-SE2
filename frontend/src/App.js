@@ -38,7 +38,7 @@ const App = () => {
             <Route element={<OverOns/>} path="/Over-ons"/>
             {/* <Route element={<Donatie/>} path="/Doneer"/> */}
             <Route element={<Navigate to="/" />} path="*" />
-            <Route element={<DonatiePagina/>} path="/DonatiePagina"/>
+            <Route element={<DonatiePagina/>} path="/Donatie"/>
           </Route>
         </Routes>
       </BrowserRouter>

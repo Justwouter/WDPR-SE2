@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import HeadItem from './HeadItem'
 import { useNavigate } from 'react-router-dom'
-import { getCookie } from '../../utils'
+import { getCookie, parseJwt } from '../../utils'
 
 function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
@@ -28,21 +28,6 @@ function Header() {
   }, [])
 
   useEffect(() => {
-    function parseJwt(token) {
-      var base64Url = token.split('.')[1]
-      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split('')
-          .map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-          })
-          .join('')
-      )
-
-      return JSON.parse(jsonPayload)
-    }
     let jwtRAW = getCookie("jwt")
     // let jwtRAW = localStorage.getItem('jwt')
     if (jwtRAW != null && jwtRAW.length > 0) {
