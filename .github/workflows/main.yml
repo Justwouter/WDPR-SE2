@@ -28,6 +28,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         script:
+          # Run commands to deploy code to your device here
           echo "Deploying..."
           ProjectDir
           docker-compose down
