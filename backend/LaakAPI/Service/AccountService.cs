@@ -18,12 +18,14 @@ public interface IAccountService
 
 public class AccountService : IAccountService
 {
+    private readonly TheaterContext _context;
     private readonly UserManager<IUser> _userManager;
     private readonly IConfiguration _configuration;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountService(UserManager<IUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+    public AccountService(TheaterContext context, UserManager<IUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
     {
+        _context = context;
         _userManager = userManager;
         _configuration = configuration;
         _roleManager = roleManager;
@@ -39,6 +41,7 @@ public class AccountService : IAccountService
             {
                 await _userManager.AddToRoleAsync(_user, "Bezoeker");
             }
+            await _context.SaveChangesAsync();
             return await _userManager.FindByNameAsync(_user.UserName);
         }
         return null;

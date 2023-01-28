@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getCookie, parseJwt } from "../utils";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function OverOns() {
     const [toestemming, setToestemming] = useState(false);
-    let navigate = useNavigate();
 
     async function changeToestemming() {
         var jwt = getCookie("jwt");
@@ -13,7 +12,7 @@ export default function OverOns() {
             return;
         }
         var id = parseJwt(jwt).Id;
-        var status = await fetch("http://api.localhost/api/Donatie/" + id)
+        var status = await fetch("http://api.localhost/api/Donatie/checkToken/" + id)
         .then(result => result.status);
         setToestemming(status === 200);
         console.log(toestemming)
@@ -26,6 +25,10 @@ export default function OverOns() {
     function askPermission() {
         var id = parseJwt(getCookie("jwt")).Id;
         window.location.href = "https://ikdoneer.azurewebsites.net/Toegang?url=http%3A%2F%2Fapi.localhost%2Fapi%2FDonatie%2FAddToken%2F"+id;
+    }
+
+    function doDonatie() {
+        window.location.href = "https://ikdoneer.azurewebsites.net/Donatie/Create?doel=66";
     }
 
     return (
@@ -43,7 +46,7 @@ export default function OverOns() {
             <div>
                 <h4>Steun ons</h4>
                 <p>Donaties zijn altijd welkom.</p>
-                {toestemming ? <Link to="/Donatie">Doneer</Link> : <button onClick={askPermission}>Vraag eerst toestemming</button>}
+                {toestemming ? <button onClick={doDonatie}>Doneer</button> : <button onClick={askPermission}>Vraag eerst toestemming</button>}
             </div>
         </div>
     )

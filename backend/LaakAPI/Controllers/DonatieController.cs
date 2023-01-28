@@ -16,14 +16,19 @@ public class DonatieDTO {
     public string Naam {get; set;}
 }
 
+public class TokenDTO {
+    public string token { get; set; }
+}
+
+
 [Route("api/[controller]")]
 [ApiController]
 public class DonatieController : ControllerBase
 {
     private readonly TheaterContext _context;
-    private readonly UserManager<User> _userManager;
+    private readonly UserManager<IUser> _userManager;
 
-    public DonatieController(TheaterContext context, UserManager<User> userManager)
+    public DonatieController(TheaterContext context, UserManager<IUser> userManager)
     {
         _context = context;
         _userManager = userManager;
@@ -36,9 +41,12 @@ public class DonatieController : ControllerBase
         }
         await _context.AddAsync(new Donatie
         {
+            Id = new Guid(),
             Email = donatie.Email,
             Hoeveelheid = donatie.Hoeveelheid,
-            Naam = donatie.Naam
+            Naam = donatie.Naam,
+            Datum = DateTime.Now
+
         });
         await _context.SaveChangesAsync();
 
@@ -52,17 +60,19 @@ public class DonatieController : ControllerBase
             }
             await _userManager.AddToRoleAsync(user, "Donateur");
         }
-        return Ok();
+        return Redirect("http://frontend.localhost/Bedankt");
     }
 
     [HttpPost("AddToken/{id}")]
-    public async Task<IActionResult> addToken(string id, [FromBody] string token) {
+    public async Task<IActionResult> addToken(string id, [FromForm] TokenDTO tokenDTO) {
         var user = await _userManager.FindByIdAsync(id);
         if (user == null) {
             return BadRequest();
         }
-        user.DonatieToken = token;
-        return Redirect("http://frontend.localhost/Succesvol");
+        user.DonatieToken = tokenDTO.token;
+        await _userManager.UpdateAsync(user);
+        await _context.SaveChangesAsync();
+        return Redirect("http://frontend.localhost/Over-ons");
     }
 
     [HttpGet("checkToken/{id}")]

@@ -16,6 +16,7 @@ import Succesvol from './components/Bestellen/Succesvol';
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import OverOns from './components/DonatiePanel/OverOns';
 import DonatiePagina from './components/DonatiePanel/DonatiePagina';
+import Bedankt from './components/DonatiePanel/Bedankt';
 // import Donatie from './components/Donatie';
 
 
@@ -39,6 +40,7 @@ const App = () => {
             {/* <Route element={<Donatie/>} path="/Doneer"/> */}
             <Route element={<Navigate to="/" />} path="*" />
             <Route element={<DonatiePagina/>} path="/Donatie"/>
+            <Route element={<Bedankt/>} path="/Bedankt"/>
           </Route>
         </Routes>
       </BrowserRouter>
