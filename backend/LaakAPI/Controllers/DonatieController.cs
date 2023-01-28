@@ -1,6 +1,7 @@
 using backend.model;
 using backend.Service;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,9 +21,9 @@ public class DonatieDTO {
 public class DonatieController : ControllerBase
 {
     private readonly TheaterContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<User> _userManager;
 
-    public DonatieController(TheaterContext context, UserManager<IdentityUser> userManager)
+    public DonatieController(TheaterContext context, UserManager<User> userManager)
     {
         _context = context;
         _userManager = userManager;
@@ -52,5 +53,32 @@ public class DonatieController : ControllerBase
             await _userManager.AddToRoleAsync(user, "Donateur");
         }
         return Ok();
-    }    
+    }
+
+    [HttpPost("AddToken/{id}")]
+    public async Task<IActionResult> addToken(string id, [FromBody] string token) {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null) {
+            return BadRequest();
+        }
+        user.DonatieToken = token;
+        return Redirect("http://frontend.localhost/Succesvol");
+    }
+
+    [HttpGet("checkToken/{id}")]
+    public async Task<IActionResult> checkToken(string id){
+        var user = await _userManager.FindByIdAsync(id);
+        if (user == null) {
+            return BadRequest("User not found.");
+        }
+        if (user.DonatieToken == null) {
+            return NotFound("Token not found.");
+        }
+        return Ok(user.DonatieToken);
+    }
+
+    [HttpGet("checkDonateur"), Authorize("Donateur")]
+    public async Task<IActionResult> checkDonateur(){
+        return Ok();
+    }
 }
