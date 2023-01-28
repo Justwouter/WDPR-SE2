@@ -1,22 +1,24 @@
 using backend.model;
-using backend.Service;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers;
 
-public class DonatieDTO {
+public class DonatieDTO
+{
     [Required]
-    public string Email {get; set;}
+    public string Email { get; set; }
     [Required]
-    public int Hoeveelheid {get; set;}
+    public int Hoeveelheid { get; set; }
     [Required]
-    public string Naam {get; set;}
+    public string Naam { get; set; }
 }
 
-public class TokenDTO {
+public class TokenDTO
+{
     public string token { get; set; }
 }
 
@@ -35,8 +37,10 @@ public class DonatieController : ControllerBase
     }
 
     [HttpPost("DonatieListener")]
-    public async Task<IActionResult> DonatieListener(DonatieDTO donatie){
-        if (donatie == null) {
+    public async Task<IActionResult> DonatieListener(DonatieDTO donatie)
+    {
+        if (donatie == null)
+        {
             return BadRequest();
         }
         await _context.AddAsync(new Donatie
@@ -64,9 +68,11 @@ public class DonatieController : ControllerBase
     }
 
     [HttpPost("AddToken/{id}")]
-    public async Task<IActionResult> addToken(string id, [FromForm] TokenDTO tokenDTO) {
+    public async Task<IActionResult> addToken(string id, [FromForm] TokenDTO tokenDTO)
+    {
         var user = await _userManager.FindByIdAsync(id);
-        if (user == null) {
+        if (user == null)
+        {
             return BadRequest();
         }
         user.DonatieToken = tokenDTO.token;
@@ -76,19 +82,34 @@ public class DonatieController : ControllerBase
     }
 
     [HttpGet("checkToken/{id}")]
-    public async Task<IActionResult> checkToken(string id){
+    public async Task<IActionResult> checkToken(string id)
+    {
         var user = await _userManager.FindByIdAsync(id);
-        if (user == null) {
+        if (user == null)
+        {
             return BadRequest("User not found.");
         }
-        if (user.DonatieToken == null) {
+        if (user.DonatieToken == null)
+        {
             return NotFound("Token not found.");
         }
         return Ok(user.DonatieToken);
     }
 
     [HttpGet("checkDonateur"), Authorize("Donateur")]
-    public async Task<IActionResult> checkDonateur(){
+    public async Task<IActionResult> checkDonateur()
+    {
         return Ok();
+    }
+
+    [HttpGet, Authorize(Roles = "Medewerker")]
+    public async Task<IActionResult> GetDonaties()
+    {
+        List<object> donatielist = new List<object>();
+        foreach (Donatie donatie in await _context.Donaties.ToListAsync())
+        {
+            donatielist.Add(donatie);
+        }
+        return Ok(donatielist);
     }
 }
