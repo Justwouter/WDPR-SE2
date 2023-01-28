@@ -20,7 +20,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy to Raspberry Pi
+    - name: Deploy to Server
       uses: appleboy/ssh-action@v0.1.7
       with:
         host: ${{ secrets.HOST }}
@@ -28,15 +28,17 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         script: |
-          # Run commands to deploy code to your Raspberry Pi here
           echo "Deploying..."
           ProjectDir
           docker-compose down
+          ./deploy -r
           git checkout Stable
           git pull
           ./deploy
           cd ./frontend
           npm run build
+          cd ../backend
+          dotnet restore
           cd ..
           docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 
