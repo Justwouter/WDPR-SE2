@@ -45,7 +45,6 @@ const App = () => {
             <Route element={<Bedankt/>} path="/Bedankt"/>
             {/* <Route element={<Donatie/>} path="/Doneer"/> */}
 
-
             <Route element={<AdminPanel/>} path="/AdminPanel"/>
             <Route element={<Navigate to="/" />} path="*" />
             

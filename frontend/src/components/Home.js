@@ -42,7 +42,8 @@ const Home = () => {
 
     const selectImage = (object) => {
         if (object.image != null) {
-            return process.env.PUBLIC_URL + '/Afbeeldingen/Unique/' + object.image
+            var i = String(object.image)
+            return i.includes("https://") ? object.image : process.env.PUBLIC_URL + '/Afbeeldingen/Unique/' + object.image
         }
         return process.env.PUBLIC_URL + '/Afbeeldingen/Generic/' + object.genre + '.jpg'
     }
