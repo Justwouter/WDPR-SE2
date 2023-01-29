@@ -8,6 +8,7 @@ const Home = () => {
     const [programmas, setProgramma] = useState([]);
     const [iSlide, setISlide] = useState(1);
 
+
     const beweegRB = index => {
         setISlide(index)
     }
@@ -39,7 +40,14 @@ const Home = () => {
         return d.getDate() + ' - ' + (d.getMonth() + 1) + ' - ' + d.getFullYear()
     }
 
+    const selectImage = (object) => {
+        if (object.image != null) {
+            return process.env.PUBLIC_URL + '/Afbeeldingen/Unique/' + object.image
+        }
+        return process.env.PUBLIC_URL + '/Afbeeldingen/Generic/' + object.genre + '.jpg'
+    }
 
+    console.log(programmas)
 
     return loading ? "Laden..." : (
         <div className='c_slider'>
@@ -65,7 +73,7 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <img src={process.env.PUBLIC_URL + '/Afbeeldingen/' + obj.genre + '.jpg'} alt={obj.genre} />
+                            <img src={selectImage(obj)} alt={obj.genre} />
 
                             <div className='c_radiobox'>
                                 {Array.from({ length: 5 }).map((item, index) => (
