@@ -51,3 +51,7 @@ export function parseJwt(token) {
 
   return JSON.parse(jsonPayload)
 }
+
+export function dateFormatter(date){
+  return date>=10? date :"0"+date
+}

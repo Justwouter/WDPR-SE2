@@ -845,15 +845,19 @@ body {
   width: 500px;
   border-radius: 0px 100px 100px 0px;
   text-align: center;
+  justify-content: center;
 }
 
 .g_dT {
-  margin-top: -60px;
+  margin-top: -80px;
   font-size: 2rem;
   color: var(--adoXiketic);
+  width: 350px;
+
 }
 
 .g_dT2 {
+  width: 350px;
   font-size: 3rem;
 
 }

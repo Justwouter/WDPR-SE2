@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUur } from './utils.js';
+import { getUur,dateFormatter } from './utils.js';
 import _ from 'lodash';
 
 
@@ -37,7 +37,7 @@ const Home = () => {
 
     const dateFormat = (date) => {
         var d = new Date(date);
-        return d.getDate() + ' - ' + (d.getMonth() + 1) + ' - ' + d.getFullYear()
+        return dateFormatter(d.getDate()) + ' - ' + (dateFormatter(d.getMonth() + 1)) + ' - ' + d.getFullYear()
     }
 
     const selectImage = (object) => {
@@ -48,7 +48,8 @@ const Home = () => {
         return process.env.PUBLIC_URL + '/Afbeeldingen/Generic/' + object.genre + '.jpg'
     }
 
-    
+    console.log(programmas)
+
     return loading ? "Laden..." : (
         <div className='c_slider'>
             <div>
