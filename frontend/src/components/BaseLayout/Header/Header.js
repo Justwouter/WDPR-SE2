@@ -6,6 +6,8 @@ import { getCookie, parseJwt } from '../../utils'
 function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
+  const [isLoggedIn, setLoginStatus] = useState(true)
+  const [jwtInfo, setJWTInfo] = useState({})
   useEffect(() => {
     async function fetchData() {
       let jwtRAW = getCookie("jwt")
@@ -32,18 +34,16 @@ function Header() {
     // let jwtRAW = localStorage.getItem('jwt')
     if (jwtRAW != null && jwtRAW.length > 0) {
       const jwtToken = parseJwt(jwtRAW)
-      if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
-        setAdminComponents(true)
-      }
-      else {
-        setAdminComponents(false)
-      }
+      console.log(jwtToken)
+      setJWTInfo(jwtToken)
+      setLoginStatus(true)
+      jwtToken.role === "Medewerker" | jwtToken.role === "Admin" ? setAdminComponents(true) : setAdminComponents(false)
     }
     else {
       setAdminComponents(false)
+      setLoginStatus(false)
     }
   }, [])
-
 
   let navigate = useNavigate()
   const routeChange = () => {
@@ -55,29 +55,37 @@ function Header() {
     <div className='header-basic'>
       <header>
         <ul className='list-inline'>
-          <div className='logo' onClick={routeChange}></div>
-          <div className='laak'>
-            <HeadItem text='LAAK' />
-          </div>
-          <div className='lijn'>
-            <HeadItem text='____________________' />
-          </div>
-          <div className='theater'>
-            <HeadItem text='THEATER' />
-          </div>
+          <React.Fragment>
+            <div className='logo' onClick={routeChange} />
+            <div className='laak'>
+              <HeadItem text='LAAK' />
+            </div>
+            <div className='lijn'>
+              <HeadItem text='____________________' />
+            </div>
+            <div className='theater'>
+              <HeadItem text='THEATER' />
+            </div>
+          </React.Fragment>
 
           <div id='HeaderItems' className='basic'>
             <HeadItem link='/programmalijst' text='Programma' />
-            <HeadItem link='/Over-ons' text='Over ons'/>
-            <HeadItem link='/Login' text='Login' />
-            <HeadItem link='/Registration' text='Registreer' />
-            {/* <HeadItem link='/Doneer' text='Doneer' /> */}
+            <HeadItem link='/Over-ons' text='Over ons' />
+
+            {!isLoggedIn && (
+              <React.Fragment>
+                <HeadItem link='/Login' text='Login' />
+                <HeadItem link='/Registration' text='Registreer' />
+              </React.Fragment>
+            )}
+
             {AdminComponents && (
-              <div>
+              <React.Fragment>
                 <HeadItem link='/AdminPanel' text='Admin Panel' />
                 {/* <HeadItem link='/programmatoevoegen' text='Toevoegen' /> */}
-              </div>
+              </React.Fragment>
             )}
+            <HeadItem className="RightItems" link='/MyAccount' text={jwtInfo.Name}/>
           </div>
         </ul>
       </header>

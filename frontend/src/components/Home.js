@@ -47,8 +47,7 @@ const Home = () => {
         return process.env.PUBLIC_URL + '/Afbeeldingen/Generic/' + object.genre + '.jpg'
     }
 
-    console.log(programmas)
-
+    
     return loading ? "Laden..." : (
         <div className='c_slider'>
             <div>

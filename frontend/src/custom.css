@@ -14,7 +14,8 @@
 /* Custom stuff */
 body {
   background-color: black;
-  padding-top: 146px; /*Set this to header hight to avoid black bars! */
+  padding-top: 146px;
+  /*Set this to header hight to avoid black bars! */
   bottom: 0px;
   height: 100%;
 }
@@ -28,44 +29,52 @@ body {
   font-style: normal;
   color: #FD024F;
   font-size: 5rem;
- 
+
 }
-.table1{
+
+.table1 {
   background-color: var(--adoXiketic);
   max-width: 25px;
-  
+
 }
-.table1 ul{
+
+.table1 ul {
   font-family: 'Poppins', sans-serif;
   font-style: 600;
 
 }
-.table2{
+
+.table2 {
   background-color: var(--adoXiketic);
 
   max-width: 25px;
 }
-.table2 ul{
+
+.table2 ul {
   font-family: 'Poppins', sans-serif;
   font-style: 600;
   font-size: 1.5rem;
 }
-.table3{
+
+.table3 {
   background-color: var(--adoXiketic);
 
   max-width: 200px;
 }
-.table3 ul{
+
+.table3 ul {
   font-family: 'Poppins', sans-serif;
-  font-style:400;
+  font-style: 400;
   font-size: 1rem;
 }
+
 .table3 .style3 {
   font-family: 'Poppins', sans-serif;
-  font-style:700;
+  font-style: 700;
   font-size: 2rem;
 }
-.table4{
+
+.table4 {
   max-width: 25px;
   background-color: var(--adoXiketic);
 }
@@ -80,6 +89,7 @@ body {
 .Card {
   background-color: #1B1725;
 }
+
 .bestelKnop {
   color: #ffffff;
   padding: 20px;
@@ -92,7 +102,8 @@ body {
   border-radius: 15px;
   transition: transform 0.5s;
 }
-.bestelKnop:hover{
+
+.bestelKnop:hover {
   color: var(--adoXiketic);
   background-color: var(--adoRedCrayola);
   transform: scale3d(1.2, 1.20, 1);
@@ -102,7 +113,7 @@ body {
 /* ----------------ProgrammaForm---------------- */
 /* --------------------------------------------- */
 
-.vTitel{
+.vTitel {
   font-family: 'Poppins', sans-serif;
   font-style: 900;
   font-size: 2.5rem;
@@ -110,13 +121,15 @@ body {
   display: flex;
   justify-content: center;
 }
-.fButton{
+
+.fButton {
   display: flex;
   justify-content: center;
- 
+
 }
-.fButton button{
-  background-color: var(--adoXiketic) ;
+
+.fButton button {
+  background-color: var(--adoXiketic);
   border-style: none;
   font-family: 'Poppins', sans-serif;
   font-style: 500;
@@ -124,12 +137,13 @@ body {
   border-radius: 15px;
   transition: transform 0.5s;
 }
-.fButton button:hover{
+
+.fButton button:hover {
   background-color: var(--adoRedCrayola);
   transform: scale3d(1.2, 1.20, 1);
 }
 
-.BG_Box{
+.BG_Box {
   background-color: var(--adoGoldCrayola);
   padding-left: 25px;
   padding-right: 25px;
@@ -149,7 +163,7 @@ body {
   padding-bottom: 5%;
   display: inline-block;
   justify-content: center;
-  
+
 }
 
 .fBox .veld {
@@ -166,12 +180,13 @@ body {
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 8px 30px 0px rgba(0, 0, 0, 0.05);
 }
+
 .veld:focus {
   outline: none;
   background-color: rgb(255, 255, 255);
 }
 
-.main-form{
+.main-form {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -552,6 +567,15 @@ body {
   float: right;
 }
 
+#HeaderItems {
+  flex-grow: 1;
+}
+
+.RightItems{
+  align-items: flex-end;
+  margin-left: auto;
+}
+
 .header-basic li {
   padding: 0 10px;
 }
@@ -599,16 +623,16 @@ body {
 }
 
 /* LOGIN FORM */
-.BG{
+.BG {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  
+
 }
 
-.Content{
+.Content {
   width: 550px;
   background-color: var(--adoMediumPurple);
   padding-left: 3%;
@@ -616,7 +640,7 @@ body {
   border-radius: 15px;
 }
 
-.Switch{
+.Switch {
   padding-top: 3%;
   padding-bottom: 5%;
   display: flex;
@@ -625,17 +649,17 @@ body {
 
 }
 
-.HuidigeKnop{
+.HuidigeKnop {
   text-align: center;
   width: 250px;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 1.95rem;
   background-color: var(--adoXiketic);
-  
+
 }
 
-.RegistreerSwitch{
+.RegistreerSwitch {
   color: #ffffff;
   text-align: center;
   width: 250px;
@@ -643,24 +667,26 @@ body {
   background-color: rgba(255, 255, 255, 0.541);
   font-weight: 600;
   font-size: 1.95rem;
- 
+
 }
-.RegistreerSwitch:hover{
+
+.RegistreerSwitch:hover {
   color: var(--adoXiketic);
   background-color: white;
 }
 
-.BG button{
+.BG button {
   color: #ffffff;
   padding-left: 15px;
   padding-right: 15px;
   cursor: pointer;
 }
-.BG button:focus{
+
+.BG button:focus {
   outline: none;
 }
 
-.LoginSwitch{
+.LoginSwitch {
   color: #ffffff;
   text-align: center;
   width: 250px;
@@ -669,12 +695,13 @@ body {
   font-weight: 600;
   font-size: 1.95rem;
 }
-.LoginSwitch:hover{
+
+.LoginSwitch:hover {
   color: var(--adoXiketic);
   background-color: white;
 }
 
-.eBG{
+.eBG {
   background-color: #FD024F;
   color: #ffffff;
   padding: 20px;
@@ -684,7 +711,7 @@ body {
 }
 
 /* HOME IMG SLIDER */
-.c_slider{
+.c_slider {
   max-width: 2560px;
   height: 1050px;
   margin: 0px auto 0;
@@ -699,25 +726,26 @@ body {
   }
 }
 
-.slide{
+.slide {
   width: 100%;
   height: 100%;
- 
+
   /* padding-left: 50px;
   padding-right: 50px; */
   position: absolute;
-  
+
   opacity: 0;
   transition: opacity ease-in-out 0.4s;
 }
 
-.slide img{
- 
+.slide img {
+
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.Actief-anim{
+
+.Actief-anim {
   opacity: 1;
 }
 
@@ -728,6 +756,7 @@ body {
   transform: translateX(-50%);
   display: flex;
 }
+
 .radiobox {
   width: 20px;
   height: 20px;
@@ -736,12 +765,13 @@ body {
   margin: 0 5px;
   background: #f1f1f100;
 }
+
 .radiobox.Actief {
   background: rgb(255, 255, 255);
-  
+
 }
 
-.g_Titel{
+.g_Titel {
   margin-bottom: -175px;
   max-width: 2560px;
   display: inline-block;
@@ -753,28 +783,28 @@ body {
 
 }
 
-.g_lijn{
+.g_lijn {
   border-style: solid;
   border-color: white;
   border-width: 0.5px;
   width: 800px;
   margin-left: -175px;
- 
+
 }
 
-.g_lijn2{
+.g_lijn2 {
   border-style: solid;
   border-color: white;
   border-width: 0.5px;
   width: 900px;
   margin-left: 1800px;
   margin-top: 400px;
-  
- 
-  
+
+
+
 }
 
-.Seizoen{
+.Seizoen {
   color: white;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
@@ -782,16 +812,17 @@ body {
   padding-left: 45px;
   padding-top: 25px;
   /* text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.75) */
-  
+
 }
-.SeizoenT2{
+
+.SeizoenT2 {
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   font-size: 4rem;
   margin-left: 220px;
 }
 
-.g_ProgTitel{
+.g_ProgTitel {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   font-size: 3rem;
@@ -802,10 +833,10 @@ body {
   text-align: right;
 }
 
-.g_datumBG{
+.g_datumBG {
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  
+
   height: 50px;
   background-color: var(--adoRedCrayola);
   border-style: solid;
@@ -815,18 +846,19 @@ body {
   border-radius: 0px 100px 100px 0px;
   text-align: center;
 }
-.g_dT{
+
+.g_dT {
   margin-top: -60px;
   font-size: 2rem;
   color: var(--adoXiketic);
 }
 
-.g_dT2{
+.g_dT2 {
   font-size: 3rem;
- 
+
 }
 
-.g_link:hover{
+.g_link:hover {
   text-decoration: none;
 }
 
@@ -853,7 +885,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   width: auto;
 }
 
-.qrcode{
+.qrcode {
   display: inline-block;
   max-width: 1500px;
   padding-left: 75px;
@@ -864,10 +896,10 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   margin-left: 20px;
   margin-top: 20px;
   border-radius: 20px;
-  
+
 }
 
-.item{
+.item {
   display: inline-block;
   padding-right: 50px;
 }
