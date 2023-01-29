@@ -76,7 +76,7 @@ const Home = () => {
                             <img src={selectImage(obj)} alt={obj.genre} />
 
                             <div className='c_radiobox'>
-                                {Array.from({ length: 5 }).map((item, index) => (
+                                {Array.from({ length: programmas.length }).map((item, index) => (
                                     <div key={index} onClick={() => beweegRB(index + 1)}
                                         className={iSlide === index + 1 ? "radiobox Actief" : "radiobox"}
                                     ></div>
@@ -94,7 +94,7 @@ const Home = () => {
                                 <div className='g_ProgTitel'>Er zijn nog geen voorstellingen!</div>
                                 <div className='g_lijn2'></div>
                             </div>
-                            <img src={process.env.PUBLIC_URL + '/Afbeeldingen/emptypage.jpg'} alt={"no shows available"} />
+                            <img src={process.env.PUBLIC_URL + '/Afbeeldingen/Generic/emptypage.jpg'} alt={"no shows available"} />
                         </div>
                     )}
             </div>
