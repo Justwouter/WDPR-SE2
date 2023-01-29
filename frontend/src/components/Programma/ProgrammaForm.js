@@ -96,7 +96,6 @@ const ProgrammaForm = (props) => {
       sLijst.push(dRObject)
     }
 
-    console.log()
     return sLijst;
 
   }

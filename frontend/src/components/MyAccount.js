@@ -11,7 +11,6 @@ function MyAccount() {
         // let jwtRAW = localStorage.getItem('jwt')
         if (jwtRAW != null && jwtRAW.length > 0) {
           const jwtToken = parseJwt(jwtRAW)
-          console.log(jwtToken)
           setJWTInfo(jwtToken)
         }
         else{

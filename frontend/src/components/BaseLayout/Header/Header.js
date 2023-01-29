@@ -69,12 +69,7 @@ function Header() {
             <HeadItem link='/programmalijst' text='Programma' />
             <HeadItem link='/Over-ons' text='Over ons' />
 
-            {!isLoggedIn && (
-              <React.Fragment>
-                <HeadItem link='/Login' text='Login' />
-                <HeadItem link='/Registration' text='Registreer' />
-              </React.Fragment>
-            )}
+
 
             {AdminComponents && (
               <React.Fragment>
@@ -82,9 +77,14 @@ function Header() {
                 {/* <HeadItem link='/programmatoevoegen' text='Toevoegen' /> */}
               </React.Fragment>
             )}
-            {isLoggedIn && (
+            
+            {isLoggedIn ? (
               <React.Fragment>
                 <HeadItem className="RightItems" link='/MyAccount' text="Account" />
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <HeadItem className="RightItems" link='/Login' text='Login' />
               </React.Fragment>
             )}
 
