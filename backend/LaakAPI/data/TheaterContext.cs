@@ -36,8 +36,8 @@ public class TheaterContext : IdentityDbContext
         //Order is: User, Password, RoleID(Use the roles above as reference)
         var DefaultUserList = new (IUser, string, string)[]
         {
-            (new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" , }, "Admin1!","1"),
-            (new IUser() { Id = "2", UserName = "Test", Email = "Test@frontend.localhost", NormalizedUserName = "TEST", NormalizedEmail = "TEST@frontend.localhost" }, "String1!","2"),
+            (new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@FRONTEND.LOCALHOST" , }, "Admin1!","1"),
+            (new IUser() { Id = "2", UserName = "Test", Email = "Test@frontend.localhost", NormalizedUserName = "TEST", NormalizedEmail = "TEST@FRONTEND.LOCALHOST" }, "String1!","2"),
         };
 
         PasswordHasher<IUser> ph = new PasswordHasher<IUser>();
