@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getCookie, parseJwt } from "../utils";
-import { Link } from "react-router-dom";
 
 export default function OverOns() {
     const [toestemming, setToestemming] = useState(false);
@@ -20,7 +19,7 @@ export default function OverOns() {
 
     useEffect (() => {
         changeToestemming()
-    }, [])
+    })
 
     function askPermission() {
         var id = parseJwt(getCookie("jwt")).Id;
