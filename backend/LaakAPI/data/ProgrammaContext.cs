@@ -23,8 +23,8 @@ public class ProgrammaContext : DbContext
         //This needs to be in a seperate list because migrations disallow the usage of a DbSet in the OnModelCreating method & We need to access these later to add Seats
         List<Programma> Startprogrammas = new List<Programma>();
         Startprogrammas.Add(new Programma() { ProgrammaId = 1, Titel = "Bo Burnham: Inside", Genre = "Cabaret", Van = DateTime.Now, Tot = DateTime.Now.AddHours(1).AddMinutes(27), Zaal = 1, Image="Inside.jpg",Descriptie = "Comedian Bo Burnham shoots and performs a comedy special over the course of a year, all alone, with no crew or audience." });
-        Startprogrammas.Add(new Programma() { ProgrammaId = 2, Titel = "The Mandalorian: A Star Wars Story", Genre = "Komedie", Van = DateTime.Now, Tot = DateTime.Now.AddMinutes(660), Zaal = 2,Image="Mando.jpg", Descriptie = "After the defeat of the Empire at the hands of Rebel forces, a lone bounty hunter operating in the Outer Rim, away from the dominion of the New Republic, goes on many surprising and risky adventures." });
-
+        Startprogrammas.Add(new Programma() { ProgrammaId = 2, Titel = "The Mandalorian", Genre = "Komedie", Van = DateTime.Now, Tot = DateTime.Now.AddMinutes(660), Zaal = 2,Image="Mando.jpg", Descriptie = "After the defeat of the Empire at the hands of Rebel forces, a lone bounty hunter operating in the Outer Rim, away from the dominion of the New Republic, goes on many surprising and risky adventures." });
+        Startprogrammas.Add(new Programma() { ProgrammaId = 3, Titel = "Avengers: Endgame", Genre = "Toneel", Van = DateTime.Now.AddHours(2), Tot = DateTime.Now.AddHours(2).AddMinutes(183), Zaal = 3,Image="https://images.pathe-thuis.nl/19174_1920x1080.jpg", Descriptie = "After Thanos, an intergalactic warlord, disintegrates half of the universe, the Avengers must reunite and assemble again to reinvigorate their trounced allies and restore balance." });
 
         var Programs = modelBuilder.Entity<Programma>();
         Programs.HasMany(c => c.StoelenLijst);
