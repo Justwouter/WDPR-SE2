@@ -16,7 +16,8 @@ migrateAll() {
         else
             migrateSingleContext "$db_context-$1" --context "$db_context"
         fi
-        updateSingleContext --context "$db_context" # Appearently in 7.0.2 migrations auto apply
+        # updateSingleContext --context "$db_context" # when Database.EnsureCreated(); is set, migrations Auto-Apply
+
     done
 }
 

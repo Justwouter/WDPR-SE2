@@ -49,7 +49,7 @@ try {
             $contextName = $fileName -replace ".{3}$"
             Write-Output($fileName)
             dotnet ef migrations add $counter -c $contextName
-            # dotnet ef database update -c $contextName # Appearently in 7.0.2 migrations auto apply
+            # dotnet ef database update -c $contextName # When Database.EnsureCreated(); is set, migrations auto-apply
         }
     }
 
@@ -65,7 +65,7 @@ try {
                 dotnet ef migrations add $migration_name 
             }
         }
-        # dotnet ef database update # Appearently in 7.0.2 migrations auto apply
+        # dotnet ef database update # When Database.EnsureCreated(); is set, migrations auto-apply
     }
 }
 finally {
