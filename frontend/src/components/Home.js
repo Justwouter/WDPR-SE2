@@ -76,7 +76,7 @@ const Home = () => {
                             <img src={selectImage(obj)} alt={obj.genre} />
 
                             <div className='c_radiobox'>
-                                {Array.from({ length: programmas.length }).map((item, index) => (
+                                {Array.from({ length: programmas.length>5?5:programmas.length }).map((item, index) => (
                                     <div key={index} onClick={() => beweegRB(index + 1)}
                                         className={iSlide === index + 1 ? "radiobox Actief" : "radiobox"}
                                     ></div>
