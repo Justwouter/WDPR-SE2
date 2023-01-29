@@ -7,7 +7,6 @@ function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
   const [isLoggedIn, setLoginStatus] = useState(true)
-  const [jwtInfo, setJWTInfo] = useState({})
   useEffect(() => {
     async function fetchData() {
       let jwtRAW = getCookie("jwt")
@@ -34,8 +33,6 @@ function Header() {
     // let jwtRAW = localStorage.getItem('jwt')
     if (jwtRAW != null && jwtRAW.length > 0) {
       const jwtToken = parseJwt(jwtRAW)
-      console.log(jwtToken)
-      setJWTInfo(jwtToken)
       setLoginStatus(true)
       jwtToken.role === "Medewerker" | jwtToken.role === "Admin" ? setAdminComponents(true) : setAdminComponents(false)
     }
@@ -85,7 +82,12 @@ function Header() {
                 {/* <HeadItem link='/programmatoevoegen' text='Toevoegen' /> */}
               </React.Fragment>
             )}
-            <HeadItem className="RightItems" link='/MyAccount' text={jwtInfo.Name}/>
+            {isLoggedIn && (
+              <React.Fragment>
+                <HeadItem className="RightItems" link='/MyAccount' text="Account" />
+              </React.Fragment>
+            )}
+
           </div>
         </ul>
       </header>
