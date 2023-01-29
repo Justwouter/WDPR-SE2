@@ -26,10 +26,7 @@ public class TheaterContext : IdentityDbContext
         builder.Entity<Role>().HasData(new Role() { Id = "2", Name = "Bezoeker", NormalizedName = "BEZOEKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
         builder.Entity<Role>().HasData(new Role() { Id = "3", Name = "Donateur", NormalizedName = "DONATEUR", ConcurrencyStamp = Guid.NewGuid().ToString() });
 
-
         seedDatabaseUsers(builder);
-
-
     }
 
     public void seedDatabaseUsers(ModelBuilder builder)
