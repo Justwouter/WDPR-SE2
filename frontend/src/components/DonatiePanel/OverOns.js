@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getCookie, parseJwt } from "../utils";
-import { Link } from "react-router-dom";
 
 export default function OverOns() {
     const [toestemming, setToestemming] = useState(false);
@@ -15,7 +14,6 @@ export default function OverOns() {
         var status = await fetch("http://api.localhost/api/Donatie/checkToken/" + id)
         .then(result => result.status);
         setToestemming(status === 200);
-        console.log(toestemming)
     }
 
     useEffect (() => {
@@ -24,7 +22,7 @@ export default function OverOns() {
 
     function askPermission() {
         var id = parseJwt(getCookie("jwt")).Id;
-        window.location.href = "https://ikdoneer.azurewebsites.net/Toegang?url=http%3A%2F%2Fapi.localhost%2Fapi%2FDonatie%2FAddToken%2F"+id;
+        window.location.href = "https://ikdoneer.azurewebsites.net/Toegang?url=http://api.localhost/api/Donatie/AddToken/"+id;
     }
 
     function doDonatie() {

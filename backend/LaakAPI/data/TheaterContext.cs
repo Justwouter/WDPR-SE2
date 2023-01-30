@@ -35,7 +35,7 @@ public class TheaterContext : IdentityDbContext
     public void seedDatabaseUsers(ModelBuilder builder)
     {
         //Default very secure admin account
-        var defaultAdmin = new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" };
+        var defaultAdmin = new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@FRONTEND.LOCALHOST" };
         PasswordHasher<IUser> ph = new PasswordHasher<IUser>();
         defaultAdmin.PasswordHash = ph.HashPassword(defaultAdmin, "Admin1!");
 

@@ -6,13 +6,25 @@ import { getCookie, parseJwt } from '../../utils'
 function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
+  const [DonateurComponents, setDonateurComponents] = useState(false)
+
   useEffect(() => {
     async function fetchData() {
       let jwtRAW = getCookie("jwt")
       // let jwtRAW = localStorage.getItem('jwt')
       if (jwtRAW != null && jwtRAW.length > 0) {
         const jwtToken = jwtRAW.replace('"', '')
-        fetch('http://api.localhost/api/Role/CheckElevation', {
+        // fetch('http://api.localhost/api/Role/CheckElevation', {
+        //   method: 'GET',
+        //   headers: {
+        //     Accept: 'text/plain',
+        //     'Content-Type': 'text/plain',
+        //     Authorization: 'Bearer ' + jwtToken
+        //   }
+        // }).then(response => {
+        //   response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+        // })
+        fetch('http://api.localhost/api/Donatie/checkDonateur', {
           method: 'GET',
           headers: {
             Accept: 'text/plain',
@@ -20,7 +32,7 @@ function Header() {
             Authorization: 'Bearer ' + jwtToken
           }
         }).then(response => {
-          response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+          response.status === 200 ? setDonateurComponents(true) : setDonateurComponents(false)
         })
       }
     }
@@ -32,15 +44,22 @@ function Header() {
     // let jwtRAW = localStorage.getItem('jwt')
     if (jwtRAW != null && jwtRAW.length > 0) {
       const jwtToken = parseJwt(jwtRAW)
-      if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
-        setAdminComponents(true)
+      // if (jwtToken.role === "Medewerker" | jwtToken.role === "Admin") {
+      //   setAdminComponents(true)
+      // }
+      // else {
+      //   setAdminComponents(false)
+      // }
+      if (jwtToken.role === "Donateur") {
+        setDonateurComponents(true)
       }
       else {
-        setAdminComponents(false)
+        setDonateurComponents(false)
       }
     }
     else {
       setAdminComponents(false)
+      setDonateurComponents(false)
     }
   }, [])
 
@@ -71,13 +90,17 @@ function Header() {
             <HeadItem link='/Over-ons' text='Over ons'/>
             <HeadItem link='/Login' text='Login' />
             <HeadItem link='/Registration' text='Registreer' />
-            {/* <HeadItem link='/Doneer' text='Doneer' /> */}
+            {DonateurComponents && (
+              <div>
+                <HeadItem link='/DonateursPanel' text='Donateurs Panel' />
+              </div>
+            )}
             {AdminComponents && (
               <div>
                 <HeadItem link='/AdminPanel' text='Admin Panel' />
-                {/* <HeadItem link='/programmatoevoegen' text='Toevoegen' /> */}
               </div>
             )}
+            {console.log(DonateurComponents)}
           </div>
         </ul>
       </header>

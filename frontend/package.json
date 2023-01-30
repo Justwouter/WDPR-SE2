@@ -13,6 +13,7 @@
     "ag-grid-community": "^29.0.0",
     "ag-grid-react": "^29.0.0",
     "babel-jest": "^29.3.1",
+    "chance": "^1.1.9",
     "qrcode": "^1.5.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",

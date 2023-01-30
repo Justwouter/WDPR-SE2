@@ -57,14 +57,16 @@ public class DonatieController : ControllerBase
         var totaal = _context.Donaties.Where(_donatie => _donatie.Email == donatie.Email && _donatie.Datum > DateTime.Now.AddDays(-365)).Sum(_donatie => _donatie.Hoeveelheid);
         if (totaal >= 1000)
         {
+            Console.WriteLine(donatie.Email);
             var user = await _userManager.FindByEmailAsync(donatie.Email);
             if (user == null)
             {
                 return NotFound("User not found");
             }
             await _userManager.AddToRoleAsync(user, "Donateur");
+            return Redirect("http://frontend.localhost/DonateursPanel");
         }
-        return Redirect("http://frontend.localhost/Bedankt");
+        return Ok();
     }
 
     [HttpPost("AddToken/{id}")]
@@ -96,7 +98,7 @@ public class DonatieController : ControllerBase
         return Ok(user.DonatieToken);
     }
 
-    [HttpGet("checkDonateur"), Authorize("Donateur")]
+    [HttpGet("checkDonateur"), Authorize(Roles = "Donateur")]
     public async Task<IActionResult> checkDonateur()
     {
         return Ok();
