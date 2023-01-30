@@ -1,4 +1,5 @@
 import React from "react";
+import CommentForm from "./CommentForm";
 
 export default function DonateursPanelContent () {
     return (
@@ -14,6 +15,10 @@ export default function DonateursPanelContent () {
 
             <h2>Geplande shows</h2>
             <p>Momenteel staan er geen show's op de planning.</p>
+
+            <div>
+                <CommentForm/>
+            </div>
         </div>
     )
 }

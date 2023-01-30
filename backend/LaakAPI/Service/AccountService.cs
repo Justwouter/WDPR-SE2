@@ -64,8 +64,8 @@ public class AccountService : IAccountService
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role));
                     claims.Add(new Claim("role", role));
-                    claims.Add(new Claim("Id", _user.Id));
-                }
+                }   
+                claims.Add(new Claim("Id", _user.Id));
 
                 var tokenOptions = new JwtSecurityToken
                 (

@@ -5,7 +5,7 @@ import DonateursPanelContent from "./DonateursPanelContent";
 
 export default function DonateursPanel () {
     const [RequestFinished, RequestisFinished] = useState(false)
-    const [isDonateur, setIsDonateur] = useState(false)
+    const [isDonateur, setIsDonateur] = useState(true)
   
     useEffect(() => {
       async function fetchData() {

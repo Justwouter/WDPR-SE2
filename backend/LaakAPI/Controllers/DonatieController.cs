@@ -114,4 +114,24 @@ public class DonatieController : ControllerBase
         }
         return Ok(donatielist);
     }
+
+    [HttpPost("Comment"), Authorize(Roles = "Donateur")]
+    public async Task<IActionResult> PostDonatie(Comment comment)
+    {
+        if (comment == null) {
+            return BadRequest("Invalid comment");
+        }
+        var user = await _userManager.FindByIdAsync(comment.commenter);
+        if (user == null) {
+            return BadRequest("User not found.");
+        }
+        await _context.AddAsync(new Comment
+        {
+            commenter = comment.commenter,
+            content = comment.content,
+            datum = DateTime.Now
+        });
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
 }

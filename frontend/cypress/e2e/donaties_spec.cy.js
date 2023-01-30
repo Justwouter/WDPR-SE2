@@ -59,8 +59,7 @@ describe('Doneren', () => {
         "naam": username
       }
     })
-    cy.visit('http://frontend.localhost');
-    cy.get('a').contains('Login').click();
+    cy.visit('http://frontend.localhost/Login');
     cy.get('#gebruikersnaam').type(username)
     cy.get('#password').type(password)
     cy.get('button').contains("Log in").click();
