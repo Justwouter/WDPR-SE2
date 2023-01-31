@@ -8,23 +8,24 @@ function Header() {
   const [AdminComponents, setAdminComponents] = useState(false)
   const [isLoggedIn, setLoginStatus] = useState(true)
   const [DonateurComponents, setDonateurComponents] = useState(false)
-  
+
   useEffect(() => {
     async function fetchData() {
       let jwtRAW = getCookie("jwt")
       // let jwtRAW = localStorage.getItem('jwt')
       if (jwtRAW != null && jwtRAW.length > 0) {
         const jwtToken = jwtRAW.replace('"', '')
-        // fetch('http://api.localhost/api/Role/CheckElevation', {
-        //   method: 'GET',
-        //   headers: {
-        //     Accept: 'text/plain',
-        //     'Content-Type': 'text/plain',
-        //     Authorization: 'Bearer ' + jwtToken
-        //   }
-        // }).then(response => {
-        //   response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
-        // })
+        fetch('http://api.localhost/api/Role/CheckElevation', {
+          method: 'GET',
+          headers: {
+            Accept: 'text/plain',
+            'Content-Type': 'text/plain',
+            Authorization: 'Bearer ' + jwtToken
+          }
+        }).then(response => {
+          response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+        })
+
         fetch('http://api.localhost/api/Donatie/checkDonateur', {
           method: 'GET',
           headers: {
@@ -82,20 +83,20 @@ function Header() {
           <div id='HeaderItems' className='basic'>
             <HeadItem link='/programmalijst' text='Programma' />
             <HeadItem link='/Over-ons' text='Over ons' />
-            
+
             {DonateurComponents && (
-              <div>
+              <React.Fragment>
                 <HeadItem link='/DonateursPanel' text='Donateurs Panel' />
-              </div>
+              </React.Fragment>
             )}
-            
+
             {AdminComponents && (
               <React.Fragment>
                 <HeadItem link='/AdminPanel' text='Admin Panel' />
                 {/* <HeadItem link='/programmatoevoegen' text='Toevoegen' /> */}
               </React.Fragment>
             )}
-            
+
             {isLoggedIn ? (
               <React.Fragment>
                 <HeadItem className="RightItems" link='/MyAccount' text="Account" />
@@ -105,7 +106,7 @@ function Header() {
                 <HeadItem className="RightItems" link='/Login' text='Login' />
               </React.Fragment>
             )}
-            
+
           </div>
         </ul>
       </header>

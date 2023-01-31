@@ -24,7 +24,7 @@ export default function CommentForm() {
 
     useEffect(() => {
         setComment("");
-    }, handleSubmit)
+    }, [handleSubmit])
 
     return (
         <div className="fBox">
