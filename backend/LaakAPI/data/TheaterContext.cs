@@ -38,10 +38,10 @@ public class TheaterContext : IdentityDbContext
         //Initializes the default users in a list and per entry hashes the password and adds the user to the database.
         //This was imo the easiest way to keep this compact and expandable
         //Order is: User, Password, RoleID(Use the roles above as reference)
-        var DefaultUserList = new (IUser, string, string)[]
+        var DefaultUserList = new (IUser, string, string[])[]
         {
-            (new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@FRONTEND.LOCALHOST" , }, "Admin1!","1"),
-            (new IUser() { Id = "2", UserName = "Test", Email = "Test@frontend.localhost", NormalizedUserName = "TEST", NormalizedEmail = "TEST@FRONTEND.LOCALHOST" }, "String1!","2"),
+            (new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@FRONTEND.LOCALHOST" , }, "Admin1!",new String[]{"1"}),
+            (new IUser() { Id = "2", UserName = "Test", Email = "Test@frontend.localhost", NormalizedUserName = "TEST", NormalizedEmail = "TEST@FRONTEND.LOCALHOST" }, "String1!",new String[]{"2"}),
         };
 
         PasswordHasher<IUser> ph = new PasswordHasher<IUser>();
@@ -49,7 +49,8 @@ public class TheaterContext : IdentityDbContext
         {
             user.Item1.PasswordHash = ph.HashPassword(user.Item1, user.Item2);
             builder.Entity<IUser>().HasData(user.Item1);
-            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { RoleId = user.Item3, UserId = user.Item1.Id });
+            user.Item3.ToList().ForEach(rID => builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { RoleId = rID, UserId = user.Item1.Id }));
+            
         });
     }
 }
