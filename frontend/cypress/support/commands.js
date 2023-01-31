@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('RegisterAndLogin', (userName, email, password) => {
+    // Registreer gedeelte
+    cy.visit('http://frontend.localhost/Registration');
+    cy.clearCookies();
+    cy.get('#userName').type(userName);
+    cy.get('#email').type(email);
+    cy.get('#password').type(password);
+    cy.get('button').click();
+
+    // Login gedeelte
+    cy.get('#gebruikersnaam').type(userName)
+    cy.get('#password').type(password)
+    cy.get('button').click();
+})

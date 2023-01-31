@@ -16,6 +16,7 @@ public class TheaterContext : IdentityDbContext
 
     public DbSet<IUser> Gebruikers { get; set; } = default!;
     public DbSet<Donatie> Donaties { get; set; } = default!;
+    public DbSet<Comment> Comments { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -25,6 +26,9 @@ public class TheaterContext : IdentityDbContext
         builder.Entity<Role>().HasData(new Role() { Id = "1", Name = "Medewerker", NormalizedName = "MEDEWERKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
         builder.Entity<Role>().HasData(new Role() { Id = "2", Name = "Bezoeker", NormalizedName = "BEZOEKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
         builder.Entity<Role>().HasData(new Role() { Id = "3", Name = "Donateur", NormalizedName = "DONATEUR", ConcurrencyStamp = Guid.NewGuid().ToString() });
+
+        builder.Entity<Comment>()
+                    .HasKey(c => new { c.commenter, c.datum });
 
         seedDatabaseUsers(builder);
     }

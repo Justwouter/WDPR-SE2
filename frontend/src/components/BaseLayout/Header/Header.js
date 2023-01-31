@@ -7,13 +7,25 @@ function Header() {
   //First check the JWT token for a role then verify with the API. Only JWT is insecure but the api takes to long.
   const [AdminComponents, setAdminComponents] = useState(false)
   const [isLoggedIn, setLoginStatus] = useState(true)
+  const [DonateurComponents, setDonateurComponents] = useState(false)
+  
   useEffect(() => {
     async function fetchData() {
       let jwtRAW = getCookie("jwt")
       // let jwtRAW = localStorage.getItem('jwt')
       if (jwtRAW != null && jwtRAW.length > 0) {
         const jwtToken = jwtRAW.replace('"', '')
-        fetch('http://api.localhost/api/Role/CheckElevation', {
+        // fetch('http://api.localhost/api/Role/CheckElevation', {
+        //   method: 'GET',
+        //   headers: {
+        //     Accept: 'text/plain',
+        //     'Content-Type': 'text/plain',
+        //     Authorization: 'Bearer ' + jwtToken
+        //   }
+        // }).then(response => {
+        //   response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+        // })
+        fetch('http://api.localhost/api/Donatie/checkDonateur', {
           method: 'GET',
           headers: {
             Accept: 'text/plain',
@@ -21,7 +33,7 @@ function Header() {
             Authorization: 'Bearer ' + jwtToken
           }
         }).then(response => {
-          response.status === 200 ? setAdminComponents(true) : setAdminComponents(false)
+          response.status === 200 ? setDonateurComponents(true) : setDonateurComponents(false)
         })
       }
     }
@@ -35,10 +47,12 @@ function Header() {
       const jwtToken = parseJwt(jwtRAW)
       setLoginStatus(true)
       jwtToken.role === "Medewerker" | jwtToken.role === "Admin" ? setAdminComponents(true) : setAdminComponents(false)
+      jwtToken.role === "Donateur" ? setDonateurComponents(true) : setDonateurComponents(false)
     }
     else {
       setAdminComponents(false)
       setLoginStatus(false)
+      setDonateurComponents(false)
     }
   }, [])
 
@@ -68,9 +82,13 @@ function Header() {
           <div id='HeaderItems' className='basic'>
             <HeadItem link='/programmalijst' text='Programma' />
             <HeadItem link='/Over-ons' text='Over ons' />
-
-
-
+            
+            {DonateurComponents && (
+              <div>
+                <HeadItem link='/DonateursPanel' text='Donateurs Panel' />
+              </div>
+            )}
+            
             {AdminComponents && (
               <React.Fragment>
                 <HeadItem link='/AdminPanel' text='Admin Panel' />
@@ -87,7 +105,7 @@ function Header() {
                 <HeadItem className="RightItems" link='/Login' text='Login' />
               </React.Fragment>
             )}
-
+            
           </div>
         </ul>
       </header>
