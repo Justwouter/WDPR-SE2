@@ -11,8 +11,7 @@ public class OrderContext : DbContext
     public OrderContext(DbContextOptions<OrderContext> options)
         : base(options)
     {
-
-
+        Database.EnsureCreated();
     }
 
     public DbSet<Order> Order { get; set; } = default!;

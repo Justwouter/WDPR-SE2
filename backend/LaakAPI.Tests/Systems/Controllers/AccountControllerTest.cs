@@ -14,8 +14,9 @@ public class AccountControllerTest
     {
         // Arrange
         var mockAccountService = new Mock<IAccountService>();
-        var user = new User();
-        mockAccountService.Setup(service => service.Registreer(user)).ReturnsAsync(user);
+        var user = new UserRegistrationDTO();
+        var _user = new IUser();
+        mockAccountService.Setup(service => service.Registreer(user)).ReturnsAsync(_user);
         AccountController sut = new AccountController(mockAccountService.Object);
         
         // Act
@@ -30,7 +31,7 @@ public class AccountControllerTest
     {
         // Arrange
         var mockAccountService = new Mock<IAccountService>();
-        var user = new User();
+        var user = new UserRegistrationDTO();
         mockAccountService.Setup(service => service.Registreer(user)).ReturnsAsync(() => null);
         AccountController sut = new AccountController(mockAccountService.Object);
         

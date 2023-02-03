@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUur } from './utils.js';
+import { getUur,dateFormatter } from './utils.js';
 import _ from 'lodash';
 
 
@@ -7,6 +7,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [programmas, setProgramma] = useState([]);
     const [iSlide, setISlide] = useState(1);
+
 
     const beweegRB = index => {
         setISlide(index)
@@ -36,9 +37,16 @@ const Home = () => {
 
     const dateFormat = (date) => {
         var d = new Date(date);
-        return d.getDate() + ' - ' + (d.getMonth() + 1) + ' - ' + d.getFullYear()
+        return dateFormatter(d.getDate()) + ' - ' + (dateFormatter(d.getMonth() + 1)) + ' - ' + d.getFullYear()
     }
 
+    const selectImage = (object) => {
+        if (object.image != null) {
+            var i = String(object.image)
+            return i.includes("https://") ? object.image : process.env.PUBLIC_URL + '/Afbeeldingen/Unique/' + object.image
+        }
+        return process.env.PUBLIC_URL + '/Afbeeldingen/Generic/' + object.genre + '.jpg'
+    }
 
 
     return loading ? "Laden..." : (
@@ -65,10 +73,10 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <img src={process.env.PUBLIC_URL + '/Afbeeldingen/' + obj.genre + '.jpg'} alt={obj.genre} />
+                            <img src={selectImage(obj)} alt={obj.genre} />
 
                             <div className='c_radiobox'>
-                                {Array.from({ length: 5 }).map((item, index) => (
+                                {Array.from({ length: programmas.length>5?5:programmas.length }).map((item, index) => (
                                     <div key={index} onClick={() => beweegRB(index + 1)}
                                         className={iSlide === index + 1 ? "radiobox Actief" : "radiobox"}
                                     ></div>
@@ -86,7 +94,7 @@ const Home = () => {
                                 <div className='g_ProgTitel'>Er zijn nog geen voorstellingen!</div>
                                 <div className='g_lijn2'></div>
                             </div>
-                            <img src={process.env.PUBLIC_URL + '/Afbeeldingen/emptypage.jpg'} alt={"no shows available"} />
+                            <img src={process.env.PUBLIC_URL + '/Afbeeldingen/Generic/emptypage.jpg'} alt={"no shows available"} />
                         </div>
                     )}
             </div>
