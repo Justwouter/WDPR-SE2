@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Header from './Header/Header';
-import HeaderMobile from './Header/HeaderMobile';
 import { Outlet } from 'react-router';
 
 

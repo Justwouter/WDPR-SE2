@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Link} from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     const [gebruikersnaam, setGebruikersnaam] = new useState("");
@@ -55,39 +55,39 @@ export default function Login() {
                 <div className="Content">
                     <div className="Switch">
                         <div className="HuidigeKnop">Login</div>
-                        <Link   style={{textDecoration: 'none'}} 
-                                className='RegistreerSwitch' 
-                                to= {'/Registration'}>
-                                Registreer
-                                </Link>
-                                </div>
-  
-            <div className="fBox">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="gebruikersnaam">Gebruikersnaam:</label>
-                    <input  className="veld"
-                            type="text"
-                            id="gebruikersnaam"
-                            value={gebruikersnaam}
-                            onInput={(e) => setGebruikersnaam(e.target.value)}/><br/><br/>
-                
-                    <label htmlFor="password">Wachtwoord:</label>
-                    <input  className="veld"
-                            type="password"
-                            id="password"
-                            value={password}
-                            onInput={(e) => setPassword(e.target.value)}/><br/><br/>
-                
-                {formError && 
-                <div className="eBG">
-                    <div className="error">{formError}</div></div>}<br></br>
-                
-                <div className="fButton">
-                    <button>Log in</button>
+                        <Link style={{ textDecoration: 'none' }}
+                            className='RegistreerSwitch'
+                            to={'/Registration'}>
+                            Registreer
+                        </Link>
                     </div>
-                </form>
-            </div>  
-            </div>
+
+                    <div className="fBox">
+                        <form onSubmit={handleSubmit}>
+                            <label htmlFor="gebruikersnaam">Gebruikersnaam:</label>
+                            <input className="veld"
+                                type="text"
+                                id="gebruikersnaam"
+                                value={gebruikersnaam}
+                                onInput={(e) => setGebruikersnaam(e.target.value)} /><br /><br />
+
+                            <label htmlFor="password">Wachtwoord:</label>
+                            <input className="veld"
+                                type="password"
+                                id="password"
+                                value={password}
+                                onInput={(e) => setPassword(e.target.value)} /><br /><br />
+
+                            {formError &&
+                                <div className="eBG">
+                                    <div className="error">{formError}</div></div>}<br></br>
+
+                            <div className="fButton">
+                                <button>Log in</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     );

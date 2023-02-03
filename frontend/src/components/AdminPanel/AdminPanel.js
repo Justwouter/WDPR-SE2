@@ -3,6 +3,7 @@ import { Navigate } from 'react-router'
 import ProgrammaToevoegen from '../Programma/ProgrammaToevoegen'
 import UserManager from './UserManager/UserManager'
 import { getCookie } from '../utils'
+import DonatieManager from './DonatieManager/DonatieManager'
 
 const AdminPanel = props => {
   const [RequestFinished, RequestisFinished] = useState(false)
@@ -40,6 +41,7 @@ const AdminPanel = props => {
           <div className='main-form '>
             {/* <div className='fBox'> */}
               <UserManager />
+              <DonatieManager/>
             {/* </div> */}
 
           </div>

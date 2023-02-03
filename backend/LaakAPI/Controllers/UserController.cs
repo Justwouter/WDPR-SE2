@@ -15,13 +15,13 @@ namespace backend.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IUser> _userManager;
+        private readonly SignInManager<IUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly TheaterContext _context;
 
-        public UserController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager, TheaterContext context)
+        public UserController(UserManager<IUser> userManager, SignInManager<IUser> signInManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager, TheaterContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -32,7 +32,7 @@ namespace backend.Controllers
 
         // GET: api/User
         [HttpGet, Authorize(Roles = "Medewerker")] //, Authorize(Roles = "Medewerker")
-        public async Task<ActionResult<IEnumerable<IdentityUser>>> GetUser()
+        public async Task<ActionResult<IEnumerable<IUser>>> GetUser()
         {
             if (_userManager.Users == null)
             {
@@ -87,7 +87,7 @@ namespace backend.Controllers
         public async Task<IActionResult> GetRolesAndUsers()
         {
             List<object> userlist = new List<object>();
-            foreach (User user in await _userManager.Users.ToListAsync())
+            foreach (IUser user in await _userManager.Users.ToListAsync())
             {
                 var userroles = await _userManager.GetRolesAsync(user);
                 var anonymous = new { userName = user.UserName, id = user.Id, roles = userroles };
@@ -98,7 +98,7 @@ namespace backend.Controllers
 
         // GET: api/User/{id}
         [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
-        public async Task<ActionResult<IdentityUser>> GetUser(string id)
+        public async Task<ActionResult<IUser>> GetUser(string id)
         {
             if (_userManager.Users == null)
             {
@@ -135,26 +135,19 @@ namespace backend.Controllers
 
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost, Authorize(Roles = "Medewerker")]
-        public async Task<ActionResult<IdentityUser>> PostUser(User user)
+        public async Task<ActionResult<IUser>> PostUser(UserRegistrationDTO user)
         {
             if (_userManager == null)
             {
                 return Problem("Entity set 'UserContext.User'  is null.");
             }
-            var resultaat = await CreateUserAsync(user.Email, user.Password);
+            var _user = new IUser() {UserName = user.UserName, Email = user.Email};
+            var resultaat = await _userManager.CreateAsync(_user, user.Password);
             // _context.User.Add(user);
             await _context.SaveChangesAsync();
 
             // return CreatedAtAction("GetUser", new { id = user.Id }, user);
             return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
-        }
-
-        [NonAction]
-        public async Task<IdentityResult> CreateUserAsync(string email, string password)
-        {
-            var user = new IdentityUser { UserName = email, Email = email };
-            var result = await _userManager.CreateAsync(user, password);
-            return result;
         }
 
         // DELETE: api/Login/5

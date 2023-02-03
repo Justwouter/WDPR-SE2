@@ -14,7 +14,9 @@ public class TheaterContext : IdentityDbContext
         Database.EnsureCreated();
     }
 
-    public DbSet<User> Gebruikers { get; set; } = default!;
+    public DbSet<IUser> Gebruikers { get; set; } = default!;
+    public DbSet<Donatie> Donaties { get; set; } = default!;
+    public DbSet<Comment> Comments { get; set; } = default!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -25,27 +27,31 @@ public class TheaterContext : IdentityDbContext
         builder.Entity<Role>().HasData(new Role() { Id = "2", Name = "Bezoeker", NormalizedName = "BEZOEKER", ConcurrencyStamp = Guid.NewGuid().ToString() });
         builder.Entity<Role>().HasData(new Role() { Id = "3", Name = "Donateur", NormalizedName = "DONATEUR", ConcurrencyStamp = Guid.NewGuid().ToString() });
 
+        builder.Entity<Comment>()
+                    .HasKey(c => new { c.commenter, c.datum });
 
         seedDatabaseUsers(builder);
-
-
     }
 
     public void seedDatabaseUsers(ModelBuilder builder)
     {
-        //Default very secure admin account
-        User defaultAdmin = new User() { Id = "1", UserName = "Admin", Type = "Medewerker", Password = "Admin1!", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@frontend.localhost" };
-        PasswordHasher<User> ph = new PasswordHasher<User>();
-        defaultAdmin.PasswordHash = ph.HashPassword(defaultAdmin, "Admin1!");
-
-        builder.Entity<User>().HasData(defaultAdmin);
-
-        //Temporary mark the admin account as a "Medewerker" instead of "Admin"
-        builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+        //Initializes the default users in a list and per entry hashes the password and adds the user to the database.
+        //This was imo the easiest way to keep this compact and expandable
+        //Order is: User, Password, RoleID(Use the roles above as reference)
+        var DefaultUserList = new (IUser, string, string[])[]
         {
-            RoleId = "1",
-            UserId = "1"
-        });
+            (new IUser() { Id = "1", UserName = "Admin", Email = "Admin@frontend.localhost", NormalizedUserName = "ADMIN", NormalizedEmail = "ADMIN@FRONTEND.LOCALHOST" , }, "Admin1!",new String[]{"1"}),
+            (new IUser() { Id = "2", UserName = "Test", Email = "Test@frontend.localhost", NormalizedUserName = "TEST", NormalizedEmail = "TEST@FRONTEND.LOCALHOST" }, "String1!",new String[]{"2"}),
+            (new IUser() { Id = "3", UserName = "Donnie", Email = "Donnie@frontend.localhost", NormalizedUserName = "DONNIE", NormalizedEmail = "DONNIE@FRONTEND.LOCALHOST" }, "String1!",new String[]{"2","3"}),
 
+        };
+
+        PasswordHasher<IUser> ph = new PasswordHasher<IUser>();
+        DefaultUserList.ToList().ForEach(user =>
+        {
+            user.Item1.PasswordHash = ph.HashPassword(user.Item1, user.Item2);
+            builder.Entity<IUser>().HasData(user.Item1);
+            user.Item3.ToList().ForEach(rID => builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string> { RoleId = rID, UserId = user.Item1.Id }));
+        });
     }
 }

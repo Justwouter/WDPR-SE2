@@ -10,43 +10,44 @@ namespace backend.Service;
 
 public interface IAccountService
 {
-    Task<IdentityUser> Registreer([FromBody] User user);
-    Task<IActionResult> Login([FromBody] User user);
+    Task<IdentityUser> Registreer([FromBody] UserRegistrationDTO user);
+    Task<IActionResult> Login([FromBody] UserLoginDTO user);
+    Task<IActionResult> getRoles(string id);
+    Task<IActionResult> addRole(string id, string role);
 }
 
 public class AccountService : IAccountService
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly TheaterContext _context;
+    private readonly UserManager<IUser> _userManager;
     private readonly IConfiguration _configuration;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountService(UserManager<IdentityUser> userManager, IConfiguration configuration)
+    public AccountService(TheaterContext context, UserManager<IUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
     {
+        _context = context;
         _userManager = userManager;
         _configuration = configuration;
+        _roleManager = roleManager;
     }
 
-    public async Task<IdentityUser> Registreer([FromBody] User user)
+    public async Task<IdentityUser> Registreer( UserRegistrationDTO user)
     {
-        var resultaat = await _userManager.CreateAsync(user, user.Password);
+        var _user = new IUser() {UserName = user.UserName, Email = user.Email};
+        var resultaat = await _userManager.CreateAsync(_user, user.Password);
         if (resultaat.Succeeded)
         {
-            if (user.Type == null)
+            if (_userManager.GetRolesAsync(_user).Result.IsNullOrEmpty())
             {
-                user.Type = "Bezoeker";
-                await _userManager.AddToRoleAsync(user, "Bezoeker");
+                await _userManager.AddToRoleAsync(_user, "Bezoeker");
             }
-            if (user.Type.Equals("Medewerker"))
-            {
-                await _userManager.AddToRoleAsync(user, "Medewerker");
-            }
-            return await _userManager.FindByNameAsync(user.UserName);
-            
+            await _context.SaveChangesAsync();
+            return await _userManager.FindByNameAsync(_user.UserName);
         }
-
         return null;
     }
 
-    public async Task<IActionResult> Login([FromBody] User user)
+    public async Task<IActionResult> Login(UserLoginDTO user)
     {
         var _user = await _userManager.FindByNameAsync(user.UserName);
         if (_user != null)
@@ -57,13 +58,16 @@ public class AccountService : IAccountService
                         _configuration["Jwt:Key"]));
 
                 var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
-                var claims = new List<Claim> { new Claim( ClaimTypes.Name, user.UserName) };
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };
                 var roles = await _userManager.GetRolesAsync(_user);
                 foreach (var role in roles)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, role));
-                    claims.Add(new Claim("role", role));
+                    claims.Add(new Claim("Role", role));
                 }
+                    claims.Add(new Claim("Id", _user.Id));
+                    claims.Add(new Claim("Name", _user.UserName));
+
 
                 var tokenOptions = new JwtSecurityToken
                 (
@@ -78,5 +82,38 @@ public class AccountService : IAccountService
 
         return new UnauthorizedResult();
     }
+
+
+    public async Task<IActionResult> getRoles(string id)
+    {
+        var user = await _userManager.FindByIdAsync(id);
+        if (user != null)
+        {
+            var result = await _userManager.GetRolesAsync(user);
+            return new OkObjectResult(result);
+        }
+        return new BadRequestResult();
+    }
+
+    public async Task<IActionResult> addRole(string id, string role)
+    {
+        var roleExist = await _roleManager.RoleExistsAsync(role);
+        if  (!roleExist) {
+            return new BadRequestObjectResult("Role does not exist.");
+        }
+        var user = await _userManager.FindByIdAsync(id);
+        if (user != null)
+        {
+            var owned = await _userManager.IsInRoleAsync(user, role);
+            if (owned) {
+                return new BadRequestObjectResult("User already owns role.");
+            }
+            var result = await _userManager.AddToRoleAsync(user, role);
+            return new OkObjectResult(result);
+        }
+        return new BadRequestObjectResult("User not found.");
+    }
+
+
 
 }

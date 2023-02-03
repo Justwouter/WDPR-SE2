@@ -26,5 +26,12 @@ runfunc() {
 
 }
 
+installDependencies(){
+    cd ./frontend && npm install || exit
+    cd ../backend && dotnet restore || exit
+    cd "$startLocation" || exit
+}
+
 startLocation=$(pwd)
+installDependencies
 runfunc "$@"
