@@ -52,7 +52,9 @@ public class DonatieController : ControllerBase
             Datum = DateTime.Now
 
         });
+        
         await _context.SaveChangesAsync();
+        Console.WriteLine("Gebruiker: " + donatie.Email + " Heeft €" + donatie.Hoeveelheid + " gedoneerd!");
 
         var totaal = _context.Donaties.Where(_donatie => _donatie.Email == donatie.Email && _donatie.Datum > DateTime.Now.AddDays(-365)).Sum(_donatie => _donatie.Hoeveelheid);
         if (totaal >= 1000)

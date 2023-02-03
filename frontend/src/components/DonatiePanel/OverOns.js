@@ -18,7 +18,7 @@ export default function OverOns() {
 
     useEffect (() => {
         changeToestemming()
-    }, [])
+    })
 
     function askPermission() {
         var id = parseJwt(getCookie("jwt")).Id;

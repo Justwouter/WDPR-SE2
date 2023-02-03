@@ -11,6 +11,5 @@ public class Programma
     public string Descriptie {get;set;} = null!;
     public int Zaal {get; set;}
     public ICollection<Stoel> StoelenLijst {get;set;} = null!;
-    
-  
+    public string? Image {get;set;}
 }
